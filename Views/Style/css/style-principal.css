@@ -891,6 +891,14 @@ footer .social-footer li:hover a {
 	color: #00CCFF;
 }
 
+.green-dark{
+	color: #006400;;
+}
+
+.red{
+	color: red;
+}
+
 .light-white {
 	color: rgba(255, 255, 255, 0.5);
 }

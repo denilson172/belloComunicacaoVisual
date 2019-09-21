@@ -136,6 +136,17 @@ iframe {
 	border: none !important;
 }
 
+/*hover icon*/
+.icon-hover:hover{
+  color: #00ccff;
+}
+
+.active{
+  cursor: not-allowed;
+  color: white;
+  
+  background-color: #00ccff;
+}
 /*//////////////////////////////////////////////////////////////////
 [ utility ]*/
 

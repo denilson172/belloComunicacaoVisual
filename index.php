@@ -17,20 +17,14 @@
 	<meta name="msapplication-TileColor" content="#00a8ff">
 	<meta name="msapplication-config" content="Views/Style/img/favicons/browserconfig.xml">
 	<meta name="theme-color" content="#ffffff">
-	<!-- Normalize -->
+	<!--====style pincipal==========================================================-->
 	<link rel="stylesheet" type="text/css" href="Views/Style/css/normalize.css">
-	<!-- Bootstrap -->
 	<link rel="stylesheet" type="text/css" href="Views/Style/css/bootstrap.css">
-	<!-- Owl -->
 	<link rel="stylesheet" type="text/css" href="Views/Style/css/owl.css">
-	<!-- Animate.css -->
 	<link rel="stylesheet" type="text/css" href="Views/Style/css/animate.css">
-	<!-- Font Awesome -->
 	<link rel="stylesheet" type="text/css" href="Views/Style/fonts/font-awesome-4.1.0/css/font-awesome.min.css">
-	<!-- Elegant Icons -->
 	<link rel="stylesheet" type="text/css" href="Views/Style/fonts/eleganticons/et-icons.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-	<!-- Main style -->
 	<link rel="stylesheet" type="text/css" href="Views/Style/css/style-principal.css">
 
 </head>
