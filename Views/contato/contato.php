@@ -120,11 +120,13 @@
 						<span class="focus-input100"></span>
 					</div>
 
+					
+
 					<div class="container-contact100-form-btn">
 
-						<!--button class="contact100-form-btn red">
+						<button class="contact100-form-btn-cancelar">
 							<span>Cancelar</span>
-						</button-->
+						</button>
 
 						<button class="contact100-form-btn">
 							<span>Enviar</span>

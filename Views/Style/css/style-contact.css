@@ -426,10 +426,42 @@ textarea.input100 {
   height: 55px;
   border-radius: 27px;
   background: #1234a5;
-  background: -webkit-linear-gradient(45deg, #00ccff, #1234a5);
-  background: -o-linear-gradient(45deg, #00ccff, #1234a5);
-  background: -moz-linear-gradient(45deg, #00ccff, #1234a5);
-  background: linear-gradient(45deg, #00ccff, #1234a5);
+  background: -webkit-linear-gradient(45deg, #006400, #7cfc00);
+  background: -o-linear-gradient(45deg, #006400, #7cfc00);
+  background: -moz-linear-gradient(45deg, #006400, #7cfc00);
+  background: linear-gradient(45deg, #006400, #7cfc00);
+  position: relative;
+  z-index: 1;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.contact100-form-btn-cancelar{
+  font-family: Raleway-Bold;
+  font-size: 16px;
+  color: #fff;
+  line-height: 1.2;
+  margin-right: 30px;
+
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  min-width: 150px;
+  height: 55px;
+  border-radius: 27px;
+  background: red;
+  background: -webkit-linear-gradient(45deg, #8b0000, #ff0000);
+  background: -o-linear-gradient(45deg, #8b0000, #ff0000);
+  background: -moz-linear-gradient(45deg, #8b0000, #ff0000);
+  background: linear-gradient(45deg, #8b0000, #ff0000);
   position: relative;
   z-index: 1;
 
@@ -457,7 +489,29 @@ textarea.input100 {
   transition: all 0.4s;
 }
 
+.contact100-form-btn-cancelar::before{
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -1;
+  border-radius: 27px;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: #8b0000;
+  opacity: 1;
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
 .contact100-form-btn:hover:before{
+  opacity: 0;
+}
+
+.contact100-form-btn-cancelar:hover:before{
   opacity: 0;
 }
 
@@ -467,7 +521,23 @@ textarea.input100 {
   -moz-transition: all 0.4s;
   transition: all 0.4s;
 }
+
+.contact100-form-btn-cancelar i{
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
 .contact100-form-btn:hover i{
+  -webkit-transform: translateX(10px);
+  -moz-transform: translateX(10px);
+  -ms-transform: translateX(10px);
+  -o-transform: translateX(10px);
+  transform: translateX(10px);
+}
+
+.contact100-form-btn-cancelar:hover i{
   -webkit-transform: translateX(10px);
   -moz-transform: translateX(10px);
   -ms-transform: translateX(10px);

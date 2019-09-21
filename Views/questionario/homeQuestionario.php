@@ -33,9 +33,9 @@
 	</head>
 	<body>
 
-		<!--div class="preloader">
+		<div class="preloader">
 			<img src="../Style/img/loader.gif" alt="Preloader image">
-		</div-->
+		</div>
 
 		<!-- Menu horizontal -->
 		<div class="collapse navbar-collapse white-bg" id="bs-example-navbar-collapse-1">

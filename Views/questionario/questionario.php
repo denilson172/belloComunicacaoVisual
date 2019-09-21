@@ -43,15 +43,15 @@
 	</head>
 	<body>
 
-		<!--div class="preloader">
+		<div class="preloader">
 			<img src="../Style/img/loader.gif" alt="Preloader image">
-		</div-->
+		</div>
 
 		<!-- Menu horizontal -->
-		<div class="collapse navbar-collapse white-bg" id="bs-example-navbar-collapse-1">
+		<div class="collapse navbar-collapse blue-bg" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-left main-nav">
 				<li class="green">
-					<a href="../../index.php"><i class="green fa fa-home fa-2x"></a></i>
+					<a href="homeQuestionario.php"><i class="white fa fa-arrow-left fa-2x"></a></i>
 				</li>
 			</ul>
 		</div><!--fim nav-->
