@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Bello - Contato</title>
+		<title>Bello - Login</title>
 		<meta name="Bello Design" content="Site Bello Design - 2019" />
 	<!--===============================================================================================-->
 		<link rel="icon" type="image/png" href="../Style/img/icons/favicon.ico"/>
@@ -36,100 +36,36 @@
 
 	</head>
 	<body>
-		<?php 
-		$plano = $_REQUEST['plano'];
-		?>
-
 		<!--div class="preloader">
 			<img src="../Style/img/loader.gif" alt="Preloader image">
 		</div-->
-
 		<div class="container-contact100">
 			<div class="wrap-contact100">
 				<form class="contact100-form validate-form" action="" method="POST">
 
-					<span class="contact100-form-title">SEU PLANO É O <?php echo $plano ?></span> <!--variavel plano-->
-						<img class ="img-mini" src="../Style/img/planos/<?php echo $plano?>-MINI.jpg" alt="PLANOS"></br>
-					
-					<span class="contact100-form-title margin-top padding-top">SOLICITE SEU ORÇAMENTO</span>
+					<img class ="img-miniatura-form-center" src="../Style/img/logo-active.png" alt="logo"></br>
+					<span class="contact100-form-title">LOGIN</span> 
 
-					<span class="contact100-form-text">SOBRE VOCÊ</span>
-
-					<label class="label-input100" for="nome">Nome Completo *</label>
-					<div class="wrap-input100 validate-input">
-						<input id="first-name" class="input100" type="text" name="nome" placeholder="Ex. João">
-						<span class="focus-input100"></span>
-					</div>
-
-					<label class="label-input100" for="email">Email *</label>
-					<div class="wrap-input100 validate-input">
+					<label class="label-input100 contact100-form-title rs2" for="email">Email</label>
+					<div class="wrap-input100 rs2 validate-input">
 						<input id="email" class="input100" type="text" name="email" placeholder="Ex. bello@email.com">
 						<span class="focus-input100"></span>
 					</div>
 
-					<label class="label-input100" for="phone">Telefone *</label>
-					<div class="wrap-input100 validate-input">
-						<input id="phone" class="input100" type="text" name="phone" placeholder="Ex. 00 0 00000000)">
+					<label class="label-input100 contact100-form-title rs2" for="password">Senha</label>
+					<div class="wrap-input100 rs2 validate-input">
+						<input id="password" class="input100" type="password" name="password">
 						<span class="focus-input100"></span>
 					</div>
-
-					<label class="label-input100" for="cidade">Endereço *</label>				
-					<div class="wrap-input100 rs1 validate-input">
-						<input class="input100" type="text" name="cidade" placeholder="Cidade: ">
-						<span class="focus-input100"></span>
-					</div>				
-					<div class="wrap-input100 rs1 validate-input">
-						<input class="input100" type="text" name="logradouro" placeholder="Rua:">
-						<span class="focus-input100"></span>
-					</div>
-					<div class="wrap-input100 rs1">
-						<input class="input100" type="text" name="numero" placeholder="Número:">
-						<span class="focus-input100"></span>
-					</div>
-					<div class="wrap-input100 rs1">
-						<input class="input100" type="text" name="bairro" placeholder="Bairro:">
-						<span class="focus-input100"></span>
-					</div>
-
-					<!--=================================================================================-->
-					<span class="contact100-form-text padding-top">SOBRE O PROJETO</span>
-
-					<label class="label-input100" for="plano">Plano</label>
-					<div class="wrap-input100 validate-input">
-						<input id="first-name" class="input100" type="text" name="plano" value="<?php echo $plano?>" placeholder="<?php echo $plano?>" disabled>
-						<span class="focus-input100"></span>
-					</div>
-
-					<label class="label-input100" for="cidade">Nome da Marca *</label>				
-					<div class="wrap-input100 validate-input">
-						<input class="input100" type="text" name="nomeMarca" placeholder="Ex. Bello Comunicação Visual">
-						<span class="focus-input100"></span>
-					</div>
-
-					<label class="label-input100" for="cidade">Slogan da Marca</label>				
-					<div class="wrap-input100">
-						<input class="input100" type="text" name="sloganMarca" placeholder="Ex. Deixando sua vida mais Bella!">
-						<span class="focus-input100"></span>
-					</div>
-
-					<label class="label-input100" for="descricaoMarca">Descrição *</label>
-					<div class="wrap-input100 validate-input">
-						<textarea id="message" class="input100" name="descricaoMarca" placeholder="Descreva seu projeto..."></textarea>
-						<span class="focus-input100"></span>
-					</div>
-
-					
+					<!--fim do form-->					
 
 					<div class="container-contact100-form-btn">
-
-					<button class="contact100-form-btn-cancelar" onclick="javascript: location.href='../questionario/homeQuestionario.php';">
-						<span>Cancelar</span>
-					</button>
-							
+						<button class="contact100-form-btn-cancelar" onclick="javascript: location.href='../../index.php';">
+							<span>Cancelar</span>
 						</button>
 
 						<button class="contact100-form-btn">
-							<span>Enviar</span>
+							<span>Entrar</span>
 						</button>
 					</div>
 				</form>

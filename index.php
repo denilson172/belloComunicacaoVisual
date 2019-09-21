@@ -449,7 +449,7 @@
 			</div>
 			<div class="row bottom-footer text-center-mobile">
 				<div class="col-sm-8">
-					<p>&copy; 2019 | <a class="green" href="LINK">Área Administrativa</a> | Bello Comunicação Visual™ | Cedro, Ceará, Brasil</p>
+					<p>&copy; 2019 | <a class="green" href="Views/login/login.php">Área Administrativa</a> | Bello Comunicação Visual™ | Cedro, Ceará, Brasil</p>
 				</div>
 				<div class="col-sm-4 text-right text-center-mobile">
 					<ul class="social-footer">
