@@ -899,6 +899,10 @@ footer .social-footer li:hover a {
 	color: red;
 }
 
+.yellow{
+	color: yellow;
+}
+
 .light-white {
 	color: rgba(255, 255, 255, 0.5);
 }

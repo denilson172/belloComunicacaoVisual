@@ -61,19 +61,24 @@
 			</ul>
 
 		</div><!--fim nav-->
-
+		<!--========inicio projetos pendentes=====================================================-->
 		<div class="container-contact100">
 			<div class="wrap-contact100">
-				<span class="contact100-form-title">PROJETOS</span>
-		
-
-				
+				<span class="contact100-form-title red">PROJETOS PENDENTES</span>
 			</div>
 		</div>
 
+		<!--========inicio projetos em produção=====================================================-->
 		<div class="container-contact100">
 			<div class="wrap-contact100">
-			
+				<span class="contact100-form-title grey">PROJETOS EM PRODUÇÃO</span>
+			</div>
+		</div>
+
+		<!--========inicio projetos finalizados=====================================================-->
+		<div class="container-contact100">
+			<div class="wrap-contact100">
+				<span class="contact100-form-title green-dark">PROJETOS FINALIZADOS</span>
 			</div>
 		</div>
 
