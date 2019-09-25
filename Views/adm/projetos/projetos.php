@@ -72,19 +72,17 @@
 		</div><!--fim nav-->
 		<!--========inicio projetos pendentes=====================================================-->
 		<div class="container-contact100">
-			<div class="wrap-contact100">
-				<span class="contact100-form-title red">PROJETOS PENDENTES</span>
-				<!--inicio crud-->
-				<div class="container">
+
+			<!--inicio crud - pendente-->
+			<div class="container">
 				<div class="table-wrapper">
 					<div class="table-title">
 						<div class="row">
 							<div class="col-sm-6">
-								<h2>Manage <b>Employees</b></h2>
+								<h2><b class="red">Projetos Pendentes</b></h2>
 							</div>
 							<div class="col-sm-6">
-								<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
-								<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
+								<a href="" class="btn btn-success" data-toggle="modal"> <i class="material-icons">&#xE147;</i><span>Executar Projeto</span></a>
 							</div>
 						</div>
 					</div>
@@ -97,11 +95,9 @@
 										<label for="selectAll"></label>
 									</span>
 								</th>
-								<th>Name</th>
-								<th>Email</th>
-								<th>Address</th>
-								<th>Phone</th>
-								<th>Actions</th>
+								<th>Marca</th>
+								<th>Plano</th>
+								<th>Detalhes</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -112,97 +108,168 @@
 										<label for="checkbox1"></label>
 									</span>
 								</td>
-								<td>Thomas Hardy</td>
-								<td>thomashardy@mail.com</td>
-								<td>89 Chiaroscuro Rd, Portland, USA</td>
-								<td>(171) 555-2222</td>
-								<td>
-									<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-									<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-								</td>
+								<!--inserir campos dinâmicamente-->
+								<td>Bello</td>
+								<td>PREMIUM</td>
+								<td><a href="#">Detalhes</a></td>
+								
+								<!--td>
+									<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
+									<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Apagar">&#xE872;</i></a>
+								</td-->
 							</tr>
-							<tr>
-								<td>
-									<span class="custom-checkbox">
-										<input type="checkbox" id="checkbox2" name="options[]" value="1">
-										<label for="checkbox2"></label>
-									</span>
-								</td>
-								<td>Dominique Perrier</td>
-								<td>dominiqueperrier@mail.com</td>
-								<td>Obere Str. 57, Berlin, Germany</td>
-								<td>(313) 555-5735</td>
-								<td>
-									<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-									<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<span class="custom-checkbox">
-										<input type="checkbox" id="checkbox3" name="options[]" value="1">
-										<label for="checkbox3"></label>
-									</span>
-								</td>
-								<td>Maria Anders</td>
-								<td>mariaanders@mail.com</td>
-								<td>25, rue Lauriston, Paris, France</td>
-								<td>(503) 555-9931</td>
-								<td>
-									<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-									<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<span class="custom-checkbox">
-										<input type="checkbox" id="checkbox4" name="options[]" value="1">
-										<label for="checkbox4"></label>
-									</span>
-								</td>
-								<td>Fran Wilson</td>
-								<td>franwilson@mail.com</td>
-								<td>C/ Araquil, 67, Madrid, Spain</td>
-								<td>(204) 619-5731</td>
-								<td>
-									<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-									<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-								</td>
-							</tr>					
-							<tr>
-								<td>
-									<span class="custom-checkbox">
-										<input type="checkbox" id="checkbox5" name="options[]" value="1">
-										<label for="checkbox5"></label>
-									</span>
-								</td>
-								<td>Martin Blank</td>
-								<td>martinblank@mail.com</td>
-								<td>Via Monte Bianco 34, Turin, Italy</td>
-								<td>(480) 631-2097</td>
-								<td>
-									<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-									<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-								</td>
-							</tr> 
+							
 						</tbody>
 					</table>
 					<div class="clearfix">
 						<div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
 						<ul class="pagination">
-							<li class="page-item disabled"><a href="#">Previous</a></li>
-							<li class="page-item"><a href="#" class="page-link">1</a></li>
+							<li class="page-item disabled"><a href="#">Anterior</a></li>
+							<li class="page-item active"><a href="#" class="page-link">1</a></li>
 							<li class="page-item"><a href="#" class="page-link">2</a></li>
-							<li class="page-item active"><a href="#" class="page-link">3</a></li>
+							<li class="page-item"><a href="#" class="page-link">3</a></li>
 							<li class="page-item"><a href="#" class="page-link">4</a></li>
 							<li class="page-item"><a href="#" class="page-link">5</a></li>
-							<li class="page-item"><a href="#" class="page-link">Next</a></li>
+							<li class="page-item"><a href="#" class="page-link">Próximo</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
+			<!--fim crud-->
+		</div>
+
+		<!--========inicio projetos em produção=====================================================-->
+		<div class="container-contact100">
+			<!--inicio crud -->
+			<div class="container">
+				<div class="table-wrapper">
+					<div class="table-title">
+						<div class="row">
+							<div class="col-sm-6">
+								<h2><b class="blue">Projetos Em Produção</b></h2>
+							</div>
+							<div class="col-sm-6">
+								<a href="" class="btn btn-success" data-toggle="modal"> <i class="material-icons">&#xE147;</i><span>Executar Projeto</span></a>
+							</div>
+						</div>
+					</div>
+					<table class="table table-striped table-hover">
+						<thead>
+							<tr>
+								<th>
+									<span class="custom-checkbox">
+										<input type="checkbox" id="selectAll">
+										<label for="selectAll"></label>
+									</span>
+								</th>
+								<th>Marca</th>
+								<th>Plano</th>
+								<th>Detalhes</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<span class="custom-checkbox">
+										<input type="checkbox" id="checkbox1" name="options[]" value="1">
+										<label for="checkbox1"></label>
+									</span>
+								</td>
+								<!--inserir campos dinâmicamente-->
+								<td>Bello</td>
+								<td>PREMIUM</td>
+								<td><a href="#">Detalhes</a></td>
+								
+								<!--td>
+									<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
+									<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Apagar">&#xE872;</i></a>
+								</td-->
+							</tr>
+							
+						</tbody>
+					</table>
+					<div class="clearfix">
+						<div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+						<ul class="pagination">
+							<li class="page-item disabled"><a href="#">Anterior</a></li>
+							<li class="page-item active"><a href="#" class="page-link">1</a></li>
+							<li class="page-item"><a href="#" class="page-link">2</a></li>
+							<li class="page-item"><a href="#" class="page-link">3</a></li>
+							<li class="page-item"><a href="#" class="page-link">4</a></li>
+							<li class="page-item"><a href="#" class="page-link">5</a></li>
+							<li class="page-item"><a href="#" class="page-link">Próximo</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--========inicio projetos finalizados=====================================================-->
+		<div class="container-contact100">
+			<!--inicio crud -->
+			<div class="container">
+				<div class="table-wrapper">
+					<div class="table-title">
+						<div class="row">
+							<div class="col-sm-6">
+								<h2><b class="green-dark">Projetos Finalizados</b></h2>
+							</div>
+							<div class="col-sm-6">
+								<a href="" class="btn btn-success" data-toggle="modal"> <i class="material-icons">&#xE147;</i><span>Finalizar Projeto</span></a>
+							</div>
+						</div>
+					</div>
+					<table class="table table-striped table-hover">
+						<thead>
+							<tr>
+								<th>
+									<span class="custom-checkbox">
+										<input type="checkbox" id="selectAll">
+										<label for="selectAll"></label>
+									</span>
+								</th>
+								<th>Marca</th>
+								<th>Plano</th>
+								<th>Detalhes</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<span class="custom-checkbox">
+										<input type="checkbox" id="checkbox1" name="options[]" value="1">
+										<label for="checkbox1"></label>
+									</span>
+								</td>
+								<!--inserir campos dinâmicamente-->
+								<td>Bello</td>
+								<td>PREMIUM</td>
+								<td><a href="#">Detalhes</a></td>
+								
+								<!--td>
+									<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
+									<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Apagar">&#xE872;</i></a>
+								</td-->
+							</tr>
+							
+						</tbody>
+					</table>
+					<div class="clearfix">
+						<div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+						<ul class="pagination">
+							<li class="page-item disabled"><a href="#">Anterior</a></li>
+							<li class="page-item active"><a href="#" class="page-link">1</a></li>
+							<li class="page-item"><a href="#" class="page-link">2</a></li>
+							<li class="page-item"><a href="#" class="page-link">3</a></li>
+							<li class="page-item"><a href="#" class="page-link">4</a></li>
+							<li class="page-item"><a href="#" class="page-link">5</a></li>
+							<li class="page-item"><a href="#" class="page-link">Próximo</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+				
 			<!-- Edit Modal HTML -->
-			<div id="addEmployeeModal" class="modal fade">
+			<!--div id="addEmployeeModal" class="modal fade">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<form>
@@ -236,7 +303,7 @@
 					</div>
 				</div>
 			</div>
-			<!-- Edit Modal HTML -->
+			<Edit Modal HTML >
 			<div id="editEmployeeModal" class="modal fade">
 				<div class="modal-dialog">
 					<div class="modal-content">
@@ -270,7 +337,7 @@
 						</form>
 					</div>
 				</div>
-			</div>
+			</div-->
 			<!-- Delete Modal HTML -->
 			<div id="deleteEmployeeModal" class="modal fade">
 				<div class="modal-dialog">
@@ -291,22 +358,6 @@
 						</form>
 					</div>
 				</div>
-			</div>
-		<!--fim crud-->
-			</div>
-		</div>
-
-		<!--========inicio projetos em produção=====================================================-->
-		<div class="container-contact100">
-			<div class="wrap-contact100">
-				<span class="contact100-form-title grey">PROJETOS EM PRODUÇÃO</span>
-			</div>	
-		</div>
-
-		<!--========inicio projetos finalizados=====================================================-->
-		<div class="container-contact100">
-			<div class="wrap-contact100">
-				<span class="contact100-form-title green-dark">PROJETOS FINALIZADOS</span>
 			</div>
 		</div>
 
