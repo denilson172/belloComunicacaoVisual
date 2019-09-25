@@ -1,7 +1,4 @@
 <?php
-    require_once ("")
-
-    $_SERVER["REQUEST_METHOD"] == "POST";
         if (isset($_POST["submit"])){
             $q1 = $_POST["q1"];
             $q2 = $_POST["q2"];
@@ -16,22 +13,31 @@
 
         $moda = array_count_values($pesos);
         arsort($moda);
-
         $str = key($moda);
         
         if ($str == 1){
             echo "PLANO LITE";
+            $contato = "LITE";
+            session_start();
+            $_contato['contatos'] = $contato;
+            header("Location:../Views/contato/contato.php?plano=$contato");
         }
         elseif($str == 2){
             echo "PLANO STANDART";
+            $contato = "STANDART" ;
+            //session_start();
+            //$_contato['contatos'] = $contato;
+            header("Location:../Views/contato/contato.php?plano=$contato");
         }
         elseif ($str == 3) {
             echo "PLANO PREMIUM";
+            $contato = "PREMIUM";
+            //session_start();
+            //$_contato['contatos'] = $contato;
+            header("Location:../Views/contato/contato.php?plano=$contato");
         }
         else{
             echo "ERRO";
         }
-
-        
-    
 ?>
+

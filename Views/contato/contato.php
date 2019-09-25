@@ -46,7 +46,7 @@
 
 		<div class="container-contact100">
 			<div class="wrap-contact100">
-				<form class="contact100-form validate-form" action="" method="POST">
+				<form class="contact100-form validate-form" "../../Controller/clienteController.php" method="POST">
 
 					<span class="contact100-form-title">SEU PLANO É O <?php echo $plano ?></span> <!--variavel plano-->
 						<img class ="img-mini" src="../Style/img/planos/<?php echo $plano?>-MINI.jpg" alt="PLANOS"></br>
@@ -128,7 +128,7 @@
 							
 						</button>
 
-						<button class="contact100-form-btn">
+						<button class="contact100-form-btn" name="submit">
 							<span>Enviar</span>
 						</button>
 					</div>

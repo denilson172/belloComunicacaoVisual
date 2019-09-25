@@ -1,41 +1,68 @@
 <?php
-        if (isset($_POST["submit"])){
-            $q1 = $_POST["q1"];
-            $q2 = $_POST["q2"];
-            $q3 = $_POST["q3"];
-            $q4 = $_POST["q4"];
-            $q5 = $_POST["q5"];
-            $q6 = $_POST["q6"];
-            $q7 = $_POST["q7"];
-        }
-        
-        $pesos  = array ($q1, $q2, $q3, $q4, $q5, $q6, $q7);
+require_Once("../model/clienteModel.php");
+require_Once("../DAO/clienteDao.php");
+		
+class ClienteController {
 
-        $moda = array_count_values($pesos);
-        arsort($moda);
-        $str = key($moda);
+    public function insere() {
+        $nome = $_POST['nome'];
+        $email = $_POST['email'];
+        $telefone = $_POST['phone'];
+        $conexao = new Database();
+        $cliente = new cliente();
+        $cliente->setNome($nome);
+        $cliente->setDescricao($email);
+        $cliente->setDescricao($telefone);
+        $clienteDao = new ClienteDao();
+        $clienteDao->adiciona($conexao, $cliente);
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		//Dados cliente
+        //if (isset($_POST["submit"])){
+        	//$qu1 = $_POST["nome"];
+           // $qu2 = $_POST["cpf"];
+            //$qu3 = $_POST["email"];
+           // $qu4 = $_POST["phone"];
+           // $qu5 = $_POST["cidade"];
+            //$qu6 = $_POST["logradouro"];
+            //$qu7 = $_POST["numero"];
+            //$qu8 = $_POST["bairro"];
+        //}
         
-        if ($str == 1){
-            echo "PLANO LITE";
-            $contato = "LITE";
-            session_start();
-            $_contato['contatos'] = $contato;
-            header("Location:../Views/contato/contato.php?plano=$contato");
-        }
-        elseif($str == 2){
-            echo "PLANO STANDART";
-            $contato = "STANDART" ;
-            //session_start();
-            //$_contato['contatos'] = $contato;
-            header("Location:../Views/contato/contato.php?plano=$contato");
-        }
-        elseif ($str == 3) {
-            echo "PLANO PREMIUM";
-            $contato = "PREMIUM";
-            //session_start();
-            //$_contato['contatos'] = $contato;
-            header("Location:../Views/contato/contato.php?plano=$contato");
-        }
-        else{
-            echo "ERRO";
-        }
+        //$inf  = array ($qu1, $qu2, $qu3, $qu4, $qu5, $qu6, $qu7,$qu8);
+        //var_dump($inf);
+
+        
+        //Dados Projeto
+
+        //if (isset($_POST["submit"])){
+        	//$que1 = $_POST["plano"];
+            //$que2 = $_POST["nomeMarca"];
+            //$que3 = $_POST["sloganMarca"];
+            //$que4 = $_POST["descricaoMarca"];
+            //var_dump($que1);
+       // }
+        
+        //$info  = array ($que2, $que3, $que4);
+        //var_dump($info);
+        
+?>

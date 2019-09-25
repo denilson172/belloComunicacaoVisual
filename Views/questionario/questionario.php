@@ -56,7 +56,7 @@
 			</ul>
 		</div><!--fim nav-->
 
-		<form action="../../Controller/clienteController.php" method="POST" class="popup-form h3">
+		<form action="../../Controller/questionarioController.php" method="POST" class="popup-form h3">
 
 		<h4 class="contact100-form-title">Só precisamos de um pouquinho do seu tempo, é rápido...</h4>
 
