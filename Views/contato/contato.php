@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<?php
+	require_once "../../Model/ClienteModel.php"
+?>
+	<!DOCTYPE html>
 	<html lang="PT-BR">
 	<head>
 		<meta charset="UTF-8">
@@ -46,7 +49,7 @@
 
 		<div class="container-contact100">
 			<div class="wrap-contact100">
-				<form class="contact100-form validate-form" "../../Controller/clienteController.php" method="POST">
+				<form class="contact100-form validate-form" action="../../Controller/clienteController.php" method="POST">
 
 					<span class="contact100-form-title">SEU PLANO É O <?php echo $plano ?></span> <!--variavel plano-->
 						<img class ="img-mini" src="../Style/img/planos/<?php echo $plano?>-MINI.jpg" alt="PLANOS"></br>
@@ -91,7 +94,7 @@
 						<span class="focus-input100"></span>
 					</div>
 
-					<!--=================================================================================-->
+					<!--=================================================================================>
 					<span class="contact100-form-text padding-top">SOBRE O PROJETO</span>
 
 					<label class="label-input100" for="plano">Plano</label>
@@ -116,7 +119,7 @@
 					<div class="wrap-input100 validate-input">
 						<textarea id="message" class="input100" name="descricaoMarca" placeholder="Descreva seu projeto..."></textarea>
 						<span class="focus-input100"></span>
-					</div>
+					</div-->
 
 					
 
@@ -127,7 +130,8 @@
 					</button>
 							
 						</button>
-
+						<input type="hidden" name="classe" value="Endereco"/>
+						<input type="hidden" name="metodo" value="insere"/>
 						<button class="contact100-form-btn" name="submit">
 							<span>Enviar</span>
 						</button>

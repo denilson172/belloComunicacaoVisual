@@ -1,43 +1,42 @@
 <?php
-class Cliente{
-	private $id;
-	private $nome;
-	private $email;
-	private $telefone;
+    class Cliente{
+        private $id_cliente;
+        private $nome_cliente;
+        private $email_cliente;
+        private $celular_cliente;
 
 
-    public function getId() {
-        return $this -> id;
+        public function getIdCliente() {
+            return $this -> id;
+        }
+
+        public function setIdCliente($id_cliente) {
+            $this->id = $id_cliente;
+        }
+
+        public function getNomeCliente() {
+            return $this -> nome;
+        }
+
+        public function setNomeCliente($nome_cliente) {
+            $this->nome = $nome_cliente;
+        }
+
+        public function getEmailCliente() {
+            return $this -> email;
+        }
+
+        public function setEmailCliente($email_cliente) {
+            $this->email = $email_cliente;
+        }
+
+        public function getCelularCliente() {
+            return $this ->  celular;
+        }
+
+        public function setCelularCliente($celular_cliente) {
+            $this->celular = $celular_cliente;
+        }
+
     }
-
-    public function setId($id) {
-        $this->id = $id;
-    }
-
-    public function getNome() {
-        return $this -> nome;
-    }
-
-    public function setNome($nome) {
-        $this->nome = $nome;
-    }
-
-    public function getEmail() {
-        return $this -> email;
-    }
-
-    public function setEmail($email) {
-        $this->email = email;
-    }
-
-    public function getTelefone() {
-        return $this ->  telefone;
-    }
-
-    public function setTelefone($telefone) {
-        $this->telefone = telefone;
-    }
-
-    }
-}
 ?>

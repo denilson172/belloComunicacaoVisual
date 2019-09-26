@@ -60,12 +60,12 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-left main-nav">
 				<li class="green">
-					<a href="../../../index.php"><i class="icon-hover grey fas fa-trash-alt fa-2x" title="Lixeira"></a></i>
+					<a href="../../index.php"><i class="icon-hover grey fas fa-trash-alt fa-2x" title="Lixeira"></a></i>
 				</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right main-nav">
 				<li class="green">
-					<a href="../../../index.php"><i class="icon-hover red fas fa-sign-out-alt fa-2x" title="Sair"></a></i>
+					<a href="../../index.php"><i class="icon-hover red fas fa-sign-out-alt fa-2x" title="Sair"></a></i>
 				</li>
 			</ul>
 

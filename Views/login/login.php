@@ -57,10 +57,10 @@
 						<input id="password" class="input100" type="password" name="password">
 						<span class="focus-input100"></span>
 					</div>
-					<!--fim do form-->					
+					<!--fim do form-->				
 
 					<div class="container-contact100-form-btn">
-						<button class="contact100-form-btn-cancelar" onclick="javascript: location.href='../../index.php';">
+						<button class="contact100-form-btn-cancelar" onclick="javascript: location.href='../index.php';">
 							<span>Cancelar</span>
 						</button>
 

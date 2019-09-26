@@ -41,7 +41,7 @@
 		<div class="collapse navbar-collapse white-bg" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-left main-nav">
 				<li class="green">
-					<a href="../../index.php"><i class="green fa fa-home fa-2x"></a></i>
+					<a href="../index.php"><i class="green fa fa-home fa-2x"></a></i>
 				</li>
 			</ul>
 		</div><!--fim nav-->
