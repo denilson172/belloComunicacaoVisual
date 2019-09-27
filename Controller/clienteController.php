@@ -1,35 +1,54 @@
 
 <?php
 
-/*require_once("../Model/Cliente.class.php");
-require_once("../DAO/clienteDao.php");*/
+/*require_once("./Model/Cliente.class.php");
+require_once("./DAO/clienteDao.php");*/
 
-require_once("Model/EnderecoModel.php");
-require_once("DAO/enderecoDao.php");
+require_once "../Model/enderecoModel.php";
+require_once "../DAO/enderecoDao.php";
+
+
+if($_SERVER['REQUEST_METHOD'] == 'POST' ) {
+    if(isset($_POST['submit'])){
+        $classe= $_POST['classe']."Controller";
+        $metodo= $_POST['metodoEndereco'];
+        $logradouro = $_POST['logradouro'];
+        $numero = $_POST['numero'];
+        $bairro = $_POST['bairro'];
+        $cidade = $_POST['cidade'];
+        
+        $controller = new $classe();
+
+        $controller->$metodo($logradouro,$numero,$bairro,$cidade);
+    }
+}else{
+    $classe ="EnderecoController";
+    $metodo ="inserir";
+}
 
 class EnderecoController {
-    private $endereco;
+    private $enderecoModel;
     private $enderecoDao;
 
     public function __construct(){
-        $this->endereco = new Endereco();
-        $this->endereco = new EnderecoDao();
+        $this->enderecoModel = new EnderecoModel();
+        $this->enderecoDao = new EnderecoDao();
     }
 
-    public function inserir() {
-           echo  $this->endereco->setLogradouroEndereco ($_POST['logradouro']);
-            $this->endereco->setNumeroEndereco ($_POST['numero']);
-            $this->endereco->setBairroEndereco ($_POST['bairro']);
-            $this->endereco->setCidadeEndereco ($_POST['cidade']);
+    public function inserir($logradouro,$numero,$bairro,$cidade) {
+           // $this->enderecoModel->setIdEndereco($id);
+            $this->enderecoModel->setLogradouroEndereco($logradouro);
+            $this->enderecoModel->setNumeroEndereco($numero);
+            $this->enderecoModel->setBairroEndereco($bairro);
+            $this->enderecoModel->setCidadeEndereco($cidade);
 
-            $this->enderecoDao->inserirEndereco($this->endereco);
+            return $this->enderecoDao->inserirEndereco($this->enderecoModel);
 
-            
+           // header('Location: http://localhost/ARQUIVOS/bellocv/index.php');
     }
-
 }
 
-class ClienteController{
+/*class ClienteController{
     private $cliente;
     private $clienteDAO;
 
@@ -51,7 +70,7 @@ class ClienteController{
         
     }
 
-}
+}*/
 
 
 

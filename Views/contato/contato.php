@@ -58,7 +58,7 @@
 
 					<span class="contact100-form-text">SOBRE VOCÊ</span>
 
-					<label class="label-input100" for="nome">Nome Completo *</label>
+					<!--label class="label-input100" for="nome">Nome Completo *</label>
 					<div class="wrap-input100 validate-input">
 						<input id="first-name" class="input100" type="text" name="nome" placeholder="Ex. João">
 						<span class="focus-input100"></span>
@@ -74,7 +74,7 @@
 					<div class="wrap-input100 validate-input">
 						<input id="phone" class="input100" type="text" name="phone" placeholder="Ex. 00 0 00000000)">
 						<span class="focus-input100"></span>
-					</div>
+					</div-->
 
 					<label class="label-input100" for="cidade">Endereço *</label>				
 					<div class="wrap-input100 rs1 validate-input">
@@ -131,7 +131,7 @@
 							
 						</button>
 						<input type="hidden" name="classe" value="Endereco"/>
-						<input type="hidden" name="metodo" value="insere"/>
+						<input type="hidden" name="metodoEndereco" value="inserir"/>
 						<button class="contact100-form-btn" name="submit">
 							<span>Enviar</span>
 						</button>

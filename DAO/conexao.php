@@ -1,56 +1,38 @@
 <?php
-	class Database{
-		protected static $db;
-		public function __construct(){
-			$db_host = 'localhost';
-			$db_nome = 'bello';
-			$db_usuario = 'root';
-			$db_senha = '';
-			$db_driver = 'mysql';
-			$sistema_titulo = 'bello';
 
-			//Quando o atributo é estático usa self em vez de this
-			try{
-				self::$db = new PDO("$db_driver:host=$db_host;dbname=$db_nome",$db_usuario,$db_senha);
-				self::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				self::$db->exec("SET NAMES utf8");
-			}
-			catch (PDOException $e){
-				echo "PDOException em $sistema_titulo", $e->getMessage();
-				die("Connection Error:".$e->getMessage());
-			}
-		}
+	//abre conenexao com mysql
+	function DBConnect(){
+		$link = @mysqli_connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE) or die (mysqli_connect_error($link));
+		mysqli_set_charset($link, DB_CHARSET) or die(mysqli_error($link));
 
-		//Método estático
-		public static function conexao(){
-			if(!self::$db){
-				new Database();
-			}
-			return self::$db;
-		}
+		return $link;
 	}
-		
 
-		
-		
-		
-		
-		
-		
-			// Create connection
-		/*function conecta() 
-		{
-			$conexao = new mysqli($this->servername, $this->database, $this->username, $this->password);
-			return $conexao; 
-			
-			// Check connection
-		if (!$conexao) {
-			die("Connection failed: " . mysqli_connect_error());
+	//fechando conexao com mysql
+	function DBClose($link){
+		@mysqli_close($link) or die(mysqli_error($link));
+	}
+
+	//protege contra sql inject
+	function DBEscape($dados){
+		$link = DBConnect();
+
+		if(!is_array($dados)){
+			$dados = mysqli_real_escape_string($link, $dados);
+		}else{
+			$arr = $dados;
+
+			foreach ($arr as $key => $value){
+				$key = mysqli_real_escape_string($link, $key);
+				$value = mysqli_real_escape_string($link, $value);
+
+				$dados[$key] = $value;
+			}
 		}
-			echo "Connected successfully";
-			mysqli_close($conexao);
 
-		}
+		DBClose($link);
+		return $dados;
+	}
 
-	}*/
-	?>
+	
+?>

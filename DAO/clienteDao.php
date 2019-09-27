@@ -1,5 +1,5 @@
 <?php
-Require_Once("../Model/Cliente.class.php");
+Require_Once("./Model/Cliente.class.php");
 
 class ClienteDAO{
     function inserirCliente($cliente) {

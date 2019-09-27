@@ -1,22 +1,31 @@
 <?php
-Require_Once("Model/EnderecoModel.php");
+
+require 'config.php';
+require 'conexao.php';
+require 'database.php';
+require_once '../Model/enderecoModel.php';
 
 class EnderecoDAO{
-	function inserirEndereco($endereco){
-        
+    function inserirEndereco($endereco){
         $logradouroEndereco = $endereco->getLogradouroEndereco();
         $numeroEndereco = $endereco->getNumeroEndereco();
         $bairroEndereco = $endereco->getBairroEndereco();
         $cidadeEndereco = $endereco->getCidadeEndereco();
-
-        $con = Database::conexao();
-
-        $query = "INSERT INTO endereco (logradouro_endereco,numero_endereco,bairro_endereco,cidade_endereco) VALUES (?,?,?,?)";  
-        $stmt = $con->prepare($query);
-        $stmt->bindParam(1,$nomeCliente);
-        $stmt->bindParam(2,$emailCliente);
-        $stmt->bindParam(3,$celularCliente);
-        $ok = $stmt->execute();/**/
-    }
-    
+        //array para insert no banco
+        $endereco_arr = array (
+            'logradouro_endereco' => $logradouroEndereco,
+            'numero_endereco' => $numeroEndereco,
+            'bairro_endereco' => $bairroEndereco,
+            'cidade_endereco' => $cidadeEndereco
+        );
+        //inserindo no bd;
+        $salvar = DBCreate('endereco', $endereco_arr);
+    }  
 }
+
+
+//função de listar
+//$endereco = DBRead('endereco'null);
+        
+    
+?>

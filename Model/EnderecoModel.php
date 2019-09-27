@@ -1,5 +1,5 @@
 <?php
-class Endereco{
+class EnderecoModel{
     private $id_endereco;
 	private $logradouro_endereco;
 	private $numero_endereco;
