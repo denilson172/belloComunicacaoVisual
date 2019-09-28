@@ -1,9 +1,10 @@
 <?php
-    class Cliente{
+    class ClienteModel{
         private $id_cliente;
         private $nome_cliente;
         private $email_cliente;
         private $celular_cliente;
+        private $id_endereco; //fk
 
 
         public function getIdCliente() {
@@ -38,5 +39,12 @@
             $this->celular = $celular_cliente;
         }
 
+        public function getIdEndereco() {
+            return $this ->  id_endereco;
+        }
+
+        public function setIdEndereco($id_endereco) {
+            $this->id_endereco = $id_endereco;
+        }
     }
 ?>

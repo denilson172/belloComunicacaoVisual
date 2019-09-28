@@ -1,31 +1,33 @@
 
 <?php
 
-/*require_once("./Model/Cliente.class.php");
-require_once("./DAO/clienteDao.php");*/
+require_once("../Model/clienteModel.php");
+require_once("../DAO/clienteDao.php");
 
 require_once "../Model/enderecoModel.php";
 require_once "../DAO/enderecoDao.php";
 
 
+//recebendo o endereço=============================================================================
 if($_SERVER['REQUEST_METHOD'] == 'POST' ) {
     if(isset($_POST['submit'])){
-        $classe= $_POST['classe']."Controller";
-        $metodo= $_POST['metodoEndereco'];
+        $classeEndereco= $_POST['classeEndereco']."Controller";
+        $metodoInserir = $_POST['metodoInserir'];
         $logradouro = $_POST['logradouro'];
         $numero = $_POST['numero'];
         $bairro = $_POST['bairro'];
         $cidade = $_POST['cidade'];
         
-        $controller = new $classe();
+        $controller = new $classeEndereco();
 
-        $controller->$metodo($logradouro,$numero,$bairro,$cidade);
+        $controller->$metodoInserir($logradouro,$numero,$bairro,$cidade);
     }
 }else{
-    $classe ="EnderecoController";
-    $metodo ="inserir";
+    $classeEndereco ="EnderecoController";
+    $metodoInserir ="inserir";
 }
 
+//enviando para Model e DAO====================================================================================
 class EnderecoController {
     private $enderecoModel;
     private $enderecoDao;
@@ -36,7 +38,6 @@ class EnderecoController {
     }
 
     public function inserir($logradouro,$numero,$bairro,$cidade) {
-           // $this->enderecoModel->setIdEndereco($id);
             $this->enderecoModel->setLogradouroEndereco($logradouro);
             $this->enderecoModel->setNumeroEndereco($numero);
             $this->enderecoModel->setBairroEndereco($bairro);
@@ -48,29 +49,46 @@ class EnderecoController {
     }
 }
 
-/*class ClienteController{
-    private $cliente;
+//recebendo o cliente===============================================================================
+if($_SERVER['REQUEST_METHOD'] == 'POST' ) {
+    if(isset($_POST['submit'])){
+        $classeCliente= $_POST['classeCliente']."Controller";
+        $metodoInserir = $_POST['metodoInserir'];
+        $nome = $_POST['nome'];
+        $email = $_POST['email'];
+        $celular = $_POST['phone'];
+        
+        $controller = new $classeCliente();
+
+        $controller->$metodoInserir($nome,$email,$celular);
+    }
+}else{
+    $classeCliente ="ClienteController";
+    $metodoInserir ="inserir";
+}
+//enviando para Model e DAO====================================================================================
+class ClienteController {
+    private $clienteModel;
     private $clienteDAO;
 
     public function __construct(){
-        $this->cliente = new Cliente();
+        $this->clienteModel = new ClienteModel();
         $this->clienteDao = new ClienteDao();
-       // $this->conexao = new Database();
     }
 
-    public function inserir() { 
-        $this->cliente->setNomeCliente($_POST["nome"]);
-        $this->cliente->setEmailCliente($_POST["email"]);
-        $this->cliente->setCelularCliente($_POST["phone"]); 
+    public function inserir($nome,$email,$celular) { 
+        $this->clienteModel->setNomeCliente($nome);
+        $this->clienteModel->setEmailCliente($email);
+        $this->clienteModel->setCelularCliente($celular); 
     
-        $this->clienteDao->inserirCliente($this->cliente);
+        return $this->clienteDao->inserirCliente($this->clienteModel);
 
-        header('Location: http://localhost/ARQUIVOS/bellocv/Views/index.php');
+        //header('Location: http://localhost/ARQUIVOS/bellocv/Views/index.php');
            
         
     }
 
-}*/
+}
 
 
 

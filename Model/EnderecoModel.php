@@ -47,5 +47,9 @@ class EnderecoModel{
         $this->cidade = $cidade_endereco;
     }
 
+   /* public function getAll(){
+        return $endereco = DBRead('endereco',null);
+    }*/
+
 }
 ?>

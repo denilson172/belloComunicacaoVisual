@@ -1,5 +1,4 @@
 <?php
-
 require 'config.php';
 require 'conexao.php';
 require 'database.php';
@@ -11,6 +10,7 @@ class EnderecoDAO{
         $numeroEndereco = $endereco->getNumeroEndereco();
         $bairroEndereco = $endereco->getBairroEndereco();
         $cidadeEndereco = $endereco->getCidadeEndereco();
+
         //array para insert no banco
         $endereco_arr = array (
             'logradouro_endereco' => $logradouroEndereco,
