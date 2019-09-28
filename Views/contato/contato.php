@@ -94,7 +94,7 @@
 						<span class="focus-input100"></span>
 					</div>
 
-					<!--=================================================================================>
+					<!--=================================================================================-->
 					<span class="contact100-form-text padding-top">SOBRE O PROJETO</span>
 
 					<label class="label-input100" for="plano">Plano</label>
@@ -119,7 +119,7 @@
 					<div class="wrap-input100 validate-input">
 						<textarea id="message" class="input100" name="descricaoMarca" placeholder="Descreva seu projeto..."></textarea>
 						<span class="focus-input100"></span>
-					</div-->
+					</div>
 
 					
 
@@ -132,6 +132,9 @@
 						</button>
 						<input type="hidden" name="classeEndereco" value="Endereco"/>
 						<input type="hidden" name="classeCliente" value="Cliente"/>
+						<input type="hidden" name="classeLogo" value="Logo"/>
+						<input type="hidden" name="classeProjeto" value="Projeto"/>
+						<input type="hidden" name="statusProjeto" value="1"/> <!--status padrão 1 - pendente-->
 						<input type="hidden" name="metodoInserir" value="inserir"/>
 						
 						
