@@ -132,11 +132,9 @@
 						</button>
 						
 						<input type="hidden" name="classe" value="Cliente"/>
-						<input type="hidden" name="classeLogo" value="Logo"/><!--apagar-->
-						<input type="hidden" name="classeProjeto" value="Projeto"/><!--apagar-->
-						<input type="hidden" name="statusProjeto" value="1"/> <!--status padrão 1 - pendente-->
 						<input type="hidden" name="metodoInserir" value="inserir"/>
-						
+						<input type="hidden" name="planos" value="<?php echo $plano?>">
+						<input type="hidden" name="status" value="1">
 						
 						
 						<button class="contact100-form-btn" name="submit">

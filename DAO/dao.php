@@ -4,23 +4,34 @@ require 'conexao.php';
 require 'database.php';
 require_once '../Model/enderecoModel.php';
 require_once '../Model/clienteModel.php';
-
+require_once '../Model/logoModel.php';
+require_once '../Model/projetoModel.php';
 
 class DAO{
-    function inserirDados($endereco, $cliente){
+    function inserirDados(
+        $endereco,
+        $cliente,
+        $logo,
+        $projeto
+        ){
         //ENDERECO - GET
         $logradouroEndereco = $endereco->getLogradouroEndereco();
         $numeroEndereco = $endereco->getNumeroEndereco();
         $bairroEndereco = $endereco->getBairroEndereco();
         $cidadeEndereco = $endereco->getCidadeEndereco();
-
         //CLIENTE - GET
         $nomeCliente = $cliente->getNomeCliente();
         $emailCliente = $cliente->getEmailCliente();
         $celularCliente = $cliente->getCelularCliente();
         $idEndereco = $cliente->getIdEndereco();
-
-
+        //LOGO - GET
+        $nomeMarcaLogo = $logo->getNomeMarcaLogo();
+        $sloganMarcaLogo = $logo->getSloganMarcaLogo();
+        $descricaoMarcaLogo = $logo->getDescricaoMarcaLogo();
+        //PROJETO - GET
+        $planoProjeto = $projeto->getPlanoProjeto();
+        $statusProjeto = $projeto->getstatusProjeto();
+        $nomeProjeto = $projeto->getNomeProjeto();
         //ENDERECO - array para insert no banco
         $endereco_arr = array (
             //'id_endereco' => $idEndereco,
@@ -29,7 +40,6 @@ class DAO{
             'bairro_endereco' => $bairroEndereco,
             'cidade_endereco' => $cidadeEndereco
         );
-
         //CLIENTE - array para insert no banco
         $cliente_arr = array (
             'email_cliente' => $emailCliente,
@@ -37,9 +47,30 @@ class DAO{
             'celular_cliente' => $celularCliente,
             'id_endereco' =>  $idEndereco
         );
+        //LOGO - array para insert no banco
+        $logo_arr = array (
+            'nome_marca_logo' => $nomeMarcaLogo,
+            'slogan_marca_logo' => $sloganMarcaLogo,
+            'descricao_marca_logo' => $descricaoMarcaLogo
+        );
+        //PROJETO - array para insert no banco
+        $projeto_arr = array (
+            'plano_projeto' => $planoProjeto,
+            'status_projeto' => $statusProjeto,
+            'nome_projeto' => $nomeProjeto,
+        );
 
         //inserindo no bd;
-        $salvar = DBCreateFK('endereco', 'cliente', $endereco_arr, $cliente_arr);
+        $salvar = DBCreateFK(
+            'endereco',
+            'cliente',
+            'logo',
+            'projeto',
+            $endereco_arr,
+            $cliente_arr,
+            $logo_arr,
+            $projeto_arr
+        );
     }  
 }
 
