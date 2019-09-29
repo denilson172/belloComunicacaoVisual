@@ -130,12 +130,13 @@
 					</button>
 							
 						</button>
-						<input type="hidden" name="classeEndereco" value="Endereco"/>
-						<input type="hidden" name="classeCliente" value="Cliente"/>
-						<input type="hidden" name="classeLogo" value="Logo"/>
-						<input type="hidden" name="classeProjeto" value="Projeto"/>
+						
+						<input type="hidden" name="classe" value="Cliente"/>
+						<input type="hidden" name="classeLogo" value="Logo"/><!--apagar-->
+						<input type="hidden" name="classeProjeto" value="Projeto"/><!--apagar-->
 						<input type="hidden" name="statusProjeto" value="1"/> <!--status padrão 1 - pendente-->
 						<input type="hidden" name="metodoInserir" value="inserir"/>
+						
 						
 						
 						<button class="contact100-form-btn" name="submit">

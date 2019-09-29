@@ -1,95 +1,66 @@
 
 <?php
-
+require_once("../DAO/dao.php");
 require_once("../Model/clienteModel.php");
-require_once("../DAO/clienteDao.php");
-
 require_once "../Model/enderecoModel.php";
-require_once "../DAO/enderecoDao.php";
 
 require_once "../Model/logoModel.php";
 require_once "../DAO/logoDao.php";
 
-//INICIO ENDERECO==================================================================================
-//recebendo dados
+//ENDERECO - recebendo dados================================================================================
 if($_SERVER['REQUEST_METHOD'] == 'POST' ) {
     if(isset($_POST['submit'])){
-        $classeEndereco= $_POST['classeEndereco']."Controller";
+        $classe= $_POST['classe']."Controller";
         $metodoInserir = $_POST['metodoInserir'];
+        //ENDERECO - FORM
         $logradouro = $_POST['logradouro'];
         $numero = $_POST['numero'];
         $bairro = $_POST['bairro'];
         $cidade = $_POST['cidade'];
+        //CLIENTE - FORM
+        $nome = $_POST['nome'];
+        $email = $_POST['email'];
+        $celular = $_POST['phone'];    
         
-        $controller = new $classeEndereco();
+        $controller = new $classe();
 
-        $controller->$metodoInserir($logradouro,$numero,$bairro,$cidade);
+        $controller->$metodoInserir($logradouro,$numero,$bairro,$cidade,$nome,$email,$celular);
     }
 }else{
-    $classeEndereco ="EnderecoController";
+    $classeEndereco ="ClienteController";
     $metodoInserir ="inserir";
 }
 
-//enviando para Model e DAO
-class EnderecoController {
+//ENDERECO - enviando para Model e DAO ================================================================================
+class ClienteController {
     private $enderecoModel;
-    private $enderecoDao;
+    private $clienteModel;
+    private $dao;
 
     public function __construct(){
         $this->enderecoModel = new EnderecoModel();
-        $this->enderecoDao = new EnderecoDao();
+        $this->clienteModel = new ClienteModel();
+        $this->dao = new DAO();
     }
 
-    public function inserir($logradouro,$numero,$bairro,$cidade) {
-            $this->enderecoModel->setLogradouroEndereco($logradouro);
-            $this->enderecoModel->setNumeroEndereco($numero);
-            $this->enderecoModel->setBairroEndereco($bairro);
-            $this->enderecoModel->setCidadeEndereco($cidade);
+    public function inserir($logradouro,$numero,$bairro,$cidade,$nome,$email,$celular) {
+        //ENDERECO - SET
+      //  $this->enderecoModel->setIdEndereco($idEndereco);
+        $this->enderecoModel->setLogradouroEndereco($logradouro);
+        $this->enderecoModel->setNumeroEndereco($numero);
+        $this->enderecoModel->setBairroEndereco($bairro);           
+        $this->enderecoModel->setCidadeEndereco($cidade);
+        //CLIENTE - SET
+        $this->clienteModel->setNomeCliente($nome);
+        $this->clienteModel->setEmailCliente($email);
+        $this->clienteModel->setCelularCliente($celular);
 
-            return $this->enderecoDao->inserirEndereco($this->enderecoModel);
+        return $this->dao->inserirDados($this->enderecoModel, $this->clienteModel);
 
            // header('Location: http://localhost/ARQUIVOS/bellocv/index.php');
     }
-}//FIM ENDERECO
+}//FIM cliente
 
-//INICIO CLIENTE==================================================================================
-//recebendo dados
-if($_SERVER['REQUEST_METHOD'] == 'POST' ) {
-    if(isset($_POST['submit'])){
-        $classeCliente= $_POST['classeCliente']."Controller";
-        $metodoInserir = $_POST['metodoInserir'];
-        $nome = $_POST['nome'];
-        $email = $_POST['email'];
-        $celular = $_POST['phone'];
-        
-        $controller = new $classeCliente();
-
-        $controller->$metodoInserir($nome,$email,$celular);
-    }
-}else{
-    $classeCliente ="ClienteController";
-    $metodoInserir ="inserir";
-}
-//enviando para Model e DAO
-class ClienteController {
-    private $clienteModel;
-    private $clienteDAO;
-
-    public function __construct(){
-        $this->clienteModel = new ClienteModel();
-        $this->clienteDao = new ClienteDao();
-    }
-
-    public function inserir($nome,$email,$celular) { 
-        $this->clienteModel->setNomeCliente($nome);
-        $this->clienteModel->setEmailCliente($email);
-        $this->clienteModel->setCelularCliente($celular); 
-    
-        return $this->clienteDao->inserirCliente($this->clienteModel);
-
-        //header('Location: http://localhost/ARQUIVOS/bellocv/Views/index.php');
-    } 
-}//FIM CLIENTE
 
     //INICIO LOGO==================================================================================
     //recebendo dados

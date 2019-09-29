@@ -7,9 +7,10 @@ class ClienteDAO{
         $nomeCliente = $cliente->getNomeCliente();
         $emailCliente = $cliente->getEmailCliente();
         $celularCliente = $cliente->getCelularCliente();
+        $idEndereco = $cliente->getIdEndereco();
         //obtendo id_endereco;
-        $idEndereco = DBRead('endereco',null,'id_endereco');        
-        $id_fk = $idEndereco['0']['id_endereco'];
+        /*$idEndereco = DBRead('endereco',null,'id_endereco');        
+        $id_fk = $idEndereco['0']['id_endereco'];*/
 
         
         
@@ -18,12 +19,12 @@ class ClienteDAO{
         $cliente_arr = array (
             'email_cliente' => $emailCliente,
             'nome_cliente' => $nomeCliente,
-            'celular_cliente' => $celularCliente,
-            'id_endereco' =>  $id_fk
+            'celular_cliente' => $celularCliente
+            //'id_endereco' =>  $id_fk
         );
 
         //insertnoBD
-       $salvar = DBCreate('cliente',$cliente_arr);
+      // $salvar = DBCreateFK('cliente',$cliente_arr);
     }
 
 }
