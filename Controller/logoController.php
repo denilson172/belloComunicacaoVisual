@@ -1,6 +1,6 @@
 
 <?php
-require_once __DIR__ . "/../DAO/dao.php";
+require_once __DIR__ . "/../DAO/logoDAO.php";
 require_once __DIR__ . "/../Model/logoModel.php";
         
    
@@ -15,8 +15,8 @@ class LogoController {
         $this->logoDao = new LogoDAO();
     }
 
-    public function listarLogo(){
-        $cli = $this->logoDao->listarLogo();
+    public function listarLogoPendente(){
+        $cli = $this->logoDao->listarLogoPendente();
         $_SESSION['logo'] = $cli;
 
         
@@ -26,7 +26,7 @@ class LogoController {
 }//FIM cliente
 
 $logo_controller = new LogoController();
-$logo_controller->listarLogo();
+$logo_controller->listarLogoPendente();
 
 //echo "<script> location.href= '../Views/adm/projetos/projetos.php' </script>"
 

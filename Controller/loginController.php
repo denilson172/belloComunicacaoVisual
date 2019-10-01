@@ -1,6 +1,7 @@
 <?php 
 require_once ("../DAO/dao.php");
 require_once ("../Model/loginModel.php");
+require_once ("../Model/logoutModel.php");
 
 if($_SERVER['REQUEST_METHOD'] == 'POST' ) {
     if(isset($_POST['submit'])){
@@ -31,6 +32,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' ) {
 
 		public function __construct(){
 			$this->loginModel = new LoginModel();
+			$this->logoutModel = new LogoutModel();
 			$this->loginDao = new LoginDAO();
 			
 		}

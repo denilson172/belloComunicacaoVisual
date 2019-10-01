@@ -1,6 +1,6 @@
 
 <?php
-require_once __DIR__ . "/../DAO/dao.php";
+require_once __DIR__ . "/../DAO/projetoDAO.php";
 require_once __DIR__ . "/../Model/projetoModel.php";
         
    
@@ -15,20 +15,21 @@ class ProjetoController {
         $this->projetoDao = new ProjetoDAO();
     }
 
-    public function listarProjeto(){
-        $cli = $this->projetoDao->listarProjeto();
+    public function listarProjetoPendente(){
+        $cli = $this->projetoDao->listarProjetoPendente();
         $_SESSION['projeto'] = $cli;
 
         
 
-         //header('Location: http://localhost/ARQUIVOS/bellocv/Views/adm/projetos/projetos.php');
+        // header('Location:  "__DIR__ ./../../Views/adm/projetos/projetos.php"');
     }
 }//FIM cliente
 
 $projeto_controller = new ProjetoController();
-$projeto_controller->listarProjeto();
+$projeto_controller->listarProjetoPendente();
 
 //echo "<script> location.href= '../Views/adm/projetos/projetos.php' </script>"
+//echo '<meta http-equiv="refresh" content="2;URL=../Views/adm/projetos/projetos.php" />';
 
 
 

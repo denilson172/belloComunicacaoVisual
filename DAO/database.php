@@ -98,36 +98,6 @@ require_once __DIR__ . '/../Model/projetoModel.php';
         }
     }
 
-    //PROJETO - listar registros
-    
-
-     //listar registros
-     /*function DBReadProjeto($table, $params = null, $filds = '*'){
-        $table = DB_PREFIX.'_'.$table;
-        $params = ($params) ? " {$params}" : null;
-        $query = "SELECT {$filds} FROM {$table}{$params}";
-        $result = DBExecute($query);
-    
-        if(!mysqli_num_rows($result)) 
-            return false;
-        else{
-            $res = mysqli_fetch_assoc($result);
-                for($i=0; $i < count($res); $i++){
-                    $projeto[$i] = new ProjetoModel();
-
-                    $projeto[$i]->setIdProjeto($res[$i]['id_projeto']);
-                    $projeto[$i]->setPlanoProjeto($res[$i]['plano_projeto']);
-                    $projeto[$i]->setStatusProjeto($res[$i]['status_projeto']);
-                    $projeto[$i]->setNomeProjeto($res[$i]['nome_projeto']);
-                    $projeto[$i]->setIdLogo($res[$i]['id_logo']);
-                    $projeto[$i]->setIdCliente($res[$i]['id_cliente']);
-                }
-                return $projeto; 
-            
-            //return $data;//retorna um array com cada linha da tabela
-        }
-    }*/
-
     //validar login
     function DBLogin($table, $email, $senha){
         $table = DB_PREFIX.'_'.$table;

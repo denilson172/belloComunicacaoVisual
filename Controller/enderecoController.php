@@ -1,6 +1,6 @@
 
 <?php
-require_once __DIR__ . "/../DAO/dao.php";
+require_once __DIR__ . "/../DAO/enderecoDAO.php";
 require_once __DIR__ . "/../Model/enderecoModel.php";
         
    
@@ -15,8 +15,8 @@ class EnderecoController {
         $this->enderecoDao = new EnderecoDAO();
     }
 
-    public function listarEndereco(){
-        $cli = $this->enderecoDao->listarEndereco();
+    public function listarEnderecoPendente(){
+        $cli = $this->enderecoDao->listarEnderecoPendente();
         $_SESSION['endereco'] = $cli;
 
         
@@ -26,7 +26,7 @@ class EnderecoController {
 }//FIM cliente
 
 $endereco_controller = new EnderecoController();
-$endereco_controller->listarEndereco();
+$endereco_controller->listarEnderecoPendente();
 
 //echo "<script> location.href= '../Views/adm/projetos/projetos.php' </script>"
 

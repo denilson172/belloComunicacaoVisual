@@ -134,7 +134,7 @@
 										<label for="selectAll"></label-->
 									</span>
 								</th>
-								<th>Marca</th>
+								<th center>Marca</th>
 								<th>Plano</th>
 								<th>Detalhes</th>
 								<th>Executar Projeto</th>
@@ -153,7 +153,7 @@
 									echo "<td> </td> ";
 									echo "<td> $nomeProjeto </td> ";
 									echo "<td> $planoProjeto </td> ";
-									echo "<td><a href='#detalhesModal' data-toggle='modal'>Detalhes</a></td>";
+									echo "<td><a href='#detalhesModal' data-toggle='modal'>Visualizar Detalhes</a></td>";
 									echo "<td><a href='' class='edit'><i class='fas fa-angle-double-right blue' title='Executar Projeto' value='2'></i></a></td>";							
 								echo "</tr>";
 							}
@@ -221,7 +221,7 @@
 								</div>	
 								<div class="form-group">
 									<label>Número</label>
-									<input type="number" class="form-control" value=<?php echo $numeroEndereco ?> required disabled>
+									<input type="text" class="form-control" value=<?php echo $numeroEndereco ?> required disabled>
 								</div>	
 								<div class="form-group">
 									<label>Bairro</label>
@@ -303,7 +303,7 @@
 									echo "<td> </td> ";
 									echo "<td> $nomeProjeto </td> ";
 									echo "<td> $planoProjeto </td> ";
-									echo "<td><a href='#detalhesModal' data-toggle='modal'>Detalhes</a></td>";
+									echo "<td><a href='#detalhesModal' data-toggle='modal'>Visualizar Detalhes</a></td>";
 									echo "<td><a href='' class='edit'><i class='fas fa-angle-double-right green-dark' title='Executar Projeto' value='2'></i></a></td>";							
 								echo "</tr>";
 							}
@@ -371,7 +371,7 @@
 								</div>	
 								<div class="form-group">
 									<label>Número</label>
-									<input type="number" class="form-control" value=<?php echo $numeroEndereco ?> required disabled>
+									<input type="text" class="form-control" value=<?php echo $numeroEndereco ?> required disabled>
 								</div>	
 								<div class="form-group">
 									<label>Bairro</label>

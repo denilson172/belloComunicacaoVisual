@@ -1,6 +1,7 @@
 
 <?php
 require_once __DIR__ ."/../DAO/dao.php";
+require_once __DIR__ ."/../DAO/clienteDAO.php";
 require_once __DIR__ ."/../Model/clienteModel.php";
 require_once __DIR__ ."/../Model/enderecoModel.php";
 require_once __DIR__ ."/../Model/logoModel.php";
@@ -94,13 +95,13 @@ class ClienteController {
         );    
     }
 
-    public function listarCliente(){
-        $cli = $this->clienteDao->listarCliente();
+    public function listarClientePendente(){
+        $cli = $this->clienteDao->listarClientePendente();
         $_SESSION['cliente'] = $cli;
     }
 }//FIM cliente
 $cliente_controller = new ClienteController();
-$cliente_controller->listarCliente();
+$cliente_controller->listarClientePendente();
 
 
 
