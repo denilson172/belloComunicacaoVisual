@@ -135,9 +135,14 @@
 						<input type="hidden" name="metodoInserir" value="inserir"/>
 						<input type="hidden" name="planos" value="<?php echo $plano?>">
 						<input type="hidden" name="status" value="1">
+						<script>
+						function funcao1()
+						{
+							alert("Cadastro realizado com Sucesso!!!");
+						}
 						
-						
-						<button class="contact100-form-btn" name="submit">
+						</script>
+						<button class="contact100-form-btn" name="submit" onclick="funcao1()" value="Exibir Alert">
 							<span>Enviar</span>
 						</button>
 					</div>

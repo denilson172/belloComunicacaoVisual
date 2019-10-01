@@ -1,3 +1,41 @@
+<?php
+	session_start();
+	require_once "../../../Model/projetoModel.php";
+	require_once "../../../Model/logoModel.php";
+	require_once "../../../Model/enderecoModel.php";
+	require_once "../../../Model/clienteModel.php";
+	require_once "../../../Controller/projetoController.php";
+	require_once "../../../Controller/logoController.php";
+	require_once "../../../Controller/enderecoController.php";
+	require_once "../../../Controller/clienteController.php";
+
+	$projeto = "";
+
+	if(empty($_SESSION['projeto'])){
+		echo "erro";
+	}else{
+		$projeto = $_SESSION['projeto'];
+	}
+
+	if(empty($_SESSION['logo'])){
+		echo "erro";
+	}else{
+		$logo = $_SESSION['logo'];
+	}
+
+	if(empty($_SESSION['endereco'])){
+		echo "erro";
+	}else{
+		$endereco = $_SESSION['endereco'];
+	}
+	if(empty($_SESSION['cliente'])){
+		echo "erro";
+	}else{
+		$cliente = $_SESSION['cliente'];
+	}
+?>
+
+
 <!DOCTYPE html>
 	<html lang="PT-BR">
 	<head>
@@ -42,9 +80,9 @@
 	</head>
 	<body>
 
-		<div class="preloader">
+		<!-- <div class="preloader">
 			<img src="../../Style/img/loader.gif" alt="Preloader image">
-		</div>
+		</div> -->
 
 		<!-- Menu horizontal -->
 		<div class="collapse navbar-collapse white-bg" id="bs-example-navbar-collapse-1">
@@ -65,11 +103,12 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right main-nav">
 				<li class="green">
-					<a href="../../index.php"><i class="icon-hover red fas fa-sign-out-alt fa-2x" title="Sair"></a></i>
+					<a href="../../../Model/logoutModel.php"><i class="icon-hover red fas fa-sign-out-alt fa-2x" title="Sair"></a></i>
 				</li>
 			</ul>
 
 		</div><!--fim nav-->
+		
 		<!--========inicio projetos pendentes=====================================================-->
 		<div class="container-contact100">
 
@@ -81,9 +120,9 @@
 							<div class="col-sm-6">
 								<h2><b class="red">Projetos Pendentes</b></h2>
 							</div>
-							<div class="col-sm-6">
+							<!--div class="col-sm-6">
 								<a href="" class="btn btn-success" data-toggle="modal"> <i class="material-icons">&#xE147;</i><span>Executar Projeto</span></a>
-							</div>
+							</div-->
 						</div>
 					</div>
 					<table class="table table-striped table-hover">
@@ -91,47 +130,129 @@
 							<tr>
 								<th>
 									<span class="custom-checkbox">
-										<input type="checkbox" id="selectAll">
-										<label for="selectAll"></label>
+										<!--input type="checkbox" id="selectAll">
+										<label for="selectAll"></label-->
 									</span>
 								</th>
 								<th>Marca</th>
 								<th>Plano</th>
 								<th>Detalhes</th>
+								<th>Executar Projeto</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>
-									<span class="custom-checkbox">
-										<input type="checkbox" id="checkbox1" name="options[]" value="1">
-										<label for="checkbox1"></label>
-									</span>
-								</td>
-								<!--inserir campos dinâmicamente-->
-								<td>Bello</td>
-								<td>PREMIUM</td>
-								<td><a href="#">Detalhes</a></td>
+							<!-- inserir campos dinâmicamente -->
+							<?php
+							foreach($projeto as $cli){
+								$nomeProjeto = $cli->getNomeProjeto();
+								$planoProjeto = $cli->getPlanoProjeto();
 								
-								<!--td>
-									<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
-									<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Apagar">&#xE872;</i></a>
-								</td-->
-							</tr>
-							
+								
+								// var_dump($cli);
+								echo "<tr>";
+									echo "<td> </td> ";
+									echo "<td> $nomeProjeto </td> ";
+									echo "<td> $planoProjeto </td> ";
+									echo "<td><a href='#detalhesModal' data-toggle='modal'>Detalhes</a></td>";
+									echo "<td><a href='' class='edit'><i class='fas fa-angle-double-right blue' title='Executar Projeto' value='2'></i></a></td>";							
+								echo "</tr>";
+							}
+							?>
+							<?php
+							foreach($logo as $cli){
+								$sloganLogo = $cli->getSloganMarcaLogo();
+								$descricaoLogo = $cli->getDescricaoMarcaLogo();
+							}
+							?>
+							<?php
+							foreach($endereco as $cli){
+								$logradouroEndereco = $cli->getLogradouroEndereco();
+								$numeroEndereco = $cli->getNumeroEndereco();
+								$bairroEndereco = $cli->getBairroEndereco();
+								$cidadeEndereco = $cli->getCidadeEndereco();									
+							}
+							?>
+							<?php
+							foreach($cliente as $cli){
+								$nomeCliente = $cli->getNomeCliente();
+								$emailCliente = $cli->getEmailCliente();
+								$celularCliente = $cli->getCelularCliente();									
+							}
+							?>
+								
+								
 						</tbody>
 					</table>
-					<div class="clearfix">
-						<div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-						<ul class="pagination">
-							<li class="page-item disabled"><a href="#">Anterior</a></li>
-							<li class="page-item active"><a href="#" class="page-link">1</a></li>
-							<li class="page-item"><a href="#" class="page-link">2</a></li>
-							<li class="page-item"><a href="#" class="page-link">3</a></li>
-							<li class="page-item"><a href="#" class="page-link">4</a></li>
-							<li class="page-item"><a href="#" class="page-link">5</a></li>
-							<li class="page-item"><a href="#" class="page-link">Próximo</a></li>
-						</ul>
+				</div>
+			</div>
+			<!-- VIEW Modal HTML -->
+			<div id="detalhesModal" class="modal fade">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<form>
+							<div class="modal-header blue-bg">						
+								<h4 class="modal-title white">Detalhes</h4>
+							</div>
+
+							<div class="modal-header">						
+								<h4 class="modal-title">Sobre o Cliente</h4>
+							</div>
+							
+							<div class="modal-body">					
+								<div class="form-group">
+									<label>Nome</label>
+									<input type="text" class="form-control" value=<?php echo $nomeCliente ?> required disabled>
+								</div>
+								<div class="form-group">
+									<label>Email</label>
+									<input type="email" class="form-control" value=<?php echo $emailCliente ?> required disabled>
+								</div>
+								<div class="form-group">
+									<label>Telefone</label>
+									<input type="phone" class="form-control" value=<?php echo $celularCliente ?> required disabled>
+								</div>
+								<div class="form-group">
+									<label>Cidade</label>
+									<input type="city" class="form-control" value=<?php echo $cidadeEndereco ?> required disabled>
+								</div>			
+								<div class="form-group">
+									<label>Rua</label>
+									<input type="text" class="form-control"  value=<?php echo $logradouroEndereco ?> required disabled>
+								</div>	
+								<div class="form-group">
+									<label>Número</label>
+									<input type="number" class="form-control" value=<?php echo $numeroEndereco ?> required disabled>
+								</div>	
+								<div class="form-group">
+									<label>Bairro</label>
+									<input type="text" class="form-control" value=<?php echo $bairroEndereco ?> required disabled>
+								</div>	
+
+								<div class="modal-header">						
+									<h4 class="modal-title">Sobre o Projeto</h4>
+								</div></br>
+
+								<div class="form-group">
+									<label>Plano</label>
+									<input type="plano" class="form-control" value=<?php echo $planoProjeto ?> required disabled>
+								</div>
+								<div class="form-group">
+									<label>Nome</label>
+									<input type="text" class="form-control" value=<?php echo $nomeProjeto ?> required disabled>
+								</div>
+								<div class="form-group">
+									<label>Slogan</label>
+									<input type="text" class="form-control" value=<?php echo $sloganLogo ?> required disabled>
+								</div>
+								<div class="form-group">
+									<label>Descrição</label>
+									<input type="text" class="form-control" value=<?php echo $descricaoLogo ?> required disabled>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<input type="button" class="btn btn-default" data-dismiss="modal" value="Fechar">
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -140,17 +261,18 @@
 
 		<!--========inicio projetos em produção=====================================================-->
 		<div class="container-contact100">
-			<!--inicio crud -->
+
+			<!--inicio crud - pendente-->
 			<div class="container">
 				<div class="table-wrapper">
 					<div class="table-title">
 						<div class="row">
 							<div class="col-sm-6">
-								<h2><b class="blue">Projetos Em Produção</b></h2>
+								<h2><b class="blue">Projetos em Produção</b></h2>
 							</div>
-							<div class="col-sm-6">
+							<!--div class="col-sm-6">
 								<a href="" class="btn btn-success" data-toggle="modal"> <i class="material-icons">&#xE147;</i><span>Executar Projeto</span></a>
-							</div>
+							</div-->
 						</div>
 					</div>
 					<table class="table table-striped table-hover">
@@ -158,54 +280,139 @@
 							<tr>
 								<th>
 									<span class="custom-checkbox">
-										<input type="checkbox" id="selectAll">
-										<label for="selectAll"></label>
+										<!--input type="checkbox" id="selectAll">
+										<label for="selectAll"></label-->
 									</span>
 								</th>
 								<th>Marca</th>
 								<th>Plano</th>
 								<th>Detalhes</th>
+								<th>Finalizar Projeto</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>
-									<span class="custom-checkbox">
-										<input type="checkbox" id="checkbox1" name="options[]" value="1">
-										<label for="checkbox1"></label>
-									</span>
-								</td>
-								<!--inserir campos dinâmicamente-->
-								<td>Bello</td>
-								<td>PREMIUM</td>
-								<td><a href="#">Detalhes</a></td>
+							<!-- inserir campos dinâmicamente -->
+							<?php
+							foreach($projeto as $cli){
+								$nomeProjeto = $cli->getNomeProjeto();
+								$planoProjeto = $cli->getPlanoProjeto();
 								
-								<!--td>
-									<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
-									<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Apagar">&#xE872;</i></a>
-								</td-->
-							</tr>
-							
+								
+								// var_dump($cli);
+								echo "<tr>";
+									echo "<td> </td> ";
+									echo "<td> $nomeProjeto </td> ";
+									echo "<td> $planoProjeto </td> ";
+									echo "<td><a href='#detalhesModal' data-toggle='modal'>Detalhes</a></td>";
+									echo "<td><a href='' class='edit'><i class='fas fa-angle-double-right green-dark' title='Executar Projeto' value='2'></i></a></td>";							
+								echo "</tr>";
+							}
+							?>
+							<?php
+							foreach($logo as $cli){
+								$sloganLogo = $cli->getSloganMarcaLogo();
+								$descricaoLogo = $cli->getDescricaoMarcaLogo();
+							}
+							?>
+							<?php
+							foreach($endereco as $cli){
+								$logradouroEndereco = $cli->getLogradouroEndereco();
+								$numeroEndereco = $cli->getNumeroEndereco();
+								$bairroEndereco = $cli->getBairroEndereco();
+								$cidadeEndereco = $cli->getCidadeEndereco();									
+							}
+							?>
+							<?php
+							foreach($cliente as $cli){
+								$nomeCliente = $cli->getNomeCliente();
+								$emailCliente = $cli->getEmailCliente();
+								$celularCliente = $cli->getCelularCliente();									
+							}
+							?>
+								
+								
 						</tbody>
 					</table>
-					<div class="clearfix">
-						<div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-						<ul class="pagination">
-							<li class="page-item disabled"><a href="#">Anterior</a></li>
-							<li class="page-item active"><a href="#" class="page-link">1</a></li>
-							<li class="page-item"><a href="#" class="page-link">2</a></li>
-							<li class="page-item"><a href="#" class="page-link">3</a></li>
-							<li class="page-item"><a href="#" class="page-link">4</a></li>
-							<li class="page-item"><a href="#" class="page-link">5</a></li>
-							<li class="page-item"><a href="#" class="page-link">Próximo</a></li>
-						</ul>
+				</div>
+			</div>
+			<!-- VIEW Modal HTML -->
+			<div id="detalhesModal" class="modal fade">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<form>
+							<div class="modal-header blue-bg">						
+								<h4 class="modal-title white">Detalhes</h4>
+							</div>
+
+							<div class="modal-header">						
+								<h4 class="modal-title">Sobre o Cliente</h4>
+							</div>
+							
+							<div class="modal-body">					
+								<div class="form-group">
+									<label>Nome</label>
+									<input type="text" class="form-control" value=<?php echo $nomeCliente ?> required disabled>
+								</div>
+								<div class="form-group">
+									<label>Email</label>
+									<input type="email" class="form-control" value=<?php echo $emailCliente ?> required disabled>
+								</div>
+								<div class="form-group">
+									<label>Telefone</label>
+									<input type="phone" class="form-control" value=<?php echo $celularCliente ?> required disabled>
+								</div>
+								<div class="form-group">
+									<label>Cidade</label>
+									<input type="city" class="form-control" value=<?php echo $cidadeEndereco ?> required disabled>
+								</div>			
+								<div class="form-group">
+									<label>Rua</label>
+									<input type="text" class="form-control"  value=<?php echo $logradouroEndereco ?> required disabled>
+								</div>	
+								<div class="form-group">
+									<label>Número</label>
+									<input type="number" class="form-control" value=<?php echo $numeroEndereco ?> required disabled>
+								</div>	
+								<div class="form-group">
+									<label>Bairro</label>
+									<input type="text" class="form-control" value=<?php echo $bairroEndereco ?> required disabled>
+								</div>	
+
+								<div class="modal-header">						
+									<h4 class="modal-title">Sobre o Projeto</h4>
+								</div></br>
+
+								<div class="form-group">
+									<label>Plano</label>
+									<input type="plano" class="form-control" value=<?php echo $planoProjeto ?> required disabled>
+								</div>
+								<div class="form-group">
+									<label>Nome</label>
+									<input type="text" class="form-control" value=<?php echo $nomeProjeto ?> required disabled>
+								</div>
+								<div class="form-group">
+									<label>Slogan</label>
+									<input type="text" class="form-control" value=<?php echo $sloganLogo ?> required disabled>
+								</div>
+								<div class="form-group">
+									<label>Descrição</label>
+									<input type="text" class="form-control" value=<?php echo $descricaoLogo ?> required disabled>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<input type="button" class="btn btn-default" data-dismiss="modal" value="Fechar">
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
+			<!--fim crud-->
 		</div>
+
 		<!--========inicio projetos finalizados=====================================================-->
 		<div class="container-contact100">
-			<!--inicio crud -->
+
+			<!--inicio crud - pendente-->
 			<div class="container">
 				<div class="table-wrapper">
 					<div class="table-title">
@@ -213,9 +420,9 @@
 							<div class="col-sm-6">
 								<h2><b class="green-dark">Projetos Finalizados</b></h2>
 							</div>
-							<div class="col-sm-6">
-								<a href="" class="btn btn-success" data-toggle="modal"> <i class="material-icons">&#xE147;</i><span>Finalizar Projeto</span></a>
-							</div>
+							<!--div class="col-sm-6">
+								<a href="" class="btn btn-success" data-toggle="modal"> <i class="material-icons">&#xE147;</i><span>Executar Projeto</span></a>
+							</div-->
 						</div>
 					</div>
 					<table class="table table-striped table-hover">
@@ -223,121 +430,133 @@
 							<tr>
 								<th>
 									<span class="custom-checkbox">
-										<input type="checkbox" id="selectAll">
-										<label for="selectAll"></label>
+										<!--input type="checkbox" id="selectAll">
+										<label for="selectAll"></label-->
 									</span>
 								</th>
 								<th>Marca</th>
 								<th>Plano</th>
 								<th>Detalhes</th>
+								<th>Deletar Projeto</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>
-									<span class="custom-checkbox">
-										<input type="checkbox" id="checkbox1" name="options[]" value="1">
-										<label for="checkbox1"></label>
-									</span>
-								</td>
-								<!--inserir campos dinâmicamente-->
-								<td>Bello</td>
-								<td>PREMIUM</td>
-								<td><a href="#">Detalhes</a></td>
+							<!-- inserir campos dinâmicamente -->
+							<?php
+							foreach($projeto as $cli){
+								$nomeProjeto = $cli->getNomeProjeto();
+								$planoProjeto = $cli->getPlanoProjeto();
 								
-								<!--td>
-									<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
-									<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Apagar">&#xE872;</i></a>
-								</td-->
-							</tr>
-							
+								
+								// var_dump($cli);
+								echo "<tr>";
+									echo "<td> </td> ";
+									echo "<td> $nomeProjeto </td> ";
+									echo "<td> $planoProjeto </td> ";
+									echo "<td><a href='#detalhesModal' data-toggle='modal'>Detalhes</a></td>";
+									echo "<td><a href='' class='edit'><i class='fas fa-angle-double-right green-dark' title='Executar Projeto' value='2'></i></a></td>";							
+								echo "</tr>";
+							}
+							?>
+							<?php
+							foreach($logo as $cli){
+								$sloganLogo = $cli->getSloganMarcaLogo();
+								$descricaoLogo = $cli->getDescricaoMarcaLogo();
+							}
+							?>
+							<?php
+							foreach($endereco as $cli){
+								$logradouroEndereco = $cli->getLogradouroEndereco();
+								$numeroEndereco = $cli->getNumeroEndereco();
+								$bairroEndereco = $cli->getBairroEndereco();
+								$cidadeEndereco = $cli->getCidadeEndereco();									
+							}
+							?>
+							<?php
+							foreach($cliente as $cli){
+								$nomeCliente = $cli->getNomeCliente();
+								$emailCliente = $cli->getEmailCliente();
+								$celularCliente = $cli->getCelularCliente();									
+							}
+							?>
+								
+								
 						</tbody>
 					</table>
-					<div class="clearfix">
-						<div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-						<ul class="pagination">
-							<li class="page-item disabled"><a href="#">Anterior</a></li>
-							<li class="page-item active"><a href="#" class="page-link">1</a></li>
-							<li class="page-item"><a href="#" class="page-link">2</a></li>
-							<li class="page-item"><a href="#" class="page-link">3</a></li>
-							<li class="page-item"><a href="#" class="page-link">4</a></li>
-							<li class="page-item"><a href="#" class="page-link">5</a></li>
-							<li class="page-item"><a href="#" class="page-link">Próximo</a></li>
-						</ul>
-					</div>
 				</div>
 			</div>
-				
-			<!-- Edit Modal HTML -->
-			<!--div id="addEmployeeModal" class="modal fade">
+			<!-- VIEW Modal HTML -->
+			<div id="detalhesModal" class="modal fade">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<form>
-							<div class="modal-header">						
-								<h4 class="modal-title">Add Employee</h4>
-								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<div class="modal-header blue-bg">						
+								<h4 class="modal-title white">Detalhes</h4>
 							</div>
+
+							<div class="modal-header">						
+								<h4 class="modal-title">Sobre o Cliente</h4>
+							</div>
+							
 							<div class="modal-body">					
 								<div class="form-group">
-									<label>Name</label>
-									<input type="text" class="form-control" required>
+									<label>Nome</label>
+									<input type="text" class="form-control" value=<?php echo $nomeCliente ?> required disabled>
 								</div>
 								<div class="form-group">
 									<label>Email</label>
-									<input type="email" class="form-control" required>
+									<input type="email" class="form-control" value=<?php echo $emailCliente ?> required disabled>
 								</div>
 								<div class="form-group">
-									<label>Address</label>
-									<textarea class="form-control" required></textarea>
+									<label>Telefone</label>
+									<input type="phone" class="form-control" value=<?php echo $celularCliente ?> required disabled>
 								</div>
 								<div class="form-group">
-									<label>Phone</label>
-									<input type="text" class="form-control" required>
-								</div>					
+									<label>Cidade</label>
+									<input type="city" class="form-control" value=<?php echo $cidadeEndereco ?> required disabled>
+								</div>			
+								<div class="form-group">
+									<label>Rua</label>
+									<input type="text" class="form-control"  value=<?php echo $logradouroEndereco ?> required disabled>
+								</div>	
+								<div class="form-group">
+									<label>Número</label>
+									<input type="number" class="form-control" value=<?php echo $numeroEndereco ?> required disabled>
+								</div>	
+								<div class="form-group">
+									<label>Bairro</label>
+									<input type="text" class="form-control" value=<?php echo $bairroEndereco ?> required disabled>
+								</div>	
+
+								<div class="modal-header">						
+									<h4 class="modal-title">Sobre o Projeto</h4>
+								</div></br>
+
+								<div class="form-group">
+									<label>Plano</label>
+									<input type="plano" class="form-control" value=<?php echo $planoProjeto ?> required disabled>
+								</div>
+								<div class="form-group">
+									<label>Nome</label>
+									<input type="text" class="form-control" value=<?php echo $nomeProjeto ?> required disabled>
+								</div>
+								<div class="form-group">
+									<label>Slogan</label>
+									<input type="text" class="form-control" value=<?php echo $sloganLogo ?> required disabled>
+								</div>
+								<div class="form-group">
+									<label>Descrição</label>
+									<input type="text" class="form-control" value=<?php echo $descricaoLogo ?> required disabled>
+								</div>
 							</div>
 							<div class="modal-footer">
-								<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-								<input type="submit" class="btn btn-success" value="Add">
+								<input type="button" class="btn btn-default" data-dismiss="modal" value="Fechar">
 							</div>
 						</form>
 					</div>
 				</div>
 			</div>
-			<Edit Modal HTML >
-			<div id="editEmployeeModal" class="modal fade">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<form>
-							<div class="modal-header">						
-								<h4 class="modal-title">Edit Employee</h4>
-								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							</div>
-							<div class="modal-body">					
-								<div class="form-group">
-									<label>Name</label>
-									<input type="text" class="form-control" required>
-								</div>
-								<div class="form-group">
-									<label>Email</label>
-									<input type="email" class="form-control" required>
-								</div>
-								<div class="form-group">
-									<label>Address</label>
-									<textarea class="form-control" required></textarea>
-								</div>
-								<div class="form-group">
-									<label>Phone</label>
-									<input type="text" class="form-control" required>
-								</div>					
-							</div>
-							<div class="modal-footer">
-								<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-								<input type="submit" class="btn btn-info" value="Save">
-							</div>
-						</form>
-					</div>
-				</div>
-			</div-->
+			<!--fim crud-->
 			<!-- Delete Modal HTML -->
 			<div id="deleteEmployeeModal" class="modal fade">
 				<div class="modal-dialog">

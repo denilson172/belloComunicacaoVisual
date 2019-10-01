@@ -1,3 +1,8 @@
+<?php session_start()
+
+?>
+
+
 <!DOCTYPE html>
 	<html lang="PT-BR">
 	<head>
@@ -41,7 +46,7 @@
 		</div-->
 		<div class="container-contact100">
 			<div class="wrap-contact100">
-				<form class="contact100-form validate-form" action="" method="POST">
+				<form class="contact100-form validate-form" action="../../Controller/loginController.php" method="POST">
 
 					<img class ="img-miniatura-form-center" src="../Style/img/logo-active.png" alt="logo"></br>
 					<span class="contact100-form-title">LOGIN</span> 
@@ -64,7 +69,9 @@
 							<span>Cancelar</span>
 						</button>
 
-						<button class="contact100-form-btn">
+						<input type="hidden" name="classe" value="Login">
+						<input type="hidden" name="metodo" value="validar">
+						<button class="contact100-form-btn" name="submit" onclick="funcao1()" value="Exibir Alert">
 							<span>Entrar</span>
 						</button>
 					</div>

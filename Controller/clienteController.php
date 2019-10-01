@@ -1,10 +1,10 @@
 
 <?php
-require_once "../DAO/dao.php";
-require_once "../Model/clienteModel.php";
-require_once "../Model/enderecoModel.php";
-require_once "../Model/logoModel.php";
-require_once "../Model/projetoModel.php";
+require_once __DIR__ ."/../DAO/dao.php";
+require_once __DIR__ ."/../Model/clienteModel.php";
+require_once __DIR__ ."/../Model/enderecoModel.php";
+require_once __DIR__ ."/../Model/logoModel.php";
+require_once __DIR__ ."/../Model/projetoModel.php";
 
 //ENDERECO, CLIENTE, LOGO - recebendo dados================================================================================
 if($_SERVER['REQUEST_METHOD'] == 'POST' ) {
@@ -56,6 +56,7 @@ class ClienteController {
         $this->clienteModel = new ClienteModel();
         $this->logoModel = new LogoModel();
         $this->projetoModel = new ProjetoModel();
+        $this->clienteDao = new ClienteDAO();
         $this->dao = new DAO();
     }
 
@@ -83,16 +84,23 @@ class ClienteController {
         $this->projetoModel->setStatusProjeto($status); 
         $this->projetoModel->setNomeProjeto($nomeProjeto);
 
+        
+        header('Location: http://localhost/ARQUIVOS/bellocv/index.php');
         return $this->dao->inserirDados(
             $this->enderecoModel,
             $this->clienteModel,
             $this->logoModel,
             $this->projetoModel
-        );
+        );    
+    }
 
-           // header('Location: http://localhost/ARQUIVOS/bellocv/index.php');
+    public function listarCliente(){
+        $cli = $this->clienteDao->listarCliente();
+        $_SESSION['cliente'] = $cli;
     }
 }//FIM cliente
+$cliente_controller = new ClienteController();
+$cliente_controller->listarCliente();
 
 
 
