@@ -17,16 +17,28 @@ class ProjetoController {
 
     public function listarProjetoPendente(){
         $cli = $this->projetoDao->listarProjetoPendente();
-        $_SESSION['projeto'] = $cli;
-
-        
-
-        // header('Location:  "__DIR__ ./../../Views/adm/projetos/projetos.php"');
+        $_SESSION['projetoPendente'] = $cli;
     }
+
+    public function listarProjetoEmProducao(){
+        $cli = $this->projetoDao->listarProjetoEmProducao();
+        $_SESSION['projetoEmProducao'] = $cli;
+    }
+
+    public function listarProjetoFinalizado(){
+        $cli = $this->projetoDao->listarProjetoFinalizado();
+        $_SESSION['projetoFinalizado'] = $cli;
+    }
+
+    // public function alterarStatus(){
+    //     $cli = $this->projetoDao->alterarStatusEmProducao()
+    // }
 }//FIM cliente
 
 $projeto_controller = new ProjetoController();
 $projeto_controller->listarProjetoPendente();
+$projeto_controller->listarProjetoEmProducao();
+$projeto_controller->listarProjetoFinalizado();
 
 //echo "<script> location.href= '../Views/adm/projetos/projetos.php' </script>"
 //echo '<meta http-equiv="refresh" content="2;URL=../Views/adm/projetos/projetos.php" />';

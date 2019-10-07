@@ -17,16 +17,17 @@ class LogoController {
 
     public function listarLogoPendente(){
         $cli = $this->logoDao->listarLogoPendente();
-        $_SESSION['logo'] = $cli;
-
-        
-
-         //header('Location: http://localhost/ARQUIVOS/bellocv/Views/adm/projetos/projetos.php');
+        $_SESSION['logoPendente'] = $cli;
     }
+    // public function listarLogoEmProducao(){
+    //     $cli = $this->logoDao->listarLogoEmProducao();
+    //     $_SESSION['logoEmProducao'] = $cli;
+    // }
 }//FIM cliente
 
 $logo_controller = new LogoController();
 $logo_controller->listarLogoPendente();
+// $logo_controller->listarLogoEmProducao();
 
 //echo "<script> location.href= '../Views/adm/projetos/projetos.php' </script>"
 

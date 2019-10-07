@@ -50,7 +50,7 @@
 		$controller->$metodo($id);
 	}*/
 
-	header('Location: http://localhost/ARQUIVOS/bellocv/Views/index.php');
+	header('Location: http://localhost/xampp-arquivos/bellocv/Views/index.php');
 
 
 ?>

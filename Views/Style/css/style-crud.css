@@ -63,6 +63,14 @@ table.table th i {
     margin: 0 5px;
     cursor: pointer;
 }	
+
+table.table th {
+    text-align: center;
+}
+table.table td {
+    text-align: center;
+}
+
 table.table td:last-child i {
     opacity: 0.9;
     font-size: 22px;
@@ -210,5 +218,5 @@ table.table .avatar {
     min-width: 100px;
 }	
 .modal form label {
-    font-weight: normal;
-}	
+    font-weight: bolder;
+}

@@ -81,6 +81,8 @@ class LoginDAO{
         $senhaLogin = $login->getSenhaLogin();
 
         $validar = DBLogin('login',$emailLogin,$senhaLogin);
+
+        return $validar;
     }
 }
 ?>

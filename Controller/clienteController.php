@@ -97,11 +97,14 @@ class ClienteController {
 
     public function listarClientePendente(){
         $cli = $this->clienteDao->listarClientePendente();
-        $_SESSION['cliente'] = $cli;
+        $_SESSION['clientePendente'] = $cli;
     }
+
+    
 }//FIM cliente
 $cliente_controller = new ClienteController();
 $cliente_controller->listarClientePendente();
+// $cliente_controller->listarClienteEmProducao();
 
 
 

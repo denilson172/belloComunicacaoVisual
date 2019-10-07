@@ -158,7 +158,9 @@ jQuery(function($) {
 		$dialog.css("margin-top", offset);
 	}
 
-	$('.modal').on('show.bs.modal', centerModal);
+	$('.modal').on('show.bs.modal', function(){
+		centerModal;
+	});
 
 	$('.modal-popup .close-link').click(function(event){
 		event.preventDefault();

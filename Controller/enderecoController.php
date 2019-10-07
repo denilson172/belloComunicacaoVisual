@@ -17,16 +17,17 @@ class EnderecoController {
 
     public function listarEnderecoPendente(){
         $cli = $this->enderecoDao->listarEnderecoPendente();
-        $_SESSION['endereco'] = $cli;
-
-        
-
-         //header('Location: http://localhost/ARQUIVOS/bellocv/Views/adm/projetos/projetos.php');
+        $_SESSION['enderecoPendente'] = $cli;
     }
+    // public function listarEnderecoEmProducao(){
+    //     $cli = $this->enderecoDao->listarEnderecoEmProducao();
+    //     $_SESSION['enderecoEmProducao'] = $cli;
+    // }
 }//FIM cliente
 
 $endereco_controller = new EnderecoController();
 $endereco_controller->listarEnderecoPendente();
+// $endereco_controller->listarEnderecoEmProducao();
 
 //echo "<script> location.href= '../Views/adm/projetos/projetos.php' </script>"
 

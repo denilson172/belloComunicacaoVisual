@@ -7,7 +7,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' ) {
     if(isset($_POST['submit'])){
 		$classe= $_POST['classe']."Controller";
 		$metodo = $_POST['metodo'];
-				
 		$login = $_POST['email']; 
 		$senha = $_POST['password'];
 		
@@ -17,7 +16,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' ) {
 		$controller = new $classe();
 
 		$controller->$metodo($login,$senha);
-		$controller->logout($logout);
+		//$controller->logout($logout);
 	}else{
 		$classeEndereco ="LoginController";
 		$metodoInserir ="validar";
@@ -28,11 +27,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' ) {
 	class LoginController{
 		private $loginModel;
 		private $loginDao;
-		private $logout;
+		//private $logout;
 
 		public function __construct(){
 			$this->loginModel = new LoginModel();
-			$this->logoutModel = new LogoutModel();
+			//$this->logoutModel = new LogoutModel();
 			$this->loginDao = new LoginDAO();
 			
 		}
@@ -42,6 +41,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' ) {
 			$this->loginModel->setSenhaLogin($senha);
 
 			return $this->loginDao->validarLogin($this->loginModel);
+			
 		}
 	}
 

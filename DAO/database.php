@@ -98,6 +98,19 @@ require_once __DIR__ . '/../Model/projetoModel.php';
         }
     }
 
+    //alterar registros
+    function DBUpdate($table, array $data, $where = null){
+        foreach ($data as $key => $value){
+            $fields[] = "{$key} = '{$value}'";
+        }
+        $fields = implode(', ', $fields);
+        //var_dump($fields); 
+        $table = DB_PREFIX.'_'.$table;
+        $where = ($where) ? "WHERE {$where}" : null;      
+        $query = "UPDATE {$table} SET {$fields}{$where}";
+        return DBExecute($query);
+    }
+
     //validar login
     function DBLogin($table, $email, $senha){
         $table = DB_PREFIX.'_'.$table;
@@ -105,17 +118,23 @@ require_once __DIR__ . '/../Model/projetoModel.php';
         $result = DBExecute($query);
         $row = mysqli_fetch_assoc($result);
         if (empty($row)) {
-            $_SESSION['errorlogin'] = "Erro: Usuario ou senha invalido";
-            header("location:../Views/Login/login.php");
+            //$_SESSION['errorlogin'] = "Erro: Usuario ou senha invalido";
+            echo "<script LANGUAGE='javascript' type='text/javascript'>alert('Usuario ou senha invalidos. Tente novamente!')</script>";
+            echo "<script> location.href= '../Views/Login/login.php' </script>";
+            //header("location:../Views/Login/login.php");
         }
         else {
-            $_SESSION['email'] = $row['email_login'];//Adaptar para os campos da tabela login
-            $_SESSION['senha'] = $row['senha_login'];//Adaptar para os campos da tabela login
+            $_SESSION['logado'] = $row['email_login'];//Adaptar para os campos da tabela login
+            $_SESSION['logado'] = $row['senha_login'];//Adaptar para os campos da tabela login
 
-            header("location: ../Controller/projetoController.php");
+            //header("location: ../Controller/projetoController.php");
             //header("location: ../Views/adm/projetos/projetos.php");//colocar redirecionamento
+
+            echo "<script> location.href= '../Views/adm/projetos/projetos.php' </script>";
+
+            $sessao = $_SESSION['logado'];
         }	
-        return session_start();
+        return ($sessao);
     }
 
 
