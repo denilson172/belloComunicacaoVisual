@@ -160,10 +160,9 @@
 									echo "<td> $idProjeto</td> ";
 									echo "<td> $nomeProjeto </td> ";
 									echo "<td> $planoProjeto </td> ";
-									// echo "<button type='button' class='btn btn-xs btn-primary' data-toggle='modal' data-target='#detalhesModal$idProjeto'>Visualizar</button>";
-									//echo "<td><a class='detalhes' detalhe='".$idProjeto."' href='../../../Controller/clienteController.php?class=ClienteController&metodoInserir=listarProjetoPendente&id=".$idProjeto."'>Visualizar Projeto</a></td>";
-									 echo "<td><a href='#detalhesModal$idProjeto' data-toggle='modal'data-target='#detalhesModal$idProjeto'>Visualizar Detalhes</a></td>";
-									echo "<td><a href='' class='edit'><i class='fas fa-angle-double-right blue' title='Executar Projeto' value='2'></i></a></td>";							
+									 //echo "<td><a href='#detalhesModal$idProjeto' target='_blank' data-toggle='modal'data-target='#detalhesModal$idProjeto'>Visualizar Detalhes</a></td>";
+									 echo "<td><a href='detalhesProjetos.php' id='#detalhes$idProjeto' target='_blank'>Visualizar Detalhes</a></td>";
+									 echo "<td><a href='../../../Controller/projetoController.php' class='edit'><i class='fas fa-angle-double-right blue' title='Executar Projeto' value='2'></i></a></td>";							
 								echo "</tr>";
 							?>
 							<?php	
@@ -171,8 +170,21 @@
 							?>	
 						</tbody>
 					</table>
+					<div class="clearfix">
+						<div class="hint-text">Exibindo <b>5</b> de <b>25</b> registros</div>
+						<ul class="pagination">
+							<li class="page-item disabled"><a href="#">Anterior</a></li>
+							<li class="page-item active"><a href="#" class="page-link">1</a></li>
+							<li class="page-item"><a href="#" class="page-link">2</a></li>
+							<li class="page-item"><a href="#" class="page-link">3</a></li>
+							<li class="page-item"><a href="#" class="page-link">4</a></li>
+							<li class="page-item"><a href="#" class="page-link">5</a></li>
+							<li class="page-item"><a href="#" class="page-link">Próximo</a></li>
+						</ul>
+					</div>
 				</div>
 			</div>
+			
 
 			<?php 
 			foreach($cliente as $cli){

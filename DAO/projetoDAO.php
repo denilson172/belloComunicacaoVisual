@@ -58,7 +58,7 @@ class ProjetoDAO{
     // }
     
 }
-    $a = array ('status_projeto'=> 3);
+    $a = array ('status_projeto'=> 1);
     $alter = DBUpdate('projeto',$a, 'id_projeto=56');
 
 
