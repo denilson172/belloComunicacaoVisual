@@ -12,7 +12,7 @@ require_once __DIR__ . '/../Model/projetoModel.php';
     }
 
     //salva registro
-    /*function DBCreate($table, array $data){
+    function DBCreate($table, array $data){
         $table = DB_PREFIX.'_'.$table;
         $data = DBEscape($data);
         $filds = implode(',',array_keys($data));
@@ -21,7 +21,7 @@ require_once __DIR__ . '/../Model/projetoModel.php';
         //echo DBRead('endereco',null,'id_endereco');
         //var_dump $id[];
         return DBExecute($query);
-    }*/
+    }
 
     //salva registro
     function DBCreateFK(

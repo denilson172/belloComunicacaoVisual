@@ -283,10 +283,10 @@
 								
 				endforeach;
 			?>
-		</div>
+		<!-- </div> -->
 
 		<!--========inicio projetos em produção=====================================================-->
-		<div class="container-contact100">
+		<!-- <div class="container-contact100"> -->
 			<!--inicio crud - pendente-->
 			<div class="container">
 				<div class="table-wrapper">
@@ -398,10 +398,10 @@
 				</div>
 			</div>
 			<!--fim modal-->
-		</div>
+		<!-- </div> -->
 
 		<!--========inicio projetos finalizados=====================================================-->
-		<div class="container-contact100">
+		<!-- <div class="container-contact100"> -->
 			<!--inicio crud - finalizados-->
 			<div class="container">
 				<div class="table-wrapper">
