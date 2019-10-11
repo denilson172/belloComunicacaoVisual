@@ -19,10 +19,12 @@ class EnderecoController {
         $cli = $this->enderecoDao->listarEnderecoPendente();
         $_SESSION['enderecoPendente'] = $cli;
     }
-    // public function listarEnderecoEmProducao(){
-    //     $cli = $this->enderecoDao->listarEnderecoEmProducao();
-    //     $_SESSION['enderecoEmProducao'] = $cli;
-    // }
+    
+    public function encontrarEndereco($ide){
+        $cli = $this->enderecoDao->encontrarEndereco($ide);
+        $_SESSION['enderecoPendente'] = $cli;
+    }
+
 }//FIM cliente
 
 $endereco_controller = new EnderecoController();

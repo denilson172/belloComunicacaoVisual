@@ -100,11 +100,19 @@ class ClienteController {
         $_SESSION['clientePendente'] = $cli;
     }
 
+    public function encontrarCliente($idc){
+        $cli = $this->clienteDao->encontrarCliente($idc);
+        $_SESSION['clientePendente'] = $cli;
+    }
+    public function encontrarEndereco($idc){
+        $cli = $this->enderecoDao->encontrarEndereco($idc);
+        $_SESSION['enderecoPendente'] = $cli;
+    }
+
     
 }//FIM cliente
 $cliente_controller = new ClienteController();
 $cliente_controller->listarClientePendente();
-// $cliente_controller->listarClienteEmProducao();
 
 
 

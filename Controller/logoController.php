@@ -19,10 +19,12 @@ class LogoController {
         $cli = $this->logoDao->listarLogoPendente();
         $_SESSION['logoPendente'] = $cli;
     }
-    // public function listarLogoEmProducao(){
-    //     $cli = $this->logoDao->listarLogoEmProducao();
-    //     $_SESSION['logoEmProducao'] = $cli;
-    // }
+    
+    public function encontrarLogo($idl){
+        $cli = $this->logoDao->encontrarLogo($idl);
+        $_SESSION['logoPendente'] = $cli;
+    }
+
 }//FIM cliente
 
 $logo_controller = new LogoController();

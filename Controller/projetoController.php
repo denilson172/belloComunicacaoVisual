@@ -30,9 +30,11 @@ class ProjetoController {
         $_SESSION['projetoFinalizado'] = $cli;
     }
 
-    // public function alterarStatus(){
-    //     $cli = $this->projetoDao->alterarStatusEmProducao()
-    // }
+    public function encontrarProjeto($idp){
+        $cli = $this->projetoDao->encontrarProjeto($idp);
+        $_SESSION['projetoPendente'] = $cli;
+    }
+
 }//FIM cliente
 
 $projeto_controller = new ProjetoController();

@@ -4,13 +4,13 @@
 	require_once "../../../Model/logoModel.php";
 	require_once "../../../Model/enderecoModel.php";
 	require_once "../../../Model/clienteModel.php";
+
 	require_once "../../../Controller/projetoController.php";
 	require_once "../../../Controller/logoController.php";
 	require_once "../../../Controller/enderecoController.php";
 	require_once "../../../Controller/clienteController.php";
 
-	//$projeto = "";
-
+	//sessões
 	if(empty($_SESSION['projetoPendente'])){
 		echo "erro";
 	}else{
@@ -142,27 +142,16 @@
 									$nomeCliente = $cli->getNomeCliente();
 									$emailCliente = $cli->getEmailCliente();
 									$celularCliente = $cli->getCelularCliente();
-								}
-	
-								foreach($logo as $cli){
-									$sloganLogo = $cli->getSloganMarcaLogo();
-									$descricaoLogo = $cli->getDescricaoMarcaLogo();
-								}
-								
-								foreach($endereco as $cli){
-									$logradouroEndereco = $cli->getLogradouroEndereco();
-									$numeroEndereco = $cli->getNumeroEndereco();
-									$bairroEndereco = $cli->getBairroEndereco();
-									$cidadeEndereco = $cli->getCidadeEndereco();									
+									$fkEndereco = $cli->getIdEndereco();
 								}
 								
 								echo "<tr>";
 									echo "<td> $idProjeto</td> ";
 									echo "<td> $nomeProjeto </td> ";
 									echo "<td> $planoProjeto </td> ";
-									 //echo "<td><a href='#detalhesModal$idProjeto' target='_blank' data-toggle='modal'data-target='#detalhesModal$idProjeto'>Visualizar Detalhes</a></td>";
-									 echo "<td><a href='detalhesProjetos.php' id='#detalhes$idProjeto' target='_blank'>Visualizar Detalhes</a></td>";
-									 echo "<td><a href='../../../Controller/projetoController.php' class='edit'><i class='fas fa-angle-double-right blue' title='Executar Projeto' value='2'></i></a></td>";							
+
+									echo "<td><a href='detalhesProjetos.php?projeto=$idProjeto&cliente=$fkCliente&logo=$fkLogo' id='#detalhes$idProjeto' target='_blank'>Visualizar Detalhes</a></td>";
+									echo "<td><a href='../../../Controller/projetoController.php' class='edit'><i class='fas fa-angle-double-right blue' title='Executar Projeto' value='2'></i></a></td>";							
 								echo "</tr>";
 							?>
 							<?php	
@@ -184,109 +173,10 @@
 					</div>
 				</div>
 			</div>
-			
-
-			<?php 
-			foreach($cliente as $cli){
-				$idCliente = $cli->getIdCliente();
-				$nomeCliente = $cli->getNomeCliente();
-				$emailCliente = $cli->getEmailCliente();
-				$celularCliente = $cli->getCelularCliente();
-			}
-
-			foreach($logo as $cli){
-				$sloganLogo = $cli->getSloganMarcaLogo();
-				$descricaoLogo = $cli->getDescricaoMarcaLogo();
-			}
-			
-			foreach($endereco as $cli){
-				$logradouroEndereco = $cli->getLogradouroEndereco();
-				$numeroEndereco = $cli->getNumeroEndereco();
-				$bairroEndereco = $cli->getBairroEndereco();
-				$cidadeEndereco = $cli->getCidadeEndereco();									
-			}
-
-			foreach($projetoPendente as $cli):
-				$idProjeto = $cli->getIdProjeto();
-				$nomeProjeto = $cli->getNomeProjeto();
-				$planoProjeto = $cli->getPlanoProjeto();
-				$fkLogo = $cli->getIdLogo();
-				$fkCliente = $cli->getIdCliente();
-				
-				echo "<div id='detalhesModal$idProjeto' class='modal fade'>";
-					echo "<div class='modal-dialog'>";
-						echo "<div class='modal-content'>";
-						echo "<form>";
-							echo "<div class='modal-header blue-bg'>";
-								echo "<h4 class='modal-title white'>Detalhes </h4>";
-							echo "</div>";
-							echo "<div class='modal-header'>";
-								echo "<h4 class='modal-title'>Sobre o Cliente</h4>";
-							echo "</div>";
-							echo "<div class='modal-body'>";
-								echo "<div class='form-group'>";
-								echo "<label>Nome</label>";
-								echo "<input type='name' class='form-control' value= $nomeCliente required disabled>";
-							echo "</div>";
-							echo "<div class='form-group'>";
-							echo "<label>Email</label>";
-							echo "<input type='email' class='form-control' value= $emailCliente required disabled>";
-							echo "</div>";
-							echo "<div class='form-group'>";
-							echo "<label>Telefone</label>";
-							echo "<input type='phone' class='form-control' value= $celularCliente required disabled>";
-							echo "</div>";
-							echo "<div class='form-group'>";
-							echo "<label>Cidade</label>";
-							echo "<input type='city' class='form-control' value= $cidadeEndereco required disabled>";
-							echo "</div>";
-							echo "<div class='form-group'>";
-							echo "<label>Rua</label>";
-							echo "<input type='text' class='form-control'  value= $logradouroEndereco required disabled>";
-							echo "</div>";
-							echo "<div class='form-group'>";
-							echo "<label>Número</label>";
-							echo "<input type='text' class='form-control' value= $numeroEndereco required disabled>";
-							echo "</div>";
-							echo "<div class='form-group'>";
-							echo "<label>Bairro</label>";
-							echo "<input type='text' class='form-control' value= $bairroEndereco required disabled>";
-							echo "</div>";
-							echo "<div class='modal-header'>";
-								echo "<h4 class='modal-title'>Sobre o Projeto</h4>";
-							echo "</div></br>";
-							echo "<div class='form-group'>";
-							echo "<label>Plano</label>";
-							echo "<input type='plano' class='form-control' value= $planoProjeto required disabled>";
-							echo "</div>";
-							echo "<div class='form-group'>";
-							echo "<label>Nome</label>";
-							echo "<input type='text' class='form-control' value= $nomeProjeto required disabled>";
-							echo "</div>";
-							echo "<div class='form-group'>";
-							echo "<label>Slogan</label>";
-							echo "<input type='text' class='form-control' value= $sloganLogo required disabled>";
-							echo "</div>";
-							echo "<div class='form-group'>";
-							echo "<label>Descrição</label>";
-							echo "<input type='text' class='form-control' value= $descricaoLogo required disabled>";
-							echo "</div>";
-							echo "</div>";
-							echo "<div class='modal-footer'>";
-							echo "<input type='button' class='btn btn-default' data-dismiss='modal' value='Fechar'>";
-							echo "</div>";
-							echo "</form>";
-							echo "</div>";
-							echo "</div>";
-
-				echo '</div>';
-								
-				endforeach;
-			?>
-		<!-- </div> -->
+		</div>
 
 		<!--========inicio projetos em produção=====================================================-->
-		<!-- <div class="container-contact100"> -->
+		<div class="container-contact100">
 			<!--inicio crud - pendente-->
 			<div class="container">
 				<div class="table-wrapper">
@@ -398,10 +288,10 @@
 				</div>
 			</div>
 			<!--fim modal-->
-		<!-- </div> -->
+		</div>
 
 		<!--========inicio projetos finalizados=====================================================-->
-		<!-- <div class="container-contact100"> -->
+		<div class="container-contact100">
 			<!--inicio crud - finalizados-->
 			<div class="container">
 				<div class="table-wrapper">

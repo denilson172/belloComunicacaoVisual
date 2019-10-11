@@ -4,19 +4,30 @@
 	require_once "../../../Model/logoModel.php";
 	require_once "../../../Model/enderecoModel.php";
 	require_once "../../../Model/clienteModel.php";
+	
 	require_once "../../../Controller/projetoController.php";
 	require_once "../../../Controller/logoController.php";
 	require_once "../../../Controller/enderecoController.php";
 	require_once "../../../Controller/clienteController.php";
 
-	//$projeto = "";
+	$projeto_controller = new ProjetoController();
+	$projeto_controller->encontrarProjeto($_GET['projeto']);
+
+	$cliente_controller = new ClienteController();
+	$cliente_controller->encontrarCliente($_GET['cliente']);
+
+	$logo_controller = new LogoController();
+	$logo_controller->encontrarLogo($_GET['logo']);
+
+	$endereco_controller = new EnderecoController();
+	$endereco_controller->encontrarEndereco($_GET['cliente']);
 
 	if(empty($_SESSION['projetoPendente'])){
 		echo "erro";
 	}else{
 		$projetoPendente = $_SESSION['projetoPendente'];
 		$logo = $_SESSION['logoPendente'];
-		$endereco= $_SESSION['enderecoPendente'];
+		$endereco = $_SESSION['enderecoPendente'];
 		$cliente = $_SESSION['clientePendente'];
 	}
 	if(empty($_SESSION['projetoEmProducao'])){
@@ -74,8 +85,7 @@
 	<!--===============================================================================================-->
 
 	</head>
-	<body>
-
+	<body class="blue-bg">
 		<!-- Menu horizontal -->
 		<div class="collapse navbar-collapse white-bg" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right main-nav">
@@ -85,50 +95,85 @@
 			</ul>
 		</div><!--fim nav-->
 		
-		<!--========inicio projetos pendentes=====================================================-->
-		<div class="container-contact100">
-			<div class="wrap-contact100">
-				<span class="contact100-form-title">Detalhes do Projeto</span> 
-				<?php
-					echo "<div id='detalhesModal$idProjeto'>";
-						foreach($projetoPendente as $cli):
-							$idProjeto = $cli->getIdProjeto();
-							$nomeProjeto = $cli->getNomeProjeto();
-							$planoProjeto = $cli->getPlanoProjeto();
-							$fkLogo = $cli->getIdLogo();
-							$fkCliente = $cli->getIdCliente();
+		<div id='detalhes$idProjeto'>
+		<!--========inicio detalhes=====================================================-->
+		<?php
+			foreach($projetoPendente as $cli):
+				$idProjeto = $cli->getIdProjeto();
+				$nomeProjeto = $cli->getNomeProjeto();
+				$planoProjeto = $cli->getPlanoProjeto();
+				$fkLogo = $cli->getIdLogo();
+				$fkCliente = $cli->getIdCliente();
 
-							foreach($cliente as $cli){
-								$idCliente = $cli->getIdCliente();
-								$nomeCliente = $cli->getNomeCliente();
-								$emailCliente = $cli->getEmailCliente();
-								$celularCliente = $cli->getCelularCliente();
+				foreach($cliente as $cli){
+					$idCliente = $cli->getIdCliente();
+					$nomeCliente = $cli->getNomeCliente();
+					$emailCliente = $cli->getEmailCliente();
+					$celularCliente = $cli->getCelularCliente();
 
-							}
+				}
 
-							foreach($logo as $cli){
-								$sloganLogo = $cli->getSloganMarcaLogo();
-								$descricaoLogo = $cli->getDescricaoMarcaLogo();
-							}
-							
-							foreach($endereco as $cli){
-								$logradouroEndereco = $cli->getLogradouroEndereco();
-								$numeroEndereco = $cli->getNumeroEndereco();
-								$bairroEndereco = $cli->getBairroEndereco();
-								$cidadeEndereco = $cli->getCidadeEndereco();									
-							}
-						endforeach;
-						
-						echo "Código =".$idProjeto;
-						echo "Cliente = ".$nomeCliente;
-					echo "</div>";
-					?>
-
-			
+				foreach($logo as $cli){
+					$sloganLogo = $cli->getSloganMarcaLogo();
+					$descricaoLogo = $cli->getDescricaoMarcaLogo();
+				}
 				
+				foreach($endereco as $cli){
+					$logradouroEndereco = $cli->getLogradouroEndereco();
+					$numeroEndereco = $cli->getNumeroEndereco();
+					$bairroEndereco = $cli->getBairroEndereco();
+					$cidadeEndereco = $cli->getCidadeEndereco();									
+				}
 
-			</div>
-		</div>
+			endforeach;
+					
+				echo '<div class="container">';
+					echo '<div class="table-wrapper">';
+						echo '<div class="table-title">';
+							echo '<div class="row">';
+								echo '<div class="col-sm-6">';
+								echo '<h2><b class="black">Detalhes | Cód: '.$idProjeto.'</b></h2>';
+								echo '</div>';
+
+							echo '<div class="col-sm-6">';
+							echo '<input class="btn btn-success" type="button" value="Imprimir" onClick="window.print()"></input>';
+							//echo '<a onClick="window.print()><i class="material-icons">&#xE147;</i> <span>Imprimir</span></a>';
+							echo '</div>';
+
+						echo '</div>';
+					echo '</div>';
+					echo '<table class="table table-striped table-hover">';
+						echo "<p><label class='margin-top'>SOBRE O PROJETO</label></p> ";
+						echo '<div class="border-top-two-black"></div>';
+						echo "<label class='margin-top-5px'>Marca:</label> $nomeProjeto";
+						echo '<div class="border-top-two-black"></div>';
+						echo "<label class='margin-top-5px'>Plano:</label> $planoProjeto";
+						echo '<div class="border-top-two-black"></div>';
+						echo "<label class='margin-top-5px'>Slogan:</label> $sloganLogo";
+						echo '<div class="border-top-two-black"></div>';
+						echo "<label class='margin-top-5px'>Descrição:</label> $descricaoLogo";
+						echo '<div class="border-top-two-black"></div>';
+
+						echo "<p><label class='margin-top-50'>SOBRE O CLIENTE</label></p> ";
+						echo '<div class="border-top-two-black"></div>';
+						echo "<label class='margin-top-5px'>Nome:</label> $nomeCliente";
+						echo '<div class="border-top-two-black"></div>';
+						echo "<label class='margin-top-5px'>Email:</label> $emailCliente";
+						echo '<div class="border-top-two-black"></div>';
+						echo "<label class='margin-top-5px'>Celular:</label> $celularCliente";
+						echo '<div class="border-top-two-black"></div>';
+						echo "<label class='margin-top-5px'>Logradouro:</label> $logradouroEndereco";
+						echo '<div class="border-top-two-black"></div>';
+						echo "<label class='margin-top-5px'>Número:</label> $numeroEndereco";
+						echo '<div class="border-top-two-black"></div>';
+						echo "<label class='margin-top-5px'>Bairro:</label> $bairroEndereco";
+						echo '<div class="border-top-two-black"></div>';
+						echo "<label class='margin-top-5px'>Cidade:</label> $cidadeEndereco";
+					echo '</table>';
+				echo '</div>';
+			echo '</div>';
+			?>
+		
 
 		<!--===============================================================================================-->
 		<script src="../../Style/js/vendor-contact/jquery/jquery-3.2.1.min.js"></script>
