@@ -146,13 +146,114 @@
 								}
 								
 								echo "<tr>";
+								if(empty($idProjeto)){
+									
+									echo "<td>-</td>";
+									echo "<td>-</td>";	
+									echo "<td>-</td>";	
+									echo "<td>-</td>";	
+									echo "<td>-</td>";									
+								}else{
 									echo "<td> $idProjeto</td> ";
 									echo "<td> $nomeProjeto </td> ";
 									echo "<td> $planoProjeto </td> ";
-
 									echo "<td><a href='detalhesProjetos.php?projeto=$idProjeto&cliente=$fkCliente&logo=$fkLogo' id='#detalhes$idProjeto' target='_blank'>Visualizar Detalhes</a></td>";
-									echo "<td><a href='../../../Controller/projetoController.php' class='edit'><i class='fas fa-angle-double-right blue' title='Executar Projeto' value='2'></i></a></td>";							
+									echo "<td><a href='detalhesProjetos.php?projeto=$idProjeto&status=2' class='edit'  target='_blank'><i class='fas fa-angle-double-right blue'stitle='Executar Projeto' onclick='window.close()'></i></a></td>";
 								echo "</tr>";
+								} 
+							?>
+							<?php	
+							endforeach;
+							?>	
+						</tbody>
+					</table>
+					<div class="clearfix">
+						<div class="hint-text">Exibindo <b>5</b> de <b>25</b> registros</div>
+						<ul class="pagination">
+							<li class="page-item disabled"><a href="#">Anterior</a></li>
+							<li class="page-item active"><a href="#" class="page-link">1</a></li>
+							<li class="page-item"><a href="#" class="page-link">2</a></li>
+							<li class="page-item"><a href="#" class="page-link">3</a></li>
+							<li class="page-item"><a href="#" class="page-link">4</a></li>
+							<li class="page-item"><a href="#" class="page-link">5</a></li>
+							<li class="page-item"><a href="#" class="page-link">Próximo</a></li>
+						</ul>
+					</div>
+				</div>
+			
+			<!-- VIEW Modal HTML -->
+			<!-- <div id="confirmModal" class="modal fade">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<form>
+							<div class="modal-header">						
+								<h4 class="modal-title">Executar esse projeto?</h4>
+							</div>
+							
+							<div class="modal-footer">
+								<input type="button" class="btn btn-danger left" data-dismiss="modal" value="Fechar">
+								<input type="button" class="btn btn-success right" data-dismiss="modal" value="Confirmar">
+							</div>
+							
+						</form>
+					</div>
+				</div>
+			</div> -->
+			<!--fim modal -->
+		
+
+				<div class="table-wrapper">
+					<div class="table-title">
+						<div class="row">
+							<div class="col-sm-6">
+								<h2><b class="blue">Projetos Em Produção</b></h2>
+							</div>
+						</div>
+					</div>
+					<table class="table table-striped table-hover">
+						<thead>
+							<tr>
+								<th>Código</th>
+								<th>Marca</th>
+								<th>Plano</th>
+								<th>Detalhes</th>
+								<th>Executar Projeto</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- inserir campos dinâmicamente -->
+							<?php
+							foreach($projetoEmProducao as $cli):
+								$idProjeto = $cli->getIdProjeto();
+								$nomeProjeto = $cli->getNomeProjeto();
+								$planoProjeto = $cli->getPlanoProjeto();
+								$fkLogo = $cli->getIdLogo();
+								$fkCliente = $cli->getIdCliente();
+
+								foreach($cliente as $cli){
+									$idCliente = $cli->getIdCliente();
+									$nomeCliente = $cli->getNomeCliente();
+									$emailCliente = $cli->getEmailCliente();
+									$celularCliente = $cli->getCelularCliente();
+									$fkEndereco = $cli->getIdEndereco();
+								}
+								
+								echo "<tr>";
+								if(empty($idProjeto)){
+									
+									echo "<td>-</td>";
+									echo "<td>-</td>";	
+									echo "<td>-</td>";	
+									echo "<td>-</td>";	
+									echo "<td>-</td>";									
+								}else{
+									echo "<td> $idProjeto</td> ";
+									echo "<td> $nomeProjeto </td> ";
+									echo "<td> $planoProjeto </td> ";
+									echo "<td><a href='detalhesProjetos.php?projeto=$idProjeto&cliente=$fkCliente&logo=$fkLogo' id='#detalhes$idProjeto' target='_blank'>Visualizar Detalhes</a></td>";
+									echo "<td><a href='detalhesProjetos.php?projeto=$idProjeto&status=2' class='edit'  target='_blank'><i class='fas fa-angle-double-right blue'stitle='Executar Projeto' onclick='window.close()'></i></a></td>";
+								echo "</tr>";
+								} 
 							?>
 							<?php	
 							endforeach;
@@ -173,256 +274,27 @@
 					</div>
 				</div>
 			</div>
-		</div>
-
-		<!--========inicio projetos em produção=====================================================-->
-		<div class="container-contact100">
-			<!--inicio crud - pendente-->
-			<div class="container">
-				<div class="table-wrapper">
-					<div class="table-title">
-						<div class="row">
-							<div class="col-sm-6">
-								<h2><b class="blue">Projetos em Produção</b></h2>
-							</div>
-						</div>
-					</div>
-					<table class="table table-striped table-hover">
-						<thead>
-							<tr>
-								<th>Código</th>
-								<th>Marca</th>
-								<th>Plano</th>
-								<th>Detalhes</th>
-								<th>Finalizar Projeto</th>
-							</tr>
-						</thead>
-						<tbody>
-							<!-- inserir campos dinâmicamente -->
-							<?php
-							foreach($projetoEmProducao as $cli){
-								$idProjeto = $cli->getIdProjeto();
-								$nomeProjeto = $cli->getNomeProjeto();
-								$planoProjeto = $cli->getPlanoProjeto();
-								
-								echo "<tr>";
-									echo "<td> $idProjeto</td> ";
-									echo "<td> $nomeProjeto </td> ";
-									echo "<td> $planoProjeto </td> ";
-									echo "<td><a href='#detalhesModal2' data-toggle='modal'>Visualizar Detalhes</a></td>";
-									echo "<td><a href='' class='edit'><i class='fas fa-angle-double-right green-dark' title='Finalizar Projeto' value='2'></i></a></td>";							
-								echo "</tr>";
-							}
-
-							?>	
-						</tbody>
-					</table>
-				</div>
-			</div>
 			<!-- VIEW Modal HTML -->
-			<div id="detalhesModal" class="modal fade">
-			<div class="modal-dialog">
-					<div class="modal-content">
-						<form>
-							<div class="modal-header blue-bg">						
-								<h4 class="modal-title white">Detalhes </h4>
-							</div>
-
-							<div class="modal-header">						
-								<h4 class="modal-title">Sobre o Cliente</h4>
-							</div>
-							
-							<div class="modal-body">					
-								<div class="form-group">
-								<!-- <?php
-									// foreach($clienteEmProducao as $cli){
-									// 	echo "<label>Nome: $nomeCliente</label></br>";
-									// 	echo "<label>Email: $emailCliente</label></br>";
-									// 	echo "<label>Telefone: $celularCliente</label></br>";
-									// }
-								?>-->
-								</div>
-								<div class="form-group">
-									<label>Cidade</label>
-									<input type="city" class="form-control" value=<?php echo $cidadeEndereco ?> required disabled>
-								</div>			
-								<div class="form-group">
-									<label>Rua</label>
-									<input type="text" class="form-control"  value=<?php echo $logradouroEndereco ?> required disabled>
-								</div>	
-								<div class="form-group">
-									<label>Número</label>
-									<input type="text" class="form-control" value=<?php echo $numeroEndereco ?> required disabled>
-								</div>	
-								<div class="form-group">
-									<label>Bairro</label>
-									<input type="text" class="form-control" value=<?php echo $bairroEndereco ?> required disabled>
-								</div>	
-
-								<div class="modal-header">						
-									<h4 class="modal-title">Sobre o Projeto</h4>
-								</div></br>
-
-								<div class="form-group">
-									<label>Plano</label>
-									<input type="plano" class="form-control" value=<?php echo $planoProjeto ?> required disabled>
-								</div>
-								<div class="form-group">
-									<label>Nome</label>
-									<input type="text" class="form-control" value=<?php echo $nomeProjeto ?> required disabled>
-								</div>
-								<div class="form-group">
-									<label>Slogan</label>
-									<input type="text" class="form-control" value=<?php echo $sloganLogo ?> required disabled>
-								</div>
-								<div class="form-group">
-									<label>Descrição</label>
-									<input type="text" class="form-control" value=<?php echo $descricaoLogo ?> required disabled>
-								</div>
-							</div>
-							<div class="modal-footer">
-								<input type="button" class="btn btn-default" data-dismiss="modal" value="Fechar">
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-			<!--fim modal-->
-		</div>
-
-		<!--========inicio projetos finalizados=====================================================-->
-		<div class="container-contact100">
-			<!--inicio crud - finalizados-->
-			<div class="container">
-				<div class="table-wrapper">
-					<div class="table-title">
-						<div class="row">
-							<div class="col-sm-6">
-								<h2><b class="green-dark">Projetos Finalizados</b></h2>
-							</div>
-						</div>
-					</div>
-					<table class="table table-striped table-hover">
-						<thead>
-							<tr>
-								<th>Código</th>
-								<th>Marca</th>
-								<th>Plano</th>
-								<th>Detalhes</th>
-								<th>Excluir Projeto</th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php
-							foreach($projetoFinalizados as $cli){
-								$idProjeto = $cli->getIdProjeto();
-								$nomeProjeto = $cli->getNomeProjeto();
-								$planoProjeto = $cli->getPlanoProjeto();
-								
-								echo "<tr>";
-									echo "<td> $idProjeto</td> ";
-									echo "<td> $nomeProjeto </td> ";
-									echo "<td> $planoProjeto </td> ";
-									echo "<td><a href='#detalhesModal2' data-toggle='modal'>Visualizar Detalhes</a></td>";
-									echo "<td><a href='' class='edit'><i class='fas fa-angle-double-right red' title='Excluir Projeto' value='2'></i></a></td>";							
-								echo "</tr>";
-							}
-							?>	
-						</tbody>
-					</table>
-				</div>
-			</div>
-			<!-- VIEW Modal HTML -->
-			<div id="detalhesModal2" class="modal fade">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<form>
-							<div class="modal-header blue-bg">						
-								<h4 class="modal-title white">Detalhes </h4>
-							</div>
-
-							<div class="modal-header">						
-								<h4 class="modal-title">Sobre o Cliente</h4>
-							</div>
-							
-							<div class="modal-body">					
-								<div class="form-group">
-								<!-- <?php
-									// foreach($clienteEmProducao as $cli){
-									// 	echo "<label>Nome: $nomeCliente</label></br>";
-									// 	echo "<label>Email: $emailCliente</label></br>";
-									// 	echo "<label>Telefone: $celularCliente</label></br>";
-									// }
-								?>-->
-								</div>
-								<div class="form-group">
-									<label>Cidade</label>
-									<input type="city" class="form-control" value=<?php echo $cidadeEndereco ?> required disabled>
-								</div>			
-								<div class="form-group">
-									<label>Rua</label>
-									<input type="text" class="form-control"  value=<?php echo $logradouroEndereco ?> required disabled>
-								</div>	
-								<div class="form-group">
-									<label>Número</label>
-									<input type="text" class="form-control" value=<?php echo $numeroEndereco ?> required disabled>
-								</div>	
-								<div class="form-group">
-									<label>Bairro</label>
-									<input type="text" class="form-control" value=<?php echo $bairroEndereco ?> required disabled>
-								</div>	
-
-								<div class="modal-header">						
-									<h4 class="modal-title">Sobre o Projeto</h4>
-								</div></br>
-
-								<div class="form-group">
-									<label>Plano</label>
-									<input type="plano" class="form-control" value=<?php echo $planoProjeto ?> required disabled>
-								</div>
-								<div class="form-group">
-									<label>Nome</label>
-									<input type="text" class="form-control" value=<?php echo $nomeProjeto ?> required disabled>
-								</div>
-								<div class="form-group">
-									<label>Slogan</label>
-									<input type="text" class="form-control" value=<?php echo $sloganLogo ?> required disabled>
-								</div>
-								<div class="form-group">
-									<label>Descrição</label>
-									<input type="text" class="form-control" value=<?php echo $descricaoLogo ?> required disabled>
-								</div>
-							</div>
-							<div class="modal-footer">
-								<input type="button" class="btn btn-default" data-dismiss="modal" value="Fechar">
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-			<!--fim modal-->
-			<!-- Delete Modal HTML -->
-			<div id="deleteEmployeeModal" class="modal fade">
+			<!-- <div id="confirmModal" class="modal fade">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<form>
 							<div class="modal-header">						
-								<h4 class="modal-title">Delete Employee</h4>
-								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h4 class="modal-title">Executar esse projeto?</h4>
 							</div>
-							<div class="modal-body">					
-								<p>Are you sure you want to delete these Records?</p>
-								<p class="text-warning"><small>This action cannot be undone.</small></p>
-							</div>
+							
 							<div class="modal-footer">
-								<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-								<input type="submit" class="btn btn-danger" value="Delete">
+								<input type="button" class="btn btn-danger left" data-dismiss="modal" value="Fechar">
+								<input type="button" class="btn btn-success right" data-dismiss="modal" value="Confirmar">
 							</div>
+							
 						</form>
 					</div>
 				</div>
-			</div>
+			</div> -->
+			<!--fim modal -->
 		</div>
+		 
 		</div>
 
 		<!--===============================================================================================-->

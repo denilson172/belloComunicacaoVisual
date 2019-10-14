@@ -2,8 +2,6 @@
 <?php
 require_once __DIR__ . "/../DAO/projetoDAO.php";
 require_once __DIR__ . "/../Model/projetoModel.php";
-        
-   
 
 //ENDERECO, CLIENTE, LOGO - enviando para Model e DAO ================================================================================
 class ProjetoController {
@@ -35,6 +33,12 @@ class ProjetoController {
         $_SESSION['projetoPendente'] = $cli;
     }
 
+    public function alterarStatusProjeto($idp, $status){
+        $cli = $this->projetoDao->alterarStatusEmProducao($idp,$status);
+        $_SESSION['projetoEmProducao'] = $cli;
+    }
+
+
 }//FIM cliente
 
 $projeto_controller = new ProjetoController();
@@ -43,7 +47,7 @@ $projeto_controller->listarProjetoEmProducao();
 $projeto_controller->listarProjetoFinalizado();
 
 //echo "<script> location.href= '../Views/adm/projetos/projetos.php' </script>"
-//echo '<meta http-equiv="refresh" content="2;URL=../Views/adm/projetos/projetos.php" />';
+
 
 
 

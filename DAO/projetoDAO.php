@@ -68,17 +68,14 @@ class ProjetoDAO{
          }
         return $pro;
     }
+    function alterarStatusEmProducao($id,$status){        
+        $a = array ('status_projeto'=> $status);  
+        $alter = DBUpdate('projeto',$a,'id_projeto='.$id);
 
-    // function alterarStatusEmProducao($projeto){
-    //     $idProjeto = $projeto->getIdProjeto();
-    //     $a = array ('status_projeto'=> 2);
-    //     return  $alter = DBUpdate('projeto',$a, 'id_projeto=$idProjeto');
-    // }
-    
+        return $alter;
+    }
+
 }
-    $a = array ('status_projeto'=> 1);
-    $alter = DBUpdate('projeto',$a, 'id_projeto=56');
-
 
 
 ?>

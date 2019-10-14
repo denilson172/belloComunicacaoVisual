@@ -113,7 +113,7 @@
 					<div class="table-title">
 						<div class="row">
 							<div class="col-sm-6">
-								<h2><b class="black">Balanço</b></h2>
+								<h2><b class="black">Balanço Financeiro</b></h2>
 							</div>
 							<div class="col-sm-6">
 								<a href="#addFinanca" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Adicionar Finança</span></a>
@@ -144,102 +144,245 @@
 
 					</table>					
 				</div>
-			</div>
+			<!-- </div> -->
 			<!-- fim tabela balanco -->
+
+				<!-- Menu horizontal -->
+				<div class="collapse navbar-collapse white-bg" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav main-nav">
+						<li class="green">
+							<a href=""><i class="fas fa-exclamation-triangle red title="Projetos"></a></i>
+						</li>
+					</ul>
+					<ul class="nav navbar-nav main-nav">
+						<li class="green">
+							<a href=""><i class="fas fa-clock grey title="Projetos"></a></i>
+						</li>
+					</ul>
+					<ul class="nav navbar-nav main-nav">
+						<li class="green">
+							<a href=""><i class="fas fa-check-circle green-dark title="Projetos"></a></i>
+						</li>
+					</ul>
+				</div><!--fim nav-->
+			</div>
 
 			<!-- inicio tabela resumo-->
 			<div class="container">
 				<div class="table-wrapper">
-					<div class="table-title">
-						<div class="row">
-							<div class="col-sm-6">
-								<h2><b class="black">Balanço</b></h2>
-							</div>
-							<div class="col-sm-6">
-								<a href="#addFinanca" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span></span></a>
-							</div>
+				<div class="table-title">
+					<div class="row">
+						<div class="col-sm-6">
+							<h2>Manage <b>Employees</b></h2>
+						</div>
+						<div class="col-sm-6">
 						</div>
 					</div>
-					<table class="table table-striped table-hover">
-						<thead>
-							<tr>
-								<th>Tipo</th>
-								<th>Valor</th>								
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th>Entrada</th><td>valor dinâmico do total</td>
-							</tr>
-							<tr>
-								<th>Pendência</th><td>valor dinâmico do total</td>
-							</tr>
-							<tr>
-								<th>Saída</th><td>valor dinâmico do total</td>
-							</tr>
-							<tr>
-								<th>Total</th><td>valor dinâmico do total</td>
-							</tr>
-						</tbody>
-
-					</table>					
+				</div>
+				<table class="table table-striped table-hover">
+					<thead>
+						<tr>
+							<th>
+								<span class="custom-checkbox">
+									<input type="checkbox" id="selectAll">
+									<label for="selectAll"></label>
+								</span>
+							</th>
+							<th>Name</th>
+							<th>Email</th>
+							<th>Address</th>
+							<th>Phone</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<span class="custom-checkbox">
+									<input type="checkbox" id="checkbox1" name="options[]" value="1">
+									<label for="checkbox1"></label>
+								</span>
+							</td>
+							<td>Thomas Hardy</td>
+							<td>thomashardy@mail.com</td>
+							<td>89 Chiaroscuro Rd, Portland, USA</td>
+							<td>(171) 555-2222</td>
+							<td>
+								<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+								<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span class="custom-checkbox">
+									<input type="checkbox" id="checkbox2" name="options[]" value="1">
+									<label for="checkbox2"></label>
+								</span>
+							</td>
+							<td>Dominique Perrier</td>
+							<td>dominiqueperrier@mail.com</td>
+							<td>Obere Str. 57, Berlin, Germany</td>
+							<td>(313) 555-5735</td>
+							<td>
+								<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+								<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span class="custom-checkbox">
+									<input type="checkbox" id="checkbox3" name="options[]" value="1">
+									<label for="checkbox3"></label>
+								</span>
+							</td>
+							<td>Maria Anders</td>
+							<td>mariaanders@mail.com</td>
+							<td>25, rue Lauriston, Paris, France</td>
+							<td>(503) 555-9931</td>
+							<td>
+								<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+								<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span class="custom-checkbox">
+									<input type="checkbox" id="checkbox4" name="options[]" value="1">
+									<label for="checkbox4"></label>
+								</span>
+							</td>
+							<td>Fran Wilson</td>
+							<td>franwilson@mail.com</td>
+							<td>C/ Araquil, 67, Madrid, Spain</td>
+							<td>(204) 619-5731</td>
+							<td>
+								<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+								<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+							</td>
+						</tr>					
+						<tr>
+							<td>
+								<span class="custom-checkbox">
+									<input type="checkbox" id="checkbox5" name="options[]" value="1">
+									<label for="checkbox5"></label>
+								</span>
+							</td>
+							<td>Martin Blank</td>
+							<td>martinblank@mail.com</td>
+							<td>Via Monte Bianco 34, Turin, Italy</td>
+							<td>(480) 631-2097</td>
+							<td>
+								<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+								<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+							</td>
+						</tr> 
+					</tbody>
+				</table>
+				<div class="clearfix">
+					<div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+					<ul class="pagination">
+						<li class="page-item disabled"><a href="#">Previous</a></li>
+						<li class="page-item"><a href="#" class="page-link">1</a></li>
+						<li class="page-item"><a href="#" class="page-link">2</a></li>
+						<li class="page-item active"><a href="#" class="page-link">3</a></li>
+						<li class="page-item"><a href="#" class="page-link">4</a></li>
+						<li class="page-item"><a href="#" class="page-link">5</a></li>
+						<li class="page-item"><a href="#" class="page-link">Next</a></li>
+					</ul>
 				</div>
 			</div>
-			<!-- fim tabela -->
 		</div>
-
 		<!-- Edit Modal HTML -->
-	<div id="addFinanca" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<form action="../../../Controller/financasController.php" method="POST">
-					<div class="modal-header blue-bg">						
-						<h4 class="modal-title white">Adicionar Finança</h4>
-						
-					</div>
-					<div class="modal-body">					
-						<div class="form-group">
-							<label>Data</label>
-							<input type="date" name="data" class="form-control" required pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}" required>
+		<div id="addEmployeeModal" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form>
+						<div class="modal-header">						
+							<h4 class="modal-title">Add Employee</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						</div>
-						<div class="form-group">
-							<label>Categoria</label>
-							<input type="text" name="categoria" class="form-control" required>
+						<div class="modal-body">					
+							<div class="form-group">
+								<label>Name</label>
+								<input type="text" class="form-control" required>
+							</div>
+							<div class="form-group">
+								<label>Email</label>
+								<input type="email" class="form-control" required>
+							</div>
+							<div class="form-group">
+								<label>Address</label>
+								<textarea class="form-control" required></textarea>
+							</div>
+							<div class="form-group">
+								<label>Phone</label>
+								<input type="text" class="form-control" required>
+							</div>					
 						</div>
-						<div class="form-group">
-							<label>Descrição</label>
-							<textarea name="descricao" class="form-control" required></textarea>
+						<div class="modal-footer">
+							<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+							<input type="submit" class="btn btn-success" value="Add">
 						</div>
-						<div class="form-group">
-							<label>Valor</label>
-							<input type="text" name="valor" class="form-control" required>
-						</div>
-						<div class="form-group">
-							<input type="radio" required="required" value="1" name="tipoFinanca" id="pendencia"/>
-								<label for="pendencia">Pendência</label>
-								<label></label>
-							<input type="radio" required="required" value="2" name="tipoFinanca" id="saida"/>
-								<label for="saida">Saída</label>
-						</div>				
-					</div>
-					<div class="modal-footer">
-						<input type="hidden" name="classe" value="Financas"/>
-						<input type="hidden" name="metodo" value="inserirFinancas"/>
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-
-						<script>
-						function funcao1(){
-							alert("Finança adicionada com sucesso!!!");
-						}
-						</script>
-
-						<input type="submit" class="btn btn-success" name="submit" value="Adicionar" onclick="funcao1()">
-					</div>
-				</form>
+					</form>
+				</div>
 			</div>
 		</div>
-	</div>
-	<!-- Edit Modal HTML -->
+		<!-- Edit Modal HTML -->
+		<div id="editEmployeeModal" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form>
+						<div class="modal-header">						
+							<h4 class="modal-title">Edit Employee</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						</div>
+						<div class="modal-body">					
+							<div class="form-group">
+								<label>Name</label>
+								<input type="text" class="form-control" required>
+							</div>
+							<div class="form-group">
+								<label>Email</label>
+								<input type="email" class="form-control" required>
+							</div>
+							<div class="form-group">
+								<label>Address</label>
+								<textarea class="form-control" required></textarea>
+							</div>
+							<div class="form-group">
+								<label>Phone</label>
+								<input type="text" class="form-control" required>
+							</div>					
+						</div>
+						<div class="modal-footer">
+							<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+							<input type="submit" class="btn btn-info" value="Save">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- Delete Modal HTML -->
+		<div id="deleteEmployeeModal" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form>
+						<div class="modal-header">						
+							<h4 class="modal-title">Delete Employee</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						</div>
+						<div class="modal-body">					
+							<p>Are you sure you want to delete these Records?</p>
+							<p class="text-warning"><small>This action cannot be undone.</small></p>
+						</div>
+						<div class="modal-footer">
+							<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+							<input type="submit" class="btn btn-danger" value="Delete">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
 
 		
 		

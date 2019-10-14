@@ -86,7 +86,8 @@ class ClienteController {
         $this->projetoModel->setNomeProjeto($nomeProjeto);
 
         
-        header('Location: http://localhost/ARQUIVOS/bellocv/index.php');
+        // header('Location: http://localhost/ARQUIVOS/bellocv/index.php');
+        echo "<script> location.href= '../Views/index.php' </script>";
         return $this->dao->inserirDados(
             $this->enderecoModel,
             $this->clienteModel,

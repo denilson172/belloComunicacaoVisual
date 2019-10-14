@@ -9,18 +9,29 @@
 	require_once "../../../Controller/logoController.php";
 	require_once "../../../Controller/enderecoController.php";
 	require_once "../../../Controller/clienteController.php";
+	
+	//se não tiver que alterar status
+	if(empty($_GET['status'])){
+		$projeto_controller = new ProjetoController();
+		$projeto_controller->encontrarProjeto($_GET['projeto']);
 
-	$projeto_controller = new ProjetoController();
-	$projeto_controller->encontrarProjeto($_GET['projeto']);
+		$cliente_controller = new ClienteController();
+		$cliente_controller->encontrarCliente($_GET['cliente']);
 
-	$cliente_controller = new ClienteController();
-	$cliente_controller->encontrarCliente($_GET['cliente']);
+		$logo_controller = new LogoController();
+		$logo_controller->encontrarLogo($_GET['logo']);
 
-	$logo_controller = new LogoController();
-	$logo_controller->encontrarLogo($_GET['logo']);
+		$endereco_controller = new EnderecoController();
+		$endereco_controller->encontrarEndereco($_GET['cliente']);
+	}
+	//se tiver que alterar status
+	else{
+		$projeto_controller = new ProjetoController();
+		$projeto_controller->encontrarProjeto($_GET['projeto']);
+		$projeto_controller->alterarStatusProjeto($_GET['projeto'], $_GET['status']);
 
-	$endereco_controller = new EnderecoController();
-	$endereco_controller->encontrarEndereco($_GET['cliente']);
+		echo '<meta http-equiv="refresh" content="10;URL=projetos.php" />';
+	}
 
 	if(empty($_SESSION['projetoPendente'])){
 		echo "erro";
@@ -136,8 +147,7 @@
 								echo '</div>';
 
 							echo '<div class="col-sm-6">';
-							echo '<input class="btn btn-success" type="button" value="Imprimir" onClick="window.print()"></input>';
-							//echo '<a onClick="window.print()><i class="material-icons">&#xE147;</i> <span>Imprimir</span></a>';
+								echo '<input class="btn btn-success" type="button" value="Imprimir" onClick="window.print()"></input>';								
 							echo '</div>';
 
 						echo '</div>';
