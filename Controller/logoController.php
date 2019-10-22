@@ -29,9 +29,6 @@ class LogoController {
 
 $logo_controller = new LogoController();
 $logo_controller->listarLogoPendente();
-// $logo_controller->listarLogoEmProducao();
-
-//echo "<script> location.href= '../Views/adm/projetos/projetos.php' </script>"
 
 
 

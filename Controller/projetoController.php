@@ -3,6 +3,17 @@
 require_once __DIR__ . "/../DAO/projetoDAO.php";
 require_once __DIR__ . "/../Model/projetoModel.php";
 
+if(!empty($_GET['status'])){
+    $projeto_controller = new ProjetoController();
+    $projeto_controller->alterarStatusProjeto($_GET['projeto'], $_GET['status']);
+    echo '<meta http-equiv="refresh" content="0.1;URL=../Views/adm/projetos/projetos.php" />';
+}
+elseif(!empty($_GET['delete'])){
+    $projeto_controller = new ProjetoController();
+    $projeto_controller->deletarProjeto($_GET['projeto'], $_GET['cliente'], $_GET['logo']);
+    echo '<meta http-equiv="refresh" content="0.1;URL=../Views/adm/projetos/projetos.php" />';
+}
+
 //ENDERECO, CLIENTE, LOGO - enviando para Model e DAO ================================================================================
 class ProjetoController {
     private $projetoModel;
@@ -34,19 +45,23 @@ class ProjetoController {
     }
 
     public function alterarStatusProjeto($idp, $status){
-        $cli = $this->projetoDao->alterarStatusEmProducao($idp,$status);
-        $_SESSION['projetoEmProducao'] = $cli;
+        $cli = $this->projetoDao->alterarStatusProjeto($idp,$status);
+        if($status == 1){
+            $_SESSION['projetoPendente'] = $cli;
+        }
+        elseif($status == 2){
+            $_SESSION['projetoEmProducao'] = $cli;
+        }
+        elseif($status == 3){
+            $_SESSION['projetoFinalizado'] = $cli;
+        }
+    }
+    public function deletarProjeto($idProjeto, $fkCliente, $fklogo){
+        $cli = $this->projetoDao->deletarProjeto($idProjeto, $fkCliente, $fklogo);
+        
     }
 
-
 }//FIM cliente
-
-$projeto_controller = new ProjetoController();
-$projeto_controller->listarProjetoPendente();
-$projeto_controller->listarProjetoEmProducao();
-$projeto_controller->listarProjetoFinalizado();
-
-//echo "<script> location.href= '../Views/adm/projetos/projetos.php' </script>"
 
 
 

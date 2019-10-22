@@ -891,8 +891,16 @@ footer .social-footer li:hover a {
 	color: #00CCFF;
 }
 
+.green-bg-lite{
+	background: rgba(0, 204, 255,0.5);
+}
+
 .green-dark{
 	color: #006400;;
+}
+
+.green-dark-bg-lite{
+	background: rgba(0, 100, 0,0.5);
 }
 
 .red{
@@ -912,7 +920,19 @@ footer .social-footer li:hover a {
 }
 
 .gray-bg {
-	background: #f7f7f7;
+	background: grey;
+}
+
+.gray-bg-lite {
+	background: rgba(128, 128, 128,0.5);;
+}
+
+.red-bg{
+	background: red;
+}
+
+.red-bg-lite{
+	background: rgba(255,0,0,0.5);
 }
 
 .blue {
@@ -929,6 +949,14 @@ footer .social-footer li:hover a {
 
 .blue-bg {
 	background: #00CCFF;
+}
+
+.yellow-bg{
+	background: yellow;
+}
+
+.yellow-bg-lite{
+	background: rgba(255, 255, 0,0.5);
 }
 
 .muted {

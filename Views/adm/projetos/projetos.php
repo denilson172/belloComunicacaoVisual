@@ -10,7 +10,12 @@
 	require_once "../../../Controller/enderecoController.php";
 	require_once "../../../Controller/clienteController.php";
 
-	//sessões
+	$projeto_controller = new ProjetoController();
+	$projeto_controller->listarProjetoPendente();
+	$projeto_controller->listarProjetoEmProducao();
+	$projeto_controller->listarProjetoFinalizado();
+
+	//sessões==========================================================
 	if(empty($_SESSION['projetoPendente'])){
 		echo "erro";
 	}else{
@@ -76,9 +81,9 @@
 	</head>
 	<body>
 
-		<!-- <div class="preloader">
+		<div class="preloader">
 			<img src="../../Style/img/loader.gif" alt="Preloader image">
-		</div> -->
+		</div>
 
 		<!-- Menu horizontal -->
 		<div class="collapse navbar-collapse white-bg" id="bs-example-navbar-collapse-1">
@@ -105,10 +110,9 @@
 
 		</div><!--fim nav-->
 		
-		<!--========inicio projetos pendentes=====================================================-->
 		<div class="container-contact100">
-			<!--inicio crud - pendente-->
 			<div class="container">
+				<!--========inicio projetos pendentes=====================================================-->
 				<div class="table-wrapper">
 					<div class="table-title">
 						<div class="row">
@@ -124,7 +128,7 @@
 								<th>Marca</th>
 								<th>Plano</th>
 								<th>Detalhes</th>
-								<th>Executar Projeto</th>
+								<th>Ações</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -142,7 +146,7 @@
 									$nomeCliente = $cli->getNomeCliente();
 									$emailCliente = $cli->getEmailCliente();
 									$celularCliente = $cli->getCelularCliente();
-									$fkEndereco = $cli->getIdEndereco();
+									// $fkEndereco = $cli->getIdEndereco();
 								}
 								
 								echo "<tr>";
@@ -158,7 +162,7 @@
 									echo "<td> $nomeProjeto </td> ";
 									echo "<td> $planoProjeto </td> ";
 									echo "<td><a href='detalhesProjetos.php?projeto=$idProjeto&cliente=$fkCliente&logo=$fkLogo' id='#detalhes$idProjeto' target='_blank'>Visualizar Detalhes</a></td>";
-									echo "<td><a href='detalhesProjetos.php?projeto=$idProjeto&status=2' class='edit'  target='_blank'><i class='fas fa-angle-double-right blue'stitle='Executar Projeto' onclick='window.close()'></i></a></td>";
+									echo "<td><a href='../../../Controller/projetoController.php?projeto=$idProjeto&status=2' class='edit'><i class='fas fa-angle-double-down blue' title='Executar Projeto'></i></a></td>";
 								echo "</tr>";
 								} 
 							?>
@@ -180,28 +184,8 @@
 						</ul>
 					</div>
 				</div>
-			
-			<!-- VIEW Modal HTML -->
-			<!-- <div id="confirmModal" class="modal fade">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<form>
-							<div class="modal-header">						
-								<h4 class="modal-title">Executar esse projeto?</h4>
-							</div>
-							
-							<div class="modal-footer">
-								<input type="button" class="btn btn-danger left" data-dismiss="modal" value="Fechar">
-								<input type="button" class="btn btn-success right" data-dismiss="modal" value="Confirmar">
-							</div>
-							
-						</form>
-					</div>
-				</div>
-			</div> -->
-			<!--fim modal -->
 		
-
+				<!--========inicio projetos em produção=====================================================-->							
 				<div class="table-wrapper">
 					<div class="table-title">
 						<div class="row">
@@ -217,7 +201,7 @@
 								<th>Marca</th>
 								<th>Plano</th>
 								<th>Detalhes</th>
-								<th>Executar Projeto</th>
+								<th>Ações</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -251,7 +235,10 @@
 									echo "<td> $nomeProjeto </td> ";
 									echo "<td> $planoProjeto </td> ";
 									echo "<td><a href='detalhesProjetos.php?projeto=$idProjeto&cliente=$fkCliente&logo=$fkLogo' id='#detalhes$idProjeto' target='_blank'>Visualizar Detalhes</a></td>";
-									echo "<td><a href='detalhesProjetos.php?projeto=$idProjeto&status=2' class='edit'  target='_blank'><i class='fas fa-angle-double-right blue'stitle='Executar Projeto' onclick='window.close()'></i></a></td>";
+									echo "<td>
+											<a href='../../../Controller/projetoController.php?projeto=$idProjeto&status=3' class='edit'><i class='fas fa-angle-double-down green-dark'title='Finalizar Projeto'></i></a>
+											<a href='../../../Controller/projetoController.php?projeto=$idProjeto&status=1' class='edit'><i class='fas fa-angle-double-up red'title='Voltar par Pendência'></i></a>
+									</td>";
 								echo "</tr>";
 								} 
 							?>
@@ -273,28 +260,154 @@
 						</ul>
 					</div>
 				</div>
-			</div>
-			<!-- VIEW Modal HTML -->
-			<!-- <div id="confirmModal" class="modal fade">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<form>
-							<div class="modal-header">						
-								<h4 class="modal-title">Executar esse projeto?</h4>
+
+				<!--========inicio projetos finalizado=====================================================-->							
+				<div class="table-wrapper">
+					<div class="table-title">
+						<div class="row">
+							<div class="col-sm-6">
+								<h2><b class="green-dark">Projetos Finalizados</b></h2>
 							</div>
-							
-							<div class="modal-footer">
-								<input type="button" class="btn btn-danger left" data-dismiss="modal" value="Fechar">
-								<input type="button" class="btn btn-success right" data-dismiss="modal" value="Confirmar">
-							</div>
-							
-						</form>
+						</div>
+					</div>
+					<table class="table table-striped table-hover">
+						<thead>
+							<tr>
+								<th>Código</th>
+								<th>Marca</th>
+								<th>Plano</th>
+								<th>Detalhes</th>
+								<th>Ações</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- inserir campos dinâmicamente -->
+							<?php
+							foreach($projetoFinalizados as $cli):
+								$idProjeto = $cli->getIdProjeto();
+								$nomeProjeto = $cli->getNomeProjeto();
+								$planoProjeto = $cli->getPlanoProjeto();
+								$fkLogo = $cli->getIdLogo();
+								$fkCliente = $cli->getIdCliente();
+
+								foreach($cliente as $cli){
+									$idCliente = $cli->getIdCliente();
+									$nomeCliente = $cli->getNomeCliente();
+									$emailCliente = $cli->getEmailCliente();
+									$celularCliente = $cli->getCelularCliente();
+									$fkEndereco = $cli->getIdEndereco();
+								}
+								
+								echo "<tr>";
+									if(empty($idProjeto)){
+										echo "<td>-</td>";
+										echo "<td>-</td>";	
+										echo "<td>-</td>";	
+										echo "<td>-</td>";	
+										echo "<td>-</td>";									
+									}else{
+										echo "<td> $idProjeto</td> ";
+										echo "<td> $nomeProjeto </td> ";
+										echo "<td> $planoProjeto </td> ";
+										echo "<td><a href='detalhesProjetos.php?projeto=$idProjeto&cliente=$fkCliente&logo=$fkLogo' id='#detalhes$idProjeto' target='_blank'>Visualizar Detalhes</a></td>";
+										echo "<td>
+											<a href='../../../Controller/projetoController.php?projeto=$idProjeto&status=2' class='edit'><i class='fas fa-angle-double-up blue'title='Voltar para Projeto em Produção'></i></a>
+											<a href='#funcaoConfirmacao' id='btn' onclick='confirmar($idProjeto)'><i class='fas fa-trash-alt red'  title='Excluir Projeto'></i></a>
+												<div id='dialog-confirm' title='Deseja apagar esse registro?'></div>
+
+												<script id='funcaoConfirmacao'>
+													function funcao_deletar() {
+														location.href='../../../Controller/projetoController.php?projeto=$idProjeto&cliente=$fkCliente&logo=$fkLogo&delete=delete';
+														alert('Projeto de Código $idProjeto excluído com sucesso!');
+													}
+													function confirmar() {
+														$( '#dialog-confirm' ).dialog({
+															resizable: false,
+															height: 'auto',
+															width: 400,
+															modal: true,
+															buttons: {
+															'Confirmar': function() {
+																$( this ).dialog( 'close');
+																funcao_deletar();
+															},
+															'Cancelar': function() {
+																$( this ).dialog( 'close');
+																console.log('cancelado');
+															}
+															}
+														});
+													}
+												</script>
+
+										</td>";
+								echo "</tr>";
+								}
+
+								// echo '<script id="funcaoConfirmacao">';
+								// 	echo 'function funcao_deletar() {';
+								// 		echo "alert('$idProjeto, $fkCliente');";
+								// 	echo '}';
+								// 	echo 'function confirmar() {';
+								// 		echo '$( "#dialog-confirm" ).dialog({';
+								// 			echo 'resizable: false,';
+								// 			echo 'height: "auto",';
+								// 			echo 'width: 400,';
+								// 			echo 'modal: true,';
+								// 			echo 'buttons: {';
+								// 			echo '"Confirmar": function() {';
+								// 				echo  '$( this ).dialog( "close" );';
+								// 				echo 'funcao_deletar();';
+								// 			echo '},';
+								// 			echo "'Cancelar': function() {";
+								// 				echo '$( this ).dialog( "close" );';
+								// 				echo "console.log('cancelado');";
+								// 			echo '}';
+								// 			echo '}';
+								// 		echo '});';
+								// 	echo '}';
+								// echo '</script>';
+								
+							?>
+							<?php	
+							endforeach;
+							?>	
+						</tbody>
+					</table>
+					<div class="clearfix">
+						<div class="hint-text">Exibindo <b>5</b> de <b>25</b> registros</div>
+						<ul class="pagination">
+							<li class="page-item disabled"><a href="#">Anterior</a></li>
+							<li class="page-item active"><a href="#" class="page-link">1</a></li>
+							<li class="page-item"><a href="#" class="page-link">2</a></li>
+							<li class="page-item"><a href="#" class="page-link">3</a></li>
+							<li class="page-item"><a href="#" class="page-link">4</a></li>
+							<li class="page-item"><a href="#" class="page-link">5</a></li>
+							<li class="page-item"><a href="#" class="page-link">Próximo</a></li>
+						</ul>
 					</div>
 				</div>
-			</div> -->
-			<!--fim modal -->
-		</div>
-		 
+				<!-- fim tabela projeto finalizado -->
+			</div>			
+			
+				<!-- delete modal -->
+				<!-- <div id="deleteModal<?php //echo$idProjeto; ?>" class="modal fade">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<form>
+								<div class="modal-header">						
+									<h4 class="modal-title red">Deletar esse projeto?</h4>
+								</div>
+								<div class="modal-footer">
+									<input type="button" class="btn btn-danger left" data-dismiss="modal" value="Fechar">
+									<a class="btn btn-success right" href='../../../Controller/projetoController.php?projeto=$idProjeto&cliente=$fkCliente&logo=$fkLogo&endereco=$fkEndereco&delete=delete' target='_blank'>Confirmar</a>
+								</div>
+
+							</form>
+						</div>
+					</div>
+				</div> -->
+				<!--fim delete modal -->
 		</div>
 
 		<!--===============================================================================================-->
@@ -319,6 +432,10 @@
 		<script src="../../Style/js/jquery.onepagenav.js"></script>
 		<script src="../../Style/js/main.js"></script>
 		<!--===============================================================================================-->
+		<!-- Script caixas de confirmação -->
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 		<!--script crud-->
 		<script src="../../Style/js/functions-crud.js"></script>
 
@@ -331,6 +448,31 @@
 
 		gtag('config', 'UA-23581568-13');
 		</script>
+
+	<!-- script das caixas de confirmação -->
+	<!-- <script id="funcaoConfirmacao">
+		function funcao_deletar($idProjeto,$fkCliente,$fkLogo,$fkEndereco) {
+			alert('<?php //echo $idProjeto, $fkCliente ?>');
+		}
+		function confirmar() {
+			$( "#dialog-confirm" ).dialog({
+				resizable: false,
+				height: "auto",
+				width: 400,
+				modal: true,
+				buttons: {
+				"Confirmar": function() {
+					$( this ).dialog( "close" );
+					funcao_deletar();
+				},
+				'Cancelar': function() {
+					$( this ).dialog( "close" );
+					console.log('cancelado');
+				}
+				}
+			});
+		}
+	</script> -->
 
 	</body>
 </html>

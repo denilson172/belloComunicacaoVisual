@@ -6,6 +6,7 @@
         private $descricao_financas;
         private $valor_financas;
         private $tipoFinanca_financas;
+        private $armazenamento_financas;
 
         public function getIdFinancas() {
             return $this -> id;
@@ -53,6 +54,14 @@
 
         public function setTipoFinancaFinancas($tipoFinanca_financas) {
             $this->tipoFinanca = $tipoFinanca_financas;
+        }
+
+        public function getArmazenamentoFinancas() {
+            return $this -> armazenamentoFinancas;
+        }
+
+        public function setArmazenamentoFinancas($armazenamento_financas) {
+            $this->armazenamentoFinancas = $armazenamento_financas;
         }
 
     }

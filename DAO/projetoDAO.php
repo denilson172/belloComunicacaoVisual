@@ -68,11 +68,30 @@ class ProjetoDAO{
          }
         return $pro;
     }
-    function alterarStatusEmProducao($id,$status){        
-        $a = array ('status_projeto'=> $status);  
-        $alter = DBUpdate('projeto',$a,'id_projeto='.$id);
+
+    function alterarStatusProjeto($id,$status){        
+        $alterarStatus = array ('status_projeto'=> $status);  
+        $alter = DBUpdate('projeto',$alterarStatus,'id_projeto='.$id);
 
         return $alter;
+    }
+
+    //deletar projeto com toda as informações
+    function deletarProjeto($idProjeto, $fkCliente, $fklogo){
+
+        //pegando endereco
+        $cliente = DBRead('cliente',"WHERE id_cliente = {$fkCliente}");
+        $pro = [];
+        for($i=0; $i < count($cliente); $i++){
+            $fkEndereco = $cliente[$i]['id_endereco'];
+        }
+
+        $projeto = DBDelete('projeto', "id_projeto = {$idProjeto}");
+        $projeto = DBDelete('cliente', "id_cliente = {$fkCliente}");
+        $projeto = DBDelete('logo', "id_logo = {$fklogo}");
+        $projeto = DBDelete('endereco', "id_endereco = {$fkEndereco}");
+
+        return $projeto;
     }
 
 }

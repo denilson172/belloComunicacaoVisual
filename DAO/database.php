@@ -106,8 +106,18 @@ require_once __DIR__ . '/../Model/projetoModel.php';
         $fields = implode(', ', $fields);
         //var_dump($fields); 
         $table = DB_PREFIX.'_'.$table;
-        $where = ($where) ? "WHERE {$where}" : null;      
+        $where = ($where) ? "WHERE {$where}" : null;
         $query = "UPDATE {$table} SET {$fields}{$where}";
+
+        return DBExecute($query);
+    }
+
+    //deletar registros
+    function DBDelete($table, $where = null){
+        $table = DB_PREFIX.'_'.$table;
+        $where = ($where) ? "WHERE {$where}" : null;
+        $query = "DELETE FROM {$table} {$where}";
+
         return DBExecute($query);
     }
 

@@ -1,34 +1,68 @@
 <?php
 	session_start();
-	require_once "../../../Model/projetoModel.php";
-	require_once "../../../Model/logoModel.php";
-	require_once "../../../Model/enderecoModel.php";
-	require_once "../../../Model/clienteModel.php";
-	require_once "../../../Controller/projetoController.php";
-	require_once "../../../Controller/logoController.php";
-	require_once "../../../Controller/enderecoController.php";
-	require_once "../../../Controller/clienteController.php";
+	require_once "../../../Model/financasModel.php";
+	require_once "../../../Controller/financasController.php";
 
-	//$projeto = "";
+	$financa_controller = new FinancasController();
+	$financa_controller->listarFinancasEntrada();
+	$financa_controller->listarFinancasPendente();
+	$financa_controller->listarFinancasSaida();
+	$financa_controller->somarEntradasFinancas();
+	$financa_controller->somarPendenciasFinancas();
+	$financa_controller->somarSaidasFinancas();
+	$financa_controller->totalFinancas();
 
-	if(empty($_SESSION['projetoPendente'])){
+	//inicio sessões================================================================================
+	if(empty($_SESSION['financasEntrada'])){
 		echo "erro";
 	}else{
-		$projetoPendente = $_SESSION['projetoPendente'];
-		$logo = $_SESSION['logoPendente'];
-		$endereco= $_SESSION['enderecoPendente'];
-		$cliente = $_SESSION['clientePendente'];
+		$financasEntrada = $_SESSION['financasEntrada'];
 	}
-	if(empty($_SESSION['projetoEmProducao'])){
+	if(empty($_SESSION['financasPendente'])){
 		echo "erro";
 	}else{
-		$projetoEmProducao = $_SESSION['projetoEmProducao'];
+		$financasPendencia = $_SESSION['financasPendente'];
 	}
-	if(empty($_SESSION['projetoFinalizado'])){
+	if(empty($_SESSION['financasSaida'])){
 		echo "erro";
 	}else{
-		$projetoFinalizados = $_SESSION['projetoFinalizado'];
+		$financasSaida = $_SESSION['financasSaida'];
 	}
+	//sessões de soma dos valores
+	if(empty($_SESSION['somarEntradaFinanca'])){
+		$somarEntradaFinancas = array("- - -");
+	}else{
+		$somarEntradaFinancas = $_SESSION['somarEntradaFinanca'];
+	}
+	if(empty($_SESSION['somarPendenciaFinanca'])){
+		$somarPendenciaFinancas = array("- - -");
+	}else{
+		$somarPendenciaFinancas = $_SESSION['somarPendenciaFinanca'];
+	}
+	if(empty($_SESSION['somarSaidaFinanca'])){
+		$somarSaidaFinancas = array("- - -");
+	}else{
+		$somarSaidaFinancas = $_SESSION['somarSaidaFinanca'];
+	}
+	if(empty($_SESSION['totalFinancas'])){
+		$totalFinancas = array("- - -");
+	}else{
+		$totalFinancas = $_SESSION['totalFinancas'];
+	}
+	//fim sessões=====================================================================================
+
+	
+	// foreach ($financasEntrada as $fin):
+	// 	$idFinancas = $fin->getIdFinancas();
+	// 	$dataFinancas = $fin->getDataFinancas();
+	// 	$categoriaFinancas = $fin->getCategoriaFinancas();
+	// 	$descricaoFinancas = $fin->getDescricaoFinancas();
+	// 	$valorFinancas = $fin->getValorFinancas();
+	// 	$tipoFinancaFinancas = $fin->getTipoFinancaFinancas();
+	// 	$armazenamentoFinancas = $fin->getArmazenamentoFinancas();
+	// 	endforeach;
+
+		//$financa_controller->somarEntradasFinancas($tipoFinancaFinancas);
 ?>
 
 
@@ -76,9 +110,9 @@
 	</head>
 	<body>
 
-		<!-- <div class="preloader">
+		<div class="preloader">
 			<img src="../../Style/img/loader.gif" alt="Preloader image">
-		</div> -->
+		</div>
 
 		<!-- Menu horizontal -->
 		<div class="collapse navbar-collapse white-bg" id="bs-example-navbar-collapse-1">
@@ -122,53 +156,145 @@
 					</div>
 					<table class="table table-striped table-hover">
 						<thead>
-							<tr>
+							<tr class="">
 								<th>Tipo</th>
-								<th>Valor</th>								
+								<th>Valor</th>							
+							</tr>
+							<tr class="green-dark-bg-lite">
+								<th>Entrada</th>
+								<?php
+									foreach($somarEntradaFinancas as $fin){
+										$entradaFinancas = $fin;
+									}
+									echo "<th>R$ $entradaFinancas</th>";
+								?>
+							</tr>
+							<tr class="red-bg-lite">
+								<th>Pendência</th>
+								<?php
+									foreach($somarPendenciaFinancas as $fin){
+										$financasPendencia = $fin;
+									}
+									echo "<th>R$ $financasPendencia</th>";
+								?>
+							</tr>
+							<tr class="yellow-bg-lite">
+								<th>Saída</th>
+								 <?php
+									foreach($somarSaidaFinancas as $fin){
+										$financasSaida = $fin;
+									}
+									echo "<th>R$ $financasSaida</th>";
+								?>
+							</tr>
+							<tr class="">
+								<th>TOTAL LÍQUIDO</th>
+								 <?php
+									foreach($totalFinancas as $fin){
+										$totalFinancas = $fin;
+									}
+									echo "<th>R$ $totalFinancas</th>";
+								?>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<th>Entrada</th><td>valor dinâmico do total</td>
-							</tr>
-							<tr>
-								<th>Pendência</th><td>valor dinâmico do total</td>
-							</tr>
-							<tr>
-								<th>Saída</th><td>valor dinâmico do total</td>
-							</tr>
-							<tr>
-								<th>Total</th><td>valor dinâmico do total</td>
-							</tr>
+							<!-- //sem nada por hora -->
 						</tbody>
-
 					</table>					
-				</div>
-			<!-- </div> -->
+				</div>	
+			</div>
 			<!-- fim tabela balanco -->
 
-				<!-- Menu horizontal -->
-				<div class="collapse navbar-collapse white-bg" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav main-nav">
-						<li class="green">
-							<a href=""><i class="fas fa-exclamation-triangle red title="Projetos"></a></i>
-						</li>
-					</ul>
-					<ul class="nav navbar-nav main-nav">
-						<li class="green">
-							<a href=""><i class="fas fa-clock grey title="Projetos"></a></i>
-						</li>
-					</ul>
-					<ul class="nav navbar-nav main-nav">
-						<li class="green">
-							<a href=""><i class="fas fa-check-circle green-dark title="Projetos"></a></i>
-						</li>
-					</ul>
-				</div><!--fim nav-->
+			<!-- inicio modal adicionar finança -->
+			<div id="addFinanca" class="modal fade">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<form action="../../../Controller/financasController.php" method="POST">
+							<div class="modal-header blue-bg">						
+								<h4 class="modal-title white">Adicionar Finança</h4>
+								
+							</div>
+							<div class="modal-body">					
+								<div class="form-group">
+									<label>Data</label>
+									<input type="text" name="data" class="form-control" required pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" required>
+								</div>
+								<div class="form-group">
+									<label>Categoria</label>
+									<input type="text" name="categoria" class="form-control" required>
+								</div>
+								<div class="form-group">
+									<label>Descrição</label>
+									<textarea name="descricao" class="form-control" required></textarea>
+								</div>
+								<div class="form-group">
+									<label>Valor</label>
+									<input type="text" name="valor" class="form-control" required>
+								</div>
+								
+								<label>Tipo de Finança</label>
+								<div class="form-group">
+									<input type="radio" required="required" value="2" name="tipoFinanca" id="pendencia" checked="checked"/>
+										<label for="pendencia">Pendência</label></br>
+									
+									<input type="radio" required="required" value="3" name="tipoFinanca" id="saida"/>
+										<label for="saida">Saída</label>
+								</div>
+								
+								<label>Local de Armazenamento</label>
+								<div class="form-group">
+									<input type="radio" required="required" value="1" name="armazenamento" id="contaBancaria" checked="checked"/>
+									<label for="contaBancaria">Conta Bancária</label></br>
+
+									<input type="radio" required="required" value="2" name="armazenamento" id="contaMaquineta"/>
+									<label for="contaMaquineta">Conta Maquineta</label></br>
+
+									<input type="radio" required="required" value="3" name="armazenamento" id="dineiroFisico"/>
+									<label for="dineiroFisico">Físico</label>
+								</div>				
+							</div>
+							<div class="modal-footer">
+								<input type="hidden" name="classe" value="Financas"/>
+								<input type="hidden" name="metodo" value="inserirFinancas"/>
+								<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+
+								<script>
+								function funcao1(){
+									alert("Finança adicionada com sucesso!!!");
+								}
+								</script>
+
+								<input type="submit" class="btn btn-success" name="submit" value="Adicionar" onfinck="funcao1()">
+							</div>
+						</form>
+					</div>
+				</div>
 			</div>
+			<!-- Fim Modal adicionar finança -->
+
+			<!-- Menu horizontal -->
+			<div class="container">
+				<!-- <div class="collapse navbar-collapse white-bg" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav main-nav">
+						<li class="green">
+							<a href=""><i class="fas fa-exclamation-triangle red" title="Projetos"></a></i>
+						</li>
+					</ul>
+					<ul class="nav navbar-nav main-nav">
+						<li class="green">
+							<a href=""><i class="fas fa-clock grey" title="Projetos"></a></i>
+						</li>
+					</ul>
+					<ul class="nav navbar-nav main-nav">
+						<li class="green">
+							<a href=""><i class="fas fa-check-circle green-dark" title="Projetos"></a></i>
+						</li>
+					</ul>
+				</div> fim nav
+			</div>-->
 
 			<!-- inicio tabela resumo-->
-			<div class="container">
+			<!-- <div class="container">
 				<div class="table-wrapper">
 				<div class="table-title">
 					<div class="row">
@@ -291,7 +417,7 @@
 					</ul>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<!-- Edit Modal HTML -->
 		<div id="addEmployeeModal" class="modal fade">
 			<div class="modal-dialog">
