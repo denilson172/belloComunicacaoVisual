@@ -1,7 +1,4 @@
 <?php
-// require 'config.php';
-// require 'conexao.php';
-// require 'database.php';
 require_once __DIR__ . '/../Model/financasModel.php';
 
 class financasDAO{
@@ -17,19 +14,56 @@ class financasDAO{
         //FINANCAS - array para insert no banco
         $financa_arr = array (
             'data_financeiro' => $dataFinancas,
-            'categoria_financeiro' => $categoriaFinancas,
-            'descricao_financeiro' => $descricaoFinancas,
             'valor_financeiro' => $valorFinancas,
+            'descricao_financeiro' => $descricaoFinancas,
+            'categoria_financeiro' => $categoriaFinancas,            
             'tipo_financeiro' => $tipoFinancaFinancas,
             'armazenamento_financeiro' => $armazenamentoFinancas
         );
         //inserindo no bd;
-        $salvar = DBCreate('financas',$financa_arr);
+        $salvar = DBCreate('financeiro',$financa_arr);
+    }
+
+    //alterar financas
+    function alterarFinancas($id, $data, $categoria, $descricao, $valor, $tipoFinanca, $armazenamento){
+        //FINANCAS - array para insert no banco
+        $financa_arr = array (
+            'id_financeiro' => $id,
+            'data_financeiro' => $data,
+            'valor_financeiro' => $valor,
+            'descricao_financeiro' => $descricao,
+            'categoria_financeiro' => $categoria,
+            'tipo_financeiro' => $tipoFinanca,
+            'armazenamento_financeiro' => $armazenamento
+        );
+        //inserindo no bd;
+        $alter = DBUpdate('financeiro',$financa_arr,'id_financeiro='.$id);
+        
+
+        return $alter;
     }
     
+    //encontrar financas
+    function encontrarFinancas($id){
+        $financa = DBRead('financeiro',"WHERE id_financeiro = {$id}");//retorna um vetor com as linhas do BD
+
+        $fin = [];
+        for($i=0; $i < count($financa); $i++){
+            $fin[$i] = new FinancasModel();
+
+            $fin[$i]->setIdFinancas($financa[$i]['id_financeiro']);  
+            $fin[$i]->setDataFinancas($financa[$i]['data_financeiro']);
+            $fin[$i]->setCategoriaFinancas($financa[$i]['categoria_financeiro']);  
+            $fin[$i]->setDescricaoFinancas($financa[$i]['descricao_financeiro']);  
+            $fin[$i]->setValorFinancas($financa[$i]['valor_financeiro']); 
+            $fin[$i]->setTipoFinancaFinancas($financa[$i]['tipo_financeiro']);  
+            $fin[$i]->setArmazenamentoFinancas($financa[$i]['armazenamento_financeiro']);
+        }
+        return $fin;
+    }
     //metodo para listar financa pendente
     function listarFinancasEntrada(){
-        $financa = DBRead('financas',"WHERE tipo_financeiro = 1");//valor 1 representa entrada
+        $financa = DBRead('financeiro',"WHERE tipo_financeiro = 1");//valor 1 representa entrada
 
         $fin = [];
         for($i=0; $i < count($financa); $i++){
@@ -48,16 +82,17 @@ class financasDAO{
 
     //metodo para listar financa pendente
     function listarFinancasPendente(){
-        $financa = DBRead('financas',"WHERE tipo_financeiro = 2");//retorna um vetor com as linhas do BD
+        $financa = DBRead('financeiro',"WHERE tipo_financeiro = 2");//retorna um vetor com as linhas do BD
         $fin = [];
+        
         for($i=0; $i < count($financa); $i++){
             $fin[$i] = new FinancasModel();
 
             $fin[$i]->setIdFinancas($financa[$i]['id_financeiro']);  
             $fin[$i]->setDataFinancas($financa[$i]['data_financeiro']);
-            $fin[$i]->setCategoriaFinancas($financa[$i]['categoria_financeiro']);  
+            $fin[$i]->setValorFinancas($financa[$i]['valor_financeiro']);
             $fin[$i]->setDescricaoFinancas($financa[$i]['descricao_financeiro']);  
-            $fin[$i]->setValorFinancas($financa[$i]['valor_financeiro']); 
+            $fin[$i]->setCategoriaFinancas($financa[$i]['categoria_financeiro']);  
             $fin[$i]->setTipoFinancaFinancas($financa[$i]['tipo_financeiro']);
             $fin[$i]->setArmazenamentoFinancas($financa[$i]['armazenamento_financeiro']);
         }
@@ -66,7 +101,7 @@ class financasDAO{
 
     //metodo para listar financa saida
     function listarFinancasSaida(){
-        $financa = DBRead('financas',"WHERE tipo_financeiro = 3");//retorna um vetor com as linhas do BD
+        $financa = DBRead('financeiro',"WHERE tipo_financeiro = 3");//retorna um vetor com as linhas do BD
         $fin = [];
         for($i=0; $i < count($financa); $i++){
             $fin[$i] = new FinancasModel();
@@ -83,7 +118,7 @@ class financasDAO{
     }
 
     function somarEntradasFinancas(){
-        $financa = DBRead('financas',"WHERE tipo_financeiro = 1");//valor 1 representa entrada
+        $financa = DBRead('financeiro',"WHERE tipo_financeiro = 1");//valor 1 representa entrada
         if(!empty($financa)){
             $sum = 0.0;
             foreach ($financa as $key => $value){
@@ -96,7 +131,7 @@ class financasDAO{
     }
 
     function somarPendenciasFinancas(){
-        $financa = DBRead('financas',"WHERE tipo_financeiro = 2");//valor 2 representa pendencia
+        $financa = DBRead('financeiro',"WHERE tipo_financeiro = 2");//valor 2 representa pendencia
         if(!empty($financa)){
             $sum = 0.0;
             foreach ($financa as $key => $value){
@@ -109,7 +144,7 @@ class financasDAO{
     }
 
     function somarSaidasFinancas(){
-        $financa = DBRead('financas',"WHERE tipo_financeiro = 3");//valor 3 representa saida
+        $financa = DBRead('financeiro',"WHERE tipo_financeiro = 3");//valor 3 representa saida
         if(!empty($financa)){
             $sum = 0.0;
             foreach ($financa as $key => $value){

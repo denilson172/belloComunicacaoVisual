@@ -66,7 +66,7 @@ class DAO{
             'endereco',
             'cliente',
             'logo',
-            'projeto',
+            'projetos',
             $endereco_arr,
             $cliente_arr,
             $logo_arr,
@@ -75,14 +75,14 @@ class DAO{
     }  
 }
 
-class LoginDAO{        
-    function validarLogin($login){
-        $emailLogin = $login->getEmailLogin();
-        $senhaLogin = $login->getSenhaLogin();
+// class LoginDAO{        
+//     function validarLogin($login){
+//         $emailLogin = $login->getEmailLogin();
+//         $senhaLogin = $login->getSenhaLogin();
 
-        $validar = DBLogin('login',$emailLogin,$senhaLogin);
+//         $validar = DBLogin('login',$emailLogin,$senhaLogin);
 
-        return $validar;
-    }
-}
+//         return $validar;
+//     }
+// }
 ?>

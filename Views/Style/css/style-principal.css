@@ -867,6 +867,12 @@ footer .social-footer li:hover a {
 .bold {
 	font-weight: bold;
 }
+
+/*text */
+.left{
+	text-align: left;
+	left: 10px;;
+}
 /* Colors */
 
 .black{
@@ -1036,6 +1042,11 @@ footer .social-footer li:hover a {
 
 .border-top-two-black{
 	border-top: 2px solid black;
+}
+
+.border-radio-red{
+	border-bottom: 1px solid red;
+	border-radius: 50%;
 }
 
 @media(max-width:992px) {

@@ -5,7 +5,7 @@ require_once __DIR__ . '/../Controller/projetoController.php';
 
 class ProjetoDAO{
     function listarProjetoPendente(){
-        $projeto = DBRead('projeto',"WHERE status_projeto = 1");//retorna um vetor com as linhas do BD
+        $projeto = DBRead('projetos',"WHERE status_projeto = 1");//retorna um vetor com as linhas do BD
         $pro = [];
         for($i=0; $i < count($projeto); $i++){
             $pro[$i] = new ProjetoModel();
@@ -21,7 +21,7 @@ class ProjetoDAO{
     }
 
     function listarProjetoEmProducao(){
-        $projeto = DBRead('projeto',"WHERE status_projeto = 2");//retorna um vetor com as linhas do BD
+        $projeto = DBRead('projetos',"WHERE status_projeto = 2");//retorna um vetor com as linhas do BD
         $pro = [];
         for($i=0; $i < count($projeto); $i++){
             $pro[$i] = new ProjetoModel();
@@ -37,7 +37,7 @@ class ProjetoDAO{
     }
 
     function listarProjetoFinalizado(){
-        $projeto = DBRead('projeto',"WHERE status_projeto = 3");//retorna um vetor com as linhas do BD
+        $projeto = DBRead('projetos',"WHERE status_projeto = 3");//retorna um vetor com as linhas do BD
         $pro = [];
         for($i=0; $i < count($projeto); $i++){
             $pro[$i] = new ProjetoModel();
@@ -53,7 +53,7 @@ class ProjetoDAO{
     }
 
     function encontrarProjeto($id){
-        $projeto = DBRead('projeto',"WHERE id_projeto = {$id}");//retorna um vetor com as linhas do BD
+        $projeto = DBRead('projetos',"WHERE id_projeto = {$id}");//retorna um vetor com as linhas do BD
 
         $pro = [];
         for($i=0; $i < count($projeto); $i++){
@@ -70,8 +70,8 @@ class ProjetoDAO{
     }
 
     function alterarStatusProjeto($id,$status){        
-        $alterarStatus = array ('status_projeto'=> $status);  
-        $alter = DBUpdate('projeto',$alterarStatus,'id_projeto='.$id);
+        $alterarStatus = array ('status_projeto'=> $status);
+        $alter = DBUpdate('projetos',$alterarStatus,'id_projeto='.$id);
 
         return $alter;
     }
@@ -86,7 +86,7 @@ class ProjetoDAO{
             $fkEndereco = $cliente[$i]['id_endereco'];
         }
 
-        $projeto = DBDelete('projeto', "id_projeto = {$idProjeto}");
+        $projeto = DBDelete('projetos', "id_projeto = {$idProjeto}");
         $projeto = DBDelete('cliente', "id_cliente = {$fkCliente}");
         $projeto = DBDelete('logo', "id_logo = {$fklogo}");
         $projeto = DBDelete('endereco', "id_endereco = {$fkEndereco}");

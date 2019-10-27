@@ -21,7 +21,7 @@
 	if(empty($_SESSION['financasPendente'])){
 		echo "erro";
 	}else{
-		$financasPendencia = $_SESSION['financasPendente'];
+		$financasPendente = $_SESSION['financasPendente'];
 	}
 	if(empty($_SESSION['financasSaida'])){
 		echo "erro";
@@ -50,19 +50,6 @@
 		$totalFinancas = $_SESSION['totalFinancas'];
 	}
 	//fim sessões=====================================================================================
-
-	
-	// foreach ($financasEntrada as $fin):
-	// 	$idFinancas = $fin->getIdFinancas();
-	// 	$dataFinancas = $fin->getDataFinancas();
-	// 	$categoriaFinancas = $fin->getCategoriaFinancas();
-	// 	$descricaoFinancas = $fin->getDescricaoFinancas();
-	// 	$valorFinancas = $fin->getValorFinancas();
-	// 	$tipoFinancaFinancas = $fin->getTipoFinancaFinancas();
-	// 	$armazenamentoFinancas = $fin->getArmazenamentoFinancas();
-	// 	endforeach;
-
-		//$financa_controller->somarEntradasFinancas($tipoFinancaFinancas);
 ?>
 
 
@@ -106,13 +93,15 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="../../Style/css/style-crud.css">
 	<!--===============================================================================================-->
+	<link rel="stylesheet" href="../../Style/css/modal.css">
+	<link rel="stylesheet" href="../../Style/css/style-modal.css">
 
 	</head>
 	<body>
-
-		<div class="preloader">
+		<!-- cabeção -->
+		<!-- <div class="preloader">
 			<img src="../../Style/img/loader.gif" alt="Preloader image">
-		</div>
+		</div> -->
 
 		<!-- Menu horizontal -->
 		<div class="collapse navbar-collapse white-bg" id="bs-example-navbar-collapse-1">
@@ -156,7 +145,7 @@
 					</div>
 					<table class="table table-striped table-hover">
 						<thead>
-							<tr class="">
+							<tr>
 								<th>Tipo</th>
 								<th>Valor</th>							
 							</tr>
@@ -169,7 +158,7 @@
 									echo "<th>R$ $entradaFinancas</th>";
 								?>
 							</tr>
-							<tr class="red-bg-lite">
+							<tr class="yellow-bg-lite">
 								<th>Pendência</th>
 								<?php
 									foreach($somarPendenciaFinancas as $fin){
@@ -178,7 +167,7 @@
 									echo "<th>R$ $financasPendencia</th>";
 								?>
 							</tr>
-							<tr class="yellow-bg-lite">
+							<tr class="red-bg-lite">
 								<th>Saída</th>
 								 <?php
 									foreach($somarSaidaFinancas as $fin){
@@ -234,10 +223,10 @@
 								
 								<label>Tipo de Finança</label>
 								<div class="form-group">
-									<input type="radio" required="required" value="2" name="tipoFinanca" id="pendencia" checked="checked"/>
+									<input type="radio" required="required" value="2" name="tipo" id="pendencia" checked="checked"/>
 										<label for="pendencia">Pendência</label></br>
 									
-									<input type="radio" required="required" value="3" name="tipoFinanca" id="saida"/>
+									<input type="radio" required="required" value="3" name="tipo" id="saida"/>
 										<label for="saida">Saída</label>
 								</div>
 								
@@ -251,11 +240,12 @@
 
 									<input type="radio" required="required" value="3" name="armazenamento" id="dineiroFisico"/>
 									<label for="dineiroFisico">Físico</label>
-								</div>				
+								</div>	
+								<input type='hidden' name='id' value=''>
+								<input type='hidden' name='classe' value='Financas'>
+								<input type='hidden' name='metodo' value='inserirFinancas'>			
 							</div>
 							<div class="modal-footer">
-								<input type="hidden" name="classe" value="Financas"/>
-								<input type="hidden" name="metodo" value="inserirFinancas"/>
 								<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
 
 								<script>
@@ -272,243 +262,116 @@
 			</div>
 			<!-- Fim Modal adicionar finança -->
 
-			<!-- Menu horizontal -->
-			<div class="container">
-				<!-- <div class="collapse navbar-collapse white-bg" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav main-nav">
-						<li class="green">
-							<a href=""><i class="fas fa-exclamation-triangle red" title="Projetos"></a></i>
-						</li>
-					</ul>
-					<ul class="nav navbar-nav main-nav">
-						<li class="green">
-							<a href=""><i class="fas fa-clock grey" title="Projetos"></a></i>
-						</li>
-					</ul>
-					<ul class="nav navbar-nav main-nav">
-						<li class="green">
-							<a href=""><i class="fas fa-check-circle green-dark" title="Projetos"></a></i>
-						</li>
-					</ul>
-				</div> fim nav
-			</div>-->
-
 			<!-- inicio tabela resumo-->
-			<!-- <div class="container">
+			<div class="container">
 				<div class="table-wrapper">
-				<div class="table-title">
-					<div class="row">
-						<div class="col-sm-6">
-							<h2>Manage <b>Employees</b></h2>
-						</div>
-						<div class="col-sm-6">
+					<div class="table-title">
+						<div class="row">
+							<div class="col-sm-6">
+								<h2 class="red">REGISTROS | <b>PENDÊNCIAS</b></h2>
+							</div>
+							<div class="col-sm-6">
+							</div>
 						</div>
 					</div>
-				</div>
-				<table class="table table-striped table-hover">
-					<thead>
-						<tr>
-							<th>
-								<span class="custom-checkbox">
-									<input type="checkbox" id="selectAll">
-									<label for="selectAll"></label>
-								</span>
-							</th>
-							<th>Name</th>
-							<th>Email</th>
-							<th>Address</th>
-							<th>Phone</th>
-							<th>Actions</th>
-						</tr>
-					</thead>
+					<table class="table table-striped table-hover">
+						<thead>
+							<tr>
+								<th>Cód.</th>
+								<th>Data</th>
+								<th>Valor</th>
+								<th>Descrição</th>
+								<th>Categoria</th>
+								<th>Armazenamento</th>
+								<th>Ações</th>
+							</tr>
+						</thead>
 					<tbody>
-						<tr>
-							<td>
-								<span class="custom-checkbox">
-									<input type="checkbox" id="checkbox1" name="options[]" value="1">
-									<label for="checkbox1"></label>
-								</span>
-							</td>
-							<td>Thomas Hardy</td>
-							<td>thomashardy@mail.com</td>
-							<td>89 Chiaroscuro Rd, Portland, USA</td>
-							<td>(171) 555-2222</td>
-							<td>
-								<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-								<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<span class="custom-checkbox">
-									<input type="checkbox" id="checkbox2" name="options[]" value="1">
-									<label for="checkbox2"></label>
-								</span>
-							</td>
-							<td>Dominique Perrier</td>
-							<td>dominiqueperrier@mail.com</td>
-							<td>Obere Str. 57, Berlin, Germany</td>
-							<td>(313) 555-5735</td>
-							<td>
-								<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-								<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<span class="custom-checkbox">
-									<input type="checkbox" id="checkbox3" name="options[]" value="1">
-									<label for="checkbox3"></label>
-								</span>
-							</td>
-							<td>Maria Anders</td>
-							<td>mariaanders@mail.com</td>
-							<td>25, rue Lauriston, Paris, France</td>
-							<td>(503) 555-9931</td>
-							<td>
-								<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-								<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<span class="custom-checkbox">
-									<input type="checkbox" id="checkbox4" name="options[]" value="1">
-									<label for="checkbox4"></label>
-								</span>
-							</td>
-							<td>Fran Wilson</td>
-							<td>franwilson@mail.com</td>
-							<td>C/ Araquil, 67, Madrid, Spain</td>
-							<td>(204) 619-5731</td>
-							<td>
-								<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-								<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-							</td>
-						</tr>					
-						<tr>
-							<td>
-								<span class="custom-checkbox">
-									<input type="checkbox" id="checkbox5" name="options[]" value="1">
-									<label for="checkbox5"></label>
-								</span>
-							</td>
-							<td>Martin Blank</td>
-							<td>martinblank@mail.com</td>
-							<td>Via Monte Bianco 34, Turin, Italy</td>
-							<td>(480) 631-2097</td>
-							<td>
-								<a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-								<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-							</td>
-						</tr> 
+						<?php
+						foreach ($financasPendente as $fin):
+							$idFinancas = $fin->getIdFinancas();
+							$dataFinancas = $fin->getDataFinancas();
+							$categoriaFinancas = $fin->getCategoriaFinancas();
+							$descricaoFinancas = $fin->getDescricaoFinancas();
+							$valorFinancas = $fin->getValorFinancas();
+							$tipoFinancaFinancas = $fin->getTipoFinancaFinancas();
+							$armazenamentoFinancas = $fin->getArmazenamentoFinancas();	
+						
+							echo "<tr>";
+								echo "<td>$idFinancas</td>";
+								echo "<td>$dataFinancas</td>";
+								echo "<td>R$ $valorFinancas</td>";
+								echo "<td>$descricaoFinancas</td>";
+								echo "<td>$categoriaFinancas</td>";
+								echo "<td>$armazenamentoFinancas</td>";
+								echo "<td><label for='modal-trigger-center$idFinancas' class='open-modal'><i class='fas fa-edit blue'title='Editar Finança'></i></label>
+									<div class='pure-modal'>
+										<input id='modal-trigger-center$idFinancas' class='checkbox' type='checkbox'>
+										<div class='pure-modal-overlay'>
+											<label for='modal-trigger-center$idFinancas' class='o-close'></label>
+											<div class='pure-modal-wrap a-center'>
+												<label for='modal-trigger-center$idFinancas' class='close'>&#10006;</label>
+												</br>
+												</br>
+												<h2>EDITAR FINANÇA</h2>
+												<p>
+													<form action='../../../Controller/financasController.php' method='POST'>
+														<div class='modal-header'>
+															<h4 class='modal-title'>CÓDIGO: $idFinancas</h4>
+														</div>
+															<div class='modal-body'>
+															<div class='form-group text-left'>
+																<label>Data de Inserção</label>
+																<input type='text' name='data' class='form-control' value = '$dataFinancas' required>
+															</div>
+															<div class='form-group text-left'>
+																<label>Categoria</label>
+																<input type='text' name='categoria' class='form-control' value ='$categoriaFinancas' required>
+															</div>
+															<div class='form-group text-left'>
+																<label>Descrição</label>
+																<input type='text' name='descricao' class='form-control' value ='$descricaoFinancas' required>
+															</div>
+															<div class='form-group text-left'>
+																<label>Valor</label>
+																<input type='text' name='valor' class='form-control' value ='$valorFinancas' required>
+															</div>
+															<div class='form-group text-left'>
+																<label>Armazenamento</label>
+																<input type='text' name='armazenamento' class='form-control' value ='$armazenamentoFinancas' required>
+															</div>
+															<input type='hidden' name='id' value='$idFinancas'>
+															<input type='hidden' name='tipo' value='$tipoFinancaFinancas'>
+															<input type='hidden' name='classe' value='Financas'>
+															<input type='hidden' name='metodo' value='alterarFinancas'>
+														</div>
+														<div class='modal-footer'>
+															<input type='submit' name='submitEdit' class='btn btn-success' value='Salvar'>	
+														</div>
+													</form>
+													<h5>* para fechar a janela clique fora da caixa</h5>
+												</p>
+											</div>
+										</div>
+									</div>
+								</td>";							
+						endforeach;
+						?>
 					</tbody>
 				</table>
 				<div class="clearfix">
-					<div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
 					<ul class="pagination">
-						<li class="page-item disabled"><a href="#">Previous</a></li>
-						<li class="page-item"><a href="#" class="page-link">1</a></li>
+						<li class="page-item disabled"><a href="#">Anterior</a></li>
+						<li class="page-item active"><a href="#" class="page-link">1</a></li>
 						<li class="page-item"><a href="#" class="page-link">2</a></li>
-						<li class="page-item active"><a href="#" class="page-link">3</a></li>
+						<li class="page-item"><a href="#" class="page-link">3</a></li>
 						<li class="page-item"><a href="#" class="page-link">4</a></li>
 						<li class="page-item"><a href="#" class="page-link">5</a></li>
-						<li class="page-item"><a href="#" class="page-link">Next</a></li>
+						<li class="page-item"><a href="#" class="page-link">Próximo</a></li>
 					</ul>
 				</div>
 			</div>
-		</div> -->
-		<!-- Edit Modal HTML -->
-		<div id="addEmployeeModal" class="modal fade">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<form>
-						<div class="modal-header">						
-							<h4 class="modal-title">Add Employee</h4>
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						</div>
-						<div class="modal-body">					
-							<div class="form-group">
-								<label>Name</label>
-								<input type="text" class="form-control" required>
-							</div>
-							<div class="form-group">
-								<label>Email</label>
-								<input type="email" class="form-control" required>
-							</div>
-							<div class="form-group">
-								<label>Address</label>
-								<textarea class="form-control" required></textarea>
-							</div>
-							<div class="form-group">
-								<label>Phone</label>
-								<input type="text" class="form-control" required>
-							</div>					
-						</div>
-						<div class="modal-footer">
-							<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-							<input type="submit" class="btn btn-success" value="Add">
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-		<!-- Edit Modal HTML -->
-		<div id="editEmployeeModal" class="modal fade">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<form>
-						<div class="modal-header">						
-							<h4 class="modal-title">Edit Employee</h4>
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						</div>
-						<div class="modal-body">					
-							<div class="form-group">
-								<label>Name</label>
-								<input type="text" class="form-control" required>
-							</div>
-							<div class="form-group">
-								<label>Email</label>
-								<input type="email" class="form-control" required>
-							</div>
-							<div class="form-group">
-								<label>Address</label>
-								<textarea class="form-control" required></textarea>
-							</div>
-							<div class="form-group">
-								<label>Phone</label>
-								<input type="text" class="form-control" required>
-							</div>					
-						</div>
-						<div class="modal-footer">
-							<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-							<input type="submit" class="btn btn-info" value="Save">
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-		<!-- Delete Modal HTML -->
-		<div id="deleteEmployeeModal" class="modal fade">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<form>
-						<div class="modal-header">						
-							<h4 class="modal-title">Delete Employee</h4>
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						</div>
-						<div class="modal-body">					
-							<p>Are you sure you want to delete these Records?</p>
-							<p class="text-warning"><small>This action cannot be undone.</small></p>
-						</div>
-						<div class="modal-footer">
-							<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-							<input type="submit" class="btn btn-danger" value="Delete">
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
+		</div>			
 
 		
 		
@@ -535,6 +398,10 @@
 		<script src="../../Style/js/jquery.onepagenav.js"></script>
 		<script src="../../Style/js/main.js"></script>
 		<!--===============================================================================================-->
+		<!-- Script caixas de confirmação -->
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 		<!--script crud-->
 		<script src="../../Style/js/functions-crud.js"></script>
 

@@ -128,17 +128,12 @@ require_once __DIR__ . '/../Model/projetoModel.php';
         $result = DBExecute($query);
         $row = mysqli_fetch_assoc($result);
         if (empty($row)) {
-            //$_SESSION['errorlogin'] = "Erro: Usuario ou senha invalido";
             echo "<script LANGUAGE='javascript' type='text/javascript'>alert('Usuario ou senha invalidos. Tente novamente!')</script>";
             echo "<script> location.href= '../Views/Login/login.php' </script>";
-            //header("location:../Views/Login/login.php");
         }
         else {
             $_SESSION['logado'] = $row['email_login'];//Adaptar para os campos da tabela login
             $_SESSION['logado'] = $row['senha_login'];//Adaptar para os campos da tabela login
-
-            //header("location: ../Controller/projetoController.php");
-            //header("location: ../Views/adm/projetos/projetos.php");//colocar redirecionamento
 
             echo "<script> location.href= '../Views/adm/projetos/projetos.php' </script>";
 

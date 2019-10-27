@@ -104,7 +104,7 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right main-nav">
 				<li class="green">
-					<a href="../../../Controller/logoutController.php"><i class="icon-hover red fas fa-sign-out-alt fa-2x" title="Sair"></a></i>
+					<a href="../../../Controller/loginController.php?logout=true"><i class="icon-hover red fas fa-sign-out-alt fa-2x" title="Sair"></a></i>
 				</li>
 			</ul>
 
@@ -162,7 +162,7 @@
 									echo "<td> $nomeProjeto </td> ";
 									echo "<td> $planoProjeto </td> ";
 									echo "<td><a href='detalhesProjetos.php?projeto=$idProjeto&cliente=$fkCliente&logo=$fkLogo' id='#detalhes$idProjeto' target='_blank'>Visualizar Detalhes</a></td>";
-									echo "<td><a href='../../../Controller/projetoController.php?projeto=$idProjeto&status=2' class='edit'><i class='fas fa-angle-double-down blue' title='Executar Projeto'></i></a></td>";
+									echo "<td><a href='../../../Controller/projetoController.php?projeto=$idProjeto&status=2' class='edit'><i class= 'fas fa-arrow-alt-circle-down blue' title='Executar Projeto'></i></a></td>";
 								echo "</tr>";
 								} 
 							?>
@@ -236,8 +236,8 @@
 									echo "<td> $planoProjeto </td> ";
 									echo "<td><a href='detalhesProjetos.php?projeto=$idProjeto&cliente=$fkCliente&logo=$fkLogo' id='#detalhes$idProjeto' target='_blank'>Visualizar Detalhes</a></td>";
 									echo "<td>
-											<a href='../../../Controller/projetoController.php?projeto=$idProjeto&status=3' class='edit'><i class='fas fa-angle-double-down green-dark'title='Finalizar Projeto'></i></a>
-											<a href='../../../Controller/projetoController.php?projeto=$idProjeto&status=1' class='edit'><i class='fas fa-angle-double-up red'title='Voltar par Pendência'></i></a>
+											<a href='../../../Controller/projetoController.php?projeto=$idProjeto&status=3' class='edit'><i class='fas fa-arrow-alt-circle-down green-dark'title='Finalizar Projeto'></i></a>
+											<a href='../../../Controller/projetoController.php?projeto=$idProjeto&status=1' class='edit'><i class='fas fa-arrow-alt-circle-up red'title='Voltar par Pendência'></i></a>
 									</td>";
 								echo "</tr>";
 								} 
@@ -311,7 +311,7 @@
 										echo "<td> $planoProjeto </td> ";
 										echo "<td><a href='detalhesProjetos.php?projeto=$idProjeto&cliente=$fkCliente&logo=$fkLogo' id='#detalhes$idProjeto' target='_blank'>Visualizar Detalhes</a></td>";
 										echo "<td>
-											<a href='../../../Controller/projetoController.php?projeto=$idProjeto&status=2' class='edit'><i class='fas fa-angle-double-up blue'title='Voltar para Projeto em Produção'></i></a>
+											<a href='../../../Controller/projetoController.php?projeto=$idProjeto&status=2' class='edit'><i class='fas fa-arrow-alt-circle-up blue'title='Voltar para Projeto em Produção'></i></a>
 											<a href='#funcaoConfirmacao' id='btn' onclick='confirmar($idProjeto)'><i class='fas fa-trash-alt red'  title='Excluir Projeto'></i></a>
 												<div id='dialog-confirm' title='Deseja apagar esse registro?'></div>
 
@@ -390,24 +390,6 @@
 				<!-- fim tabela projeto finalizado -->
 			</div>			
 			
-				<!-- delete modal -->
-				<!-- <div id="deleteModal<?php //echo$idProjeto; ?>" class="modal fade">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<form>
-								<div class="modal-header">						
-									<h4 class="modal-title red">Deletar esse projeto?</h4>
-								</div>
-								<div class="modal-footer">
-									<input type="button" class="btn btn-danger left" data-dismiss="modal" value="Fechar">
-									<a class="btn btn-success right" href='../../../Controller/projetoController.php?projeto=$idProjeto&cliente=$fkCliente&logo=$fkLogo&endereco=$fkEndereco&delete=delete' target='_blank'>Confirmar</a>
-								</div>
-
-							</form>
-						</div>
-					</div>
-				</div> -->
-				<!--fim delete modal -->
 		</div>
 
 		<!--===============================================================================================-->
