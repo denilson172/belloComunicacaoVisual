@@ -13,6 +13,7 @@
 	$financa_controller->totalFinancas();
 
 	//inicio sessões================================================================================
+	//sessões de listagem dinâmica
 	if(empty($_SESSION['financasEntrada'])){
 		echo "erro";
 	}else{
@@ -147,9 +148,9 @@
 						<thead>
 							<tr>
 								<th>Tipo</th>
-								<th>Valor</th>							
+								<th>Valor</th>
 							</tr>
-							<tr class="green-dark-bg-lite">
+							<tr class="btn-outline-success">
 								<th>Entrada</th>
 								<?php
 									foreach($somarEntradaFinancas as $fin){
@@ -158,7 +159,7 @@
 									echo "<th>R$ $entradaFinancas</th>";
 								?>
 							</tr>
-							<tr class="yellow-bg-lite">
+							<tr class="btn-outline-info">
 								<th>Pendência</th>
 								<?php
 									foreach($somarPendenciaFinancas as $fin){
@@ -167,7 +168,7 @@
 									echo "<th>R$ $financasPendencia</th>";
 								?>
 							</tr>
-							<tr class="red-bg-lite">
+							<tr class="btn-outline-danger">
 								<th>Saída</th>
 								 <?php
 									foreach($somarSaidaFinancas as $fin){
@@ -176,7 +177,7 @@
 									echo "<th>R$ $financasSaida</th>";
 								?>
 							</tr>
-							<tr class="">
+							<tr>
 								<th>TOTAL LÍQUIDO</th>
 								 <?php
 									foreach($totalFinancas as $fin){
@@ -185,6 +186,7 @@
 									echo "<th>R$ $totalFinancas</th>";
 								?>
 							</tr>
+							
 						</thead>
 						<tbody>
 							<!-- //sem nada por hora -->
@@ -262,49 +264,56 @@
 			</div>
 			<!-- Fim Modal adicionar finança -->
 
-			<!-- inicio tabela resumo-->
+
 			<div class="container">
-				<div class="table-wrapper">
-					<div class="table-title">
-						<div class="row">
-							<div class="col-sm-6">
-								<h2 class="red">REGISTROS | <b>PENDÊNCIAS</b></h2>
-							</div>
-							<div class="col-sm-6">
-							</div>
-						</div>
-					</div>
-					<table class="table table-striped table-hover">
-						<thead>
-							<tr>
-								<th>Cód.</th>
-								<th>Data</th>
-								<th>Valor</th>
-								<th>Descrição</th>
-								<th>Categoria</th>
-								<th>Armazenamento</th>
-								<th>Ações</th>
-							</tr>
-						</thead>
-					<tbody>
-						<?php
-						foreach ($financasPendente as $fin):
-							$idFinancas = $fin->getIdFinancas();
-							$dataFinancas = $fin->getDataFinancas();
-							$categoriaFinancas = $fin->getCategoriaFinancas();
-							$descricaoFinancas = $fin->getDescricaoFinancas();
-							$valorFinancas = $fin->getValorFinancas();
-							$tipoFinancaFinancas = $fin->getTipoFinancaFinancas();
-							$armazenamentoFinancas = $fin->getArmazenamentoFinancas();	
-						
-							echo "<tr>";
-								echo "<td>$idFinancas</td>";
-								echo "<td>$dataFinancas</td>";
-								echo "<td>R$ $valorFinancas</td>";
-								echo "<td>$descricaoFinancas</td>";
-								echo "<td>$categoriaFinancas</td>";
-								echo "<td>$armazenamentoFinancas</td>";
-								echo "<td><label for='modal-trigger-center$idFinancas' class='open-modal'><i class='fas fa-edit blue'title='Editar Finança'></i></label>
+			<a href="?tipo=entrada" class="btn btn-outline-success" onClick="#entrada">Entrada</a>
+			<a href="?tipo=saida" class="btn btn-outline-danger">Saída</a>
+			<a href="?tipo=pendencia" class="btn btn-outline-info">Pendência</a>
+			
+
+					<?php 
+					
+					if(isset($_GET['tipo']) && $_GET['tipo'] == "entrada"){
+			echo'		<div class="table-wrapper id="entrada"">';
+			echo'			<div class="table-title">';
+			echo'				<div class="row">';
+			echo'					<div class="col-sm-6">';
+			echo'						<h2 class="green-dark">REGISTROS | <b>ENTRADA</b></h2>';
+			echo'					</div>';
+			echo'					<div class="col-sm-6">';
+			echo'				</div>';
+			echo'			</div>';
+			echo'		</div>';
+			echo'		<table class="table table-striped table-hover">';
+			echo'			<thead>';
+			echo'				<tr>';
+			echo'					<th>Cód.</th>';
+			echo'					<th>Data</th>';
+			echo'					<th>Valor</th>';
+			echo'					<th>Descrição</th>';
+			echo'					<th>Categoria</th>';
+			echo'					<th>Armazenamento</th>';
+			echo'					<th>Ações</th>';
+			echo'				</tr>';
+			echo'			</thead>';
+			echo'			<tbody>';
+								foreach ($financasEntrada as $fin):
+									$idFinancas = $fin->getIdFinancas();
+									$dataFinancas = $fin->getDataFinancas();
+									$categoriaFinancas = $fin->getCategoriaFinancas();
+									$descricaoFinancas = $fin->getDescricaoFinancas();
+									$valorFinancas = $fin->getValorFinancas();
+									$tipoFinancaFinancas = $fin->getTipoFinancaFinancas();
+									$armazenamentoFinancas = $fin->getArmazenamentoFinancas();
+
+			echo				 "<tr>";
+			echo				 "<td>$idFinancas</td>";
+			echo				 "<td>$dataFinancas</td>";
+			echo				 "<td>R$ $valorFinancas</td>";
+			echo				 "<td>$descricaoFinancas</td>";
+			echo				 "<td>$categoriaFinancas</td>";
+			echo				 "<td>$armazenamentoFinancas</td>";
+			echo				 "<td><label for='modal-trigger-center$idFinancas' class='open-modal'><i class='fas fa-edit blue'title='Editar Finança'></i></label>
 									<div class='pure-modal'>
 										<input id='modal-trigger-center$idFinancas' class='checkbox' type='checkbox'>
 										<div class='pure-modal-overlay'>
@@ -348,30 +357,343 @@
 														<div class='modal-footer'>
 															<input type='submit' name='submitEdit' class='btn btn-success' value='Salvar'>	
 														</div>
+														<h5>* para fechar a janela clique fora da caixa</h5>
 													</form>
-													<h5>* para fechar a janela clique fora da caixa</h5>
 												</p>
 											</div>
 										</div>
 									</div>
-								</td>";							
-						endforeach;
-						?>
-					</tbody>
-				</table>
-				<div class="clearfix">
-					<ul class="pagination">
-						<li class="page-item disabled"><a href="#">Anterior</a></li>
-						<li class="page-item active"><a href="#" class="page-link">1</a></li>
-						<li class="page-item"><a href="#" class="page-link">2</a></li>
-						<li class="page-item"><a href="#" class="page-link">3</a></li>
-						<li class="page-item"><a href="#" class="page-link">4</a></li>
-						<li class="page-item"><a href="#" class="page-link">5</a></li>
-						<li class="page-item"><a href="#" class="page-link">Próximo</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>			
+
+									<label for='modal-trigger-center-mover$idFinancas' class='open-modal'><i class='fas fa-money red'title='Mover para Pendência'></i></label>
+									<div class='pure-modal'>
+										<input id='modal-trigger-center-mover$idFinancas' class='checkbox' type='checkbox'>
+										<div class='pure-modal-overlay'>
+											<label for='modal-trigger-center-mover$idFinancas' class='o-close'></label>
+											<div class='pure-modal-wrap a-center'>
+												<label for='modal-trigger-center-mover$idFinancas' class='close'>&#10006;</label>
+												</br>
+												</br>
+												<h3>DESEJA MOVER A FINANÇA DE <span class='bold'>CÓDIGO $idFinancas </span> PARA A PENDÊNCIA?</h3>
+												<p>
+													<form action='../../../Controller/financasController.php' method='POST'>
+														<div class='modal-header'>
+															<input type='hidden' name='id' value='$idFinancas'>
+															<input type='hidden' name='tipo' value='2'>
+															<input type='hidden' name='classe' value='Financas'>
+															<input type='hidden' name='metodo' value='alterarTipoFinancas'>
+														</div>
+														<div class='modal-header'>
+															<input type='submit' name='submitConfirmEntrada' class='btn btn-success' value='Confirmar'>	
+														</div>
+														<div class='modal-footer center'>
+														<h5>* para fechar a janela clique fora da caixa</h5>
+														</div>
+													</form>
+													
+												</p>
+											</div>
+										</div>
+									</div>
+									</td>";
+							endforeach;
+			echo'				</tbody>';
+			echo'				</table>';
+			echo'				<div class="clearfix">';
+			echo'					<ul class="pagination">';
+			echo'						<li class="page-item disabled"><a href="#">Anterior</a></li>';
+			echo'						<li class="page-item active"><a href="#" class="page-link">1</a></li>';
+			echo'						<li class="page-item"><a href="#" class="page-link">2</a></li>';
+			echo'						<li class="page-item"><a href="#" class="page-link">3</a></li>';
+			echo'						<li class="page-item"><a href="#" class="page-link">4</a></li>';
+			echo'						<li class="page-item"><a href="#" class="page-link">5</a></li>';
+			echo'						<li class="page-item"><a href="#" class="page-link">Próximo</a></li>';
+			echo'					</ul>';
+			echo'				</div>';
+			echo'			</div>';
+			echo'		</div>';
+						}
+						elseif(isset($_GET['tipo']) && $_GET['tipo'] == "saida"){
+			echo'		<div class="table-wrapper">';
+			echo'			<div class="table-title">';
+			echo'				<div class="row">';
+			echo'					<div class="col-sm-6">';
+			echo'						<h2 class="red">REGISTROS | <b>SAÍDA</b></h2>';
+			echo'					</div>';
+			echo'					<div class="col-sm-6">';
+			echo'				</div>';
+			echo'			</div>';
+			echo'		</div>';
+			echo'		<table class="table table-striped table-hover">';
+			echo'			<thead>';
+			echo'				<tr>';
+			echo'					<th>Cód.</th>';
+			echo'					<th>Data</th>';
+			echo'					<th>Valor</th>';
+			echo'					<th>Descrição</th>';
+			echo'					<th>Categoria</th>';
+			echo'					<th>Armazenamento</th>';
+			echo'					<th>Ações</th>';
+			echo'				</tr>';
+			echo'			</thead>';
+			echo'			<tbody>';
+								foreach ($financasSaida as $fin):
+									$idFinancas = $fin->getIdFinancas();
+									$dataFinancas = $fin->getDataFinancas();
+									$categoriaFinancas = $fin->getCategoriaFinancas();
+									$descricaoFinancas = $fin->getDescricaoFinancas();
+									$valorFinancas = $fin->getValorFinancas();
+									$tipoFinancaFinancas = $fin->getTipoFinancaFinancas();
+									$armazenamentoFinancas = $fin->getArmazenamentoFinancas();
+
+			echo				 "<tr>";
+			echo				 "<td>$idFinancas</td>";
+			echo				 "<td>$dataFinancas</td>";
+			echo				 "<td>R$ $valorFinancas</td>";
+			echo				 "<td>$descricaoFinancas</td>";
+			echo				 "<td>$categoriaFinancas</td>";
+			echo				 "<td>$armazenamentoFinancas</td>";
+			echo				 "<td><label for='modal-trigger-center$idFinancas' class='open-modal'><i class='fas fa-edit blue'title='Editar Finança'></i></label>
+									<div class='pure-modal'>
+										<input id='modal-trigger-center$idFinancas' class='checkbox' type='checkbox'>
+										<div class='pure-modal-overlay'>
+											<label for='modal-trigger-center$idFinancas' class='o-close'></label>
+											<div class='pure-modal-wrap a-center'>
+												<label for='modal-trigger-center$idFinancas' class='close'>&#10006;</label>
+												</br>
+												</br>
+												<h2>EDITAR FINANÇA</h2>
+												<p>
+													<form action='../../../Controller/financasController.php' method='POST'>
+														<div class='modal-header'>
+															<h4 class='modal-title'>CÓDIGO: $idFinancas</h4>
+														</div>
+															<div class='modal-body'>
+															<div class='form-group text-left'>
+																<label>Data de Inserção</label>
+																<input type='text' name='data' class='form-control' value = '$dataFinancas' required>
+															</div>
+															<div class='form-group text-left'>
+																<label>Categoria</label>
+																<input type='text' name='categoria' class='form-control' value ='$categoriaFinancas' required>
+															</div>
+															<div class='form-group text-left'>
+																<label>Descrição</label>
+																<input type='text' name='descricao' class='form-control' value ='$descricaoFinancas' required>
+															</div>
+															<div class='form-group text-left'>
+																<label>Valor</label>
+																<input type='text' name='valor' class='form-control' value ='$valorFinancas' required>
+															</div>
+															<div class='form-group text-left'>
+																<label>Armazenamento</label>
+																<input type='text' name='armazenamento' class='form-control' value ='$armazenamentoFinancas' required>
+															</div>
+															<input type='hidden' name='id' value='$idFinancas'>
+															<input type='hidden' name='tipo' value='$tipoFinancaFinancas'>
+															<input type='hidden' name='classe' value='Financas'>
+															<input type='hidden' name='metodo' value='alterarFinancas'>
+														</div>
+														<div class='modal-footer'>
+															<input type='submit' name='submitEdit' class='btn btn-success' value='Salvar'>	
+														</div>
+														<h5>* para fechar a janela clique fora da caixa</h5>
+													</form>
+												</p>
+											</div>
+										</div>
+									</div>
+
+									<label for='modal-trigger-center-mover$idFinancas' class='open-modal'><i class='fas fa-money green-dark'title='Editar Finança'></i></label>
+									<div class='pure-modal'>
+										<input id='modal-trigger-center-mover$idFinancas' class='checkbox' type='checkbox'>
+										<div class='pure-modal-overlay'>
+											<label for='modal-trigger-center-mover$idFinancas' class='o-close'></label>
+											<div class='pure-modal-wrap a-center'>
+												<label for='modal-trigger-center-mover$idFinancas' class='close'>&#10006;</label>
+												</br>
+												</br>
+												<h3>DESEJA MOVER A FINANÇA DE <span class='bold'>CÓDIGO $idFinancas </span> PARA A ENTRADA?</h3>
+												<p>
+													<form action='../../../Controller/financasController.php' method='POST'>
+														<div class='modal-header'>
+															<input type='hidden' name='id' value='$idFinancas'>
+															<input type='hidden' name='tipo' value='1'>
+															<input type='hidden' name='classe' value='Financas'>
+															<input type='hidden' name='metodo' value='alterarTipoFinancas'>
+														</div>
+														<div class='modal-header'>
+															<input type='submit' name='submitConfirmEntrada' class='btn btn-success' value='Confirmar'>	
+														</div>
+														<div class='modal-footer center'>
+														<h5>* para fechar a janela clique fora da caixa</h5>
+														</div>
+													</form>
+													
+												</p>
+											</div>
+										</div>
+									</div>
+									</td>";
+							endforeach;
+			echo'				</tbody>';
+			echo'				</table>';
+			echo'				<div class="clearfix">';
+			echo'					<ul class="pagination">';
+			echo'						<li class="page-item disabled"><a href="#">Anterior</a></li>';
+			echo'						<li class="page-item active"><a href="#" class="page-link">1</a></li>';
+			echo'						<li class="page-item"><a href="#" class="page-link">2</a></li>';
+			echo'						<li class="page-item"><a href="#" class="page-link">3</a></li>';
+			echo'						<li class="page-item"><a href="#" class="page-link">4</a></li>';
+			echo'						<li class="page-item"><a href="#" class="page-link">5</a></li>';
+			echo'						<li class="page-item"><a href="#" class="page-link">Próximo</a></li>';
+			echo'					</ul>';
+			echo'				</div>';
+			echo'			</div>';
+			echo'		</div>';
+						}
+						elseif(isset($_GET['tipo']) && $_GET['tipo'] == "pendencia" OR !isset($_GET['tipo'])){
+							echo'		<div class="table-wrapper">';
+							echo'			<div class="table-title">';
+							echo'				<div class="row">';
+							echo'					<div class="col-sm-6">';
+							echo'						<h2 class="yellow">REGISTROS | <b>PENDÊNCIAS</b></h2>';
+							echo'					</div>';
+							echo'					<div class="col-sm-6">';
+							echo'				</div>';
+							echo'			</div>';
+							echo'		</div>';
+							echo'		<table class="table table-striped table-hover">';
+							echo'			<thead>';
+							echo'				<tr>';
+							echo'					<th>Cód.</th>';
+							echo'					<th>Data</th>';
+							echo'					<th>Valor</th>';
+							echo'					<th>Descrição</th>';
+							echo'					<th>Categoria</th>';
+							echo'					<th>Armazenamento</th>';
+							echo'					<th>Ações</th>';
+							echo'				</tr>';
+							echo'			</thead>';
+							echo'			<tbody>';
+												foreach ($financasPendente as $fin):
+													$idFinancas = $fin->getIdFinancas();
+													$dataFinancas = $fin->getDataFinancas();
+													$categoriaFinancas = $fin->getCategoriaFinancas();
+													$descricaoFinancas = $fin->getDescricaoFinancas();
+													$valorFinancas = $fin->getValorFinancas();
+													$tipoFinancaFinancas = $fin->getTipoFinancaFinancas();
+													$armazenamentoFinancas = $fin->getArmazenamentoFinancas();
+				
+							echo				 "<tr>";
+							echo				 "<td>$idFinancas</td>";
+							echo				 "<td>$dataFinancas</td>";
+							echo				 "<td>R$ $valorFinancas</td>";
+							echo				 "<td>$descricaoFinancas</td>";
+							echo				 "<td>$categoriaFinancas</td>";
+							echo				 "<td>$armazenamentoFinancas</td>";
+							echo				 "<td><label for='modal-trigger-center$idFinancas' class='open-modal'><i class='fas fa-edit blue'title='Editar Finança'></i></label>
+													<div class='pure-modal'>
+														<input id='modal-trigger-center$idFinancas' class='checkbox' type='checkbox'>
+														<div class='pure-modal-overlay'>
+															<label for='modal-trigger-center$idFinancas' class='o-close'></label>
+															<div class='pure-modal-wrap a-center'>
+																<label for='modal-trigger-center$idFinancas' class='close'>&#10006;</label>
+																</br>
+																</br>
+																<h2>EDITAR FINANÇA</h2>
+																<p>
+																	<form action='../../../Controller/financasController.php' method='POST'>
+																		<div class='modal-header'>
+																			<h4 class='modal-title'>CÓDIGO: $idFinancas</h4>
+																		</div>
+																			<div class='modal-body'>
+																			<div class='form-group text-left'>
+																				<label>Data de Inserção</label>
+																				<input type='text' name='data' class='form-control' value = '$dataFinancas' required>
+																			</div>
+																			<div class='form-group text-left'>
+																				<label>Categoria</label>
+																				<input type='text' name='categoria' class='form-control' value ='$categoriaFinancas' required>
+																			</div>
+																			<div class='form-group text-left'>
+																				<label>Descrição</label>
+																				<input type='text' name='descricao' class='form-control' value ='$descricaoFinancas' required>
+																			</div>
+																			<div class='form-group text-left'>
+																				<label>Valor</label>
+																				<input type='text' name='valor' class='form-control' value ='$valorFinancas' required>
+																			</div>
+																			<div class='form-group text-left'>
+																				<label>Armazenamento</label>
+																				<input type='text' name='armazenamento' class='form-control' value ='$armazenamentoFinancas' required>
+																			</div>
+																			<input type='hidden' name='id' value='$idFinancas'>
+																			<input type='hidden' name='tipo' value='$tipoFinancaFinancas'>
+																			<input type='hidden' name='classe' value='Financas'>
+																			<input type='hidden' name='metodo' value='alterarFinancas'>
+																		</div>
+																		<div class='modal-footer'>
+																			<input type='submit' name='submitEdit' class='btn btn-success' value='Salvar'>	
+																		</div>
+																		<h5>* para fechar a janela clique fora da caixa</h5>
+																	</form>
+																</p>
+															</div>
+														</div>
+													</div>
+				
+													<label for='modal-trigger-center-mover$idFinancas' class='open-modal'><i class='fas fa-money green-dark'title='Editar Finança'></i></label>
+													<div class='pure-modal'>
+														<input id='modal-trigger-center-mover$idFinancas' class='checkbox' type='checkbox'>
+														<div class='pure-modal-overlay'>
+															<label for='modal-trigger-center-mover$idFinancas' class='o-close'></label>
+															<div class='pure-modal-wrap a-center'>
+																<label for='modal-trigger-center-mover$idFinancas' class='close'>&#10006;</label>
+																</br>
+																</br>
+																<h3>DESEJA MOVER A FINANÇA DE <span class='bold'>CÓDIGO $idFinancas </span> PARA A ENTRADA?</h3>
+																<p>
+																	<form action='../../../Controller/financasController.php' method='POST'>
+																		<div class='modal-header'>
+																			<h4 class=''>Esta ação não pode ser desfeita</h4>
+																			<input type='hidden' name='id' value='$idFinancas'>
+																			<input type='hidden' name='tipo' value='1'>
+																			<input type='hidden' name='classe' value='Financas'>
+																			<input type='hidden' name='metodo' value='alterarTipoFinancas'>
+																		</div>
+																		<div class='modal-header'>
+																			<input type='submit' name='submitConfirmEntrada' class='btn btn-success' value='Confirmar'>	
+																		</div>
+																		<div class='modal-footer center'>
+																		<h5>* para fechar a janela clique fora da caixa</h5>
+																		</div>
+																	</form>
+																	
+																</p>
+															</div>
+														</div>
+													</div>
+													</td>";
+											endforeach;
+							echo'				</tbody>';
+							echo'				</table>';
+							echo'				<div class="clearfix">';
+							echo'					<ul class="pagination">';
+							echo'						<li class="page-item disabled"><a href="#">Anterior</a></li>';
+							echo'						<li class="page-item active"><a href="#" class="page-link">1</a></li>';
+							echo'						<li class="page-item"><a href="#" class="page-link">2</a></li>';
+							echo'						<li class="page-item"><a href="#" class="page-link">3</a></li>';
+							echo'						<li class="page-item"><a href="#" class="page-link">4</a></li>';
+							echo'						<li class="page-item"><a href="#" class="page-link">5</a></li>';
+							echo'						<li class="page-item"><a href="#" class="page-link">Próximo</a></li>';
+							echo'					</ul>';
+							echo'				</div>';
+							echo'			</div>';
+							echo'		</div>';
+										}
+					
+					?>
+								
 
 		
 		

@@ -53,7 +53,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' ) {
 
         $controller = new $classe();
         $controller->$metodo($id, $data, $categoria, $descricao, $valor, $tipoFinanca, $armazenamentoFinanca);
-    } 
+    }
+    elseif(isset($_POST['submitConfirmEntrada'])){
+        $classe= $_POST['classe']."Controller";
+        $metodo = $_POST['metodo'];
+        $id = $_POST['id'];
+        $tipo = $_POST['tipo'];
+
+        $controller = new $classe();
+        $controller->$metodo($id, $tipo);
+
+    }
 }
 // else{
 //     $classeEndereco ="FinancasController";
@@ -132,6 +142,22 @@ class FinancasController {
     //alterar financas=================================================================================
     public function alterarFinancas($id, $data, $categoria, $descricao, $valor, $tipoFinanca, $armazenamentoFinanca){
         $fin = $this->financasDao->alterarFinancas($id, $data, $categoria, $descricao, $valor, $tipoFinanca, $armazenamentoFinanca);
+        echo "<script> location.href= '../Views/adm/financas/financas.php' </script>";
+    }
+
+    public function alterarTipoFinancas($id, $tipo){
+        echo $id;
+        echo $tipo;
+        $cli = $this->financasDao->alterarTipoFinancas($id, $tipo);
+        if($tipo == 1){
+            $_SESSION['financasEntrada'] = $cli;
+        }
+        elseif($tipo == 2){
+            $_SESSION['financasPendente'] = $cli;
+        }
+        elseif($tipo == 3){
+            $_SESSION['financasSaida'] = $cli;
+        }
         echo "<script> location.href= '../Views/adm/financas/financas.php' </script>";
     }
 }//FIM financas

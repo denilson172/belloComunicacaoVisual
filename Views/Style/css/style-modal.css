@@ -45,14 +45,12 @@ body{
 
 
 .open-modal {
-  border-radius: 200px;
-  font-size: 20px;
+  border-radius: 20px;
+  font-size: 10px;
   padding: 10px;
   transition: all 0.2s ease;
-  display: inline-block;
-  margin: 10px;
   border-top: 1px solid transparent;
-  min-width: 80px;
+  min-width: 50px;
 }
 
 .open-modal:hover {

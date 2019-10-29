@@ -187,12 +187,12 @@ class financasDAO{
 
         //GERANDO MENSAGEM DO SALDO
         if ($result < 0){
-            $msgSaldo = "</br> <h5 class='red bold'> SALDO NEGATIVO</h5>";
+            $msgSaldo = "</br> <h5 class='red bold'> SALDO NEGATIVO 😭</h5>";
         }
         elseif($result > 0){
-            $msgSaldo = "</br> <h5 class='green-dark bold'> SALDO POSITIVO</h5>";
+            $msgSaldo = "</br> <h5 class='green-dark bold'> SALDO POSITIVO 🥰</h5>";
         }else{
-            $msgSaldo = "</br> <h5 class='black bold'> SALDO ZERADO</h5>";
+            $msgSaldo = "</br> <h5 class='black bold'> SALDO ZERADO 😑</h5>";
         }
 
         //TROCANDO . POR , E BOTANDO EM UM VETOR
@@ -200,6 +200,13 @@ class financasDAO{
         $data[] = $result;
 
         return $data;
+    }
+
+    function alterarTipoFinancas($id,$tipo){        
+        $alterarTipo = array ('tipo_financeiro'=> $tipo);
+        $alter = DBUpdate('financeiro',$alterarTipo,'id_financeiro='.$id);
+
+        return $alter;
     }
 
 }
