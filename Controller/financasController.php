@@ -18,25 +18,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' ) {
         $valor = str_replace(',', '.', $valor); //transformando , em .
         $tipoFinanca = $_POST['tipo'];
         $armazenamentoFinanca = $_POST['armazenamento'];
-        // //NÃO TA FUNCIONANDO
-        // if ($armazenamentoFinanca = '1'){
-        //     $armazenamentoFinanca == "Conta Bancária";
-        // }elseif($armazenamentoFinanca = '2'){
-        //     $armazenamentoFinanca == "Conta Maquineta";
-        // }elseif($armazenamentoFinanca = '3'){
-        //     $armazenamentoFinanca == "Físico";
-        // }else{
-        //     $armazenamentoFinanca == "erro";
-        // }
         
         $controller = new $classe();
 
        $controller->$metodo($data, $categoria, $descricao, $valor, $tipoFinanca, $armazenamentoFinanca);
-
-        // $controller->$somarEntradasFinancas();
-        // $controller->$somarPendenciasFinancas();
-        // $controller->$somarSaidasFinancas();
-        // $controller->$totalFinancas();
         
     }
     elseif(isset($_POST['submitEdit'])){
@@ -65,10 +50,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' ) {
 
     }
 }
-// else{
-//     $classeEndereco ="FinancasController";
-//     $metodoInserir ="inserirFinancas";
-// }
 
 //FINANCA - enviando para Model e DAO ================================================================================
 class FinancasController {
@@ -117,7 +98,7 @@ class FinancasController {
 
     public function listarFinancasSaida(){
         $fin = $this->financasDao->listarFinancasSaida();
-        $_SESSION['financasSaida'] = $fin;
+        $_SESSION['financasSaidas'] = $fin;
     }
     //sessões de soma==========================================================================
     public function somarEntradasFinancas(){
@@ -146,8 +127,6 @@ class FinancasController {
     }
 
     public function alterarTipoFinancas($id, $tipo){
-        echo $id;
-        echo $tipo;
         $cli = $this->financasDao->alterarTipoFinancas($id, $tipo);
         if($tipo == 1){
             $_SESSION['financasEntrada'] = $cli;

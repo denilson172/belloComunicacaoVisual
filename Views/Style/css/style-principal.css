@@ -860,6 +860,10 @@ footer .social-footer li:hover a {
 	font-weight: 300;
 }
 
+.info-bg {
+	background: rgb(23,162,184);
+}
+
 .regular {
 	font-weight: 400;
 }
@@ -874,6 +878,9 @@ footer .social-footer li:hover a {
 	left: 10px;;
 }
 /* Colors */
+.info {
+	color: rgb(23,162,184);
+}
 
 .black{
 	color:black;

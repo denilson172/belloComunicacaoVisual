@@ -42,7 +42,6 @@ elseif(isset($_GET['logout'])){
 		}
 
 		public function validar($email,$senha){
-			echo "entrou no validar";
 			$this->loginModel->setEmailLogin($email);
 			$this->loginModel->setSenhaLogin($senha);
 

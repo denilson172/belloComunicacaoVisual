@@ -183,7 +183,7 @@ class financasDAO{
             $financaSaida = array_pop($financaSaida); //retorna o último valor do array
         }
         
-        $result = ($financaEntrada - ($financaPendente + $financaSaida));
+        $result = ($financaEntrada - $financaSaida);
 
         //GERANDO MENSAGEM DO SALDO
         if ($result < 0){
