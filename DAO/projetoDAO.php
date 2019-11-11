@@ -77,7 +77,7 @@ class ProjetoDAO{
     }
 
     //deletar projeto com toda as informações
-    function deletarProjeto($idProjeto, $fkCliente, $fklogo){
+    function deletarProjeto($id, $nome, $plano, $fkLogo, $fkCliente, $motivoExclusao, $dataExclusao){
 
         //pegando endereco
         $cliente = DBRead('cliente',"WHERE id_cliente = {$fkCliente}");
@@ -86,12 +86,38 @@ class ProjetoDAO{
             $fkEndereco = $cliente[$i]['id_endereco'];
         }
 
-        $projeto = DBDelete('projetos', "id_projeto = {$idProjeto}");
+        //inserindo log
+        $projeto_arr = array (
+            'motivo_pro_del' => $motivoExclusao,
+            'data_exclusao_pro_del' => $dataExclusao,
+            'nome_pro_del' => $nome,
+            'plano_pro_del' => $plano,            
+            'idProjeto_pro_del' => $id
+        );
+        DBCreate('projetos_delete',$projeto_arr);
+
+        $projeto = DBDelete('projetos', "id_projeto = {$id}");
         $projeto = DBDelete('cliente', "id_cliente = {$fkCliente}");
-        $projeto = DBDelete('logo', "id_logo = {$fklogo}");
+        $projeto = DBDelete('logo', "id_logo = {$fkLogo}");
         $projeto = DBDelete('endereco', "id_endereco = {$fkEndereco}");
 
         return $projeto;
+    }
+
+    //listando projetos excluidos
+    function listarProjetosExclusoes(){
+        $projetosExcluidos = DBRead('projetos_delete',null);
+        $pro = [];
+        for($i=0; $i < count($projetosExcluidos); $i++){
+            $pro[$i] = new ProjetoModel();
+
+            $pro[$i]->setIdProjeto($projetosExcluidos[$i]['id_pro_del']);
+            $pro[$i]->setPlanoProjeto($projetosExcluidos[$i]['plano_pro_del']);
+            $pro[$i]->setNomeProjeto($projetosExcluidos[$i]['nome_pro_del']);  
+            $pro[$i]->setDataExclusao($projetosExcluidos[$i]['data_exclusao_pro_del']);   
+            $pro[$i]->setMotivoExclusao($projetosExcluidos[$i]['motivo_pro_del']);   
+        }
+        return $pro;
     }
 
 }

@@ -69,9 +69,7 @@
 							<span>Cancelar</span>
 						</button>
 
-						<input type="hidden" name="classe" value="Login">
-						<input type="hidden" name="metodo" value="validar">
-						<button class="contact100-form-btn" name="submit" onclick="funcao1()" value="Exibir Alert">
+						<button class="contact100-form-btn" name="submit">
 							<span>Entrar</span>
 						</button>
 					</div>

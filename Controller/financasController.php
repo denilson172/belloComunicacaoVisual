@@ -49,6 +49,23 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' ) {
         $controller->$metodo($id, $tipo);
 
     }
+    elseif(isset($_POST['submitConfirmExclusao'])){
+        $classe= $_POST['classe']."Controller";
+        $metodo = $_POST['metodo'];
+        $id = $_POST['id'];
+        $data = $_POST['data'];
+        $categoria = $_POST['categoria'];
+        $descricao = $_POST['descricao'];
+        $valor = $_POST['valor'];
+        $valor = str_replace(',', '.', $valor); //transformando , em .
+        $armazenamento = $_POST['armazenamento'];
+        $motivoExclusao = $_POST['motivoExclusao'];
+        $dataExclusao = $_POST['dataExclusao'];
+
+        $controller = new $classe();
+        $controller->$metodo($id, $data, $categoria, $descricao, $valor, $armazenamento, $motivoExclusao, $dataExclusao);
+
+    }
 }
 
 //FINANCA - enviando para Model e DAO ================================================================================
@@ -127,17 +144,27 @@ class FinancasController {
     }
 
     public function alterarTipoFinancas($id, $tipo){
-        $cli = $this->financasDao->alterarTipoFinancas($id, $tipo);
+        $fin = $this->financasDao->alterarTipoFinancas($id, $tipo);
         if($tipo == 1){
-            $_SESSION['financasEntrada'] = $cli;
+            $_SESSION['financasEntrada'] = $fin;
         }
         elseif($tipo == 2){
-            $_SESSION['financasPendente'] = $cli;
+            $_SESSION['financasPendente'] = $fin;
         }
         elseif($tipo == 3){
-            $_SESSION['financasSaida'] = $cli;
+            $_SESSION['financasSaida'] = $fin;
         }
         echo "<script> location.href= '../Views/adm/financas/financas.php' </script>";
+    }
+
+    public function deletarFinanca($id, $data, $categoria, $descricao, $valor, $armazenamento, $motivoExclusao, $dataExclusao){
+        $fin = $this->financasDao->deletarFinanca($id, $data, $categoria, $descricao, $valor, $armazenamento, $motivoExclusao, $dataExclusao);
+        echo "<script> location.href= '../Views/adm/financas/financas.php?tipo=entrada' </script>";
+    }
+
+    public function listarFinancasExclusoes(){
+        $fin = $this->financasDao->listarFinancasExclusoes();
+            $_SESSION['financasDelete'] = $fin;
     }
 }//FIM financas
 

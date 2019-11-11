@@ -7,6 +7,8 @@
         private $valor_financas;
         private $tipoFinanca_financas;
         private $armazenamento_financas;
+        private $dataExclusao;
+        private $motivoExclusao;
 
         public function getIdFinancas() {
             return $this -> id;
@@ -62,6 +64,22 @@
 
         public function setArmazenamentoFinancas($armazenamento_financas) {
             $this->armazenamentoFinancas = $armazenamento_financas;
+        }
+
+        public function getDataExclusaoFinancas() {
+            return $this -> dataExclusao;
+        }
+
+        public function setDataExclusaoFinancas($dataExclusao) {
+            $this->dataExclusao = $dataExclusao;
+        }
+
+        public function getMotivoExclusaoFinancas() {
+            return $this -> motivoExclusao;
+        }
+
+        public function setMotivoExclusaoFinancas($motivoExclusao) {
+            $this->motivoExclusao = $motivoExclusao;
         }
 
     }

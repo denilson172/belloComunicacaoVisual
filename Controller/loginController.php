@@ -6,20 +6,18 @@ require_once ("../Model/loginModel.php");
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
     if(isset($_POST['submit'])){
-		$classe= $_POST['classe']."Controller";
-		$metodo = $_POST['metodo'];
 		$login = $_POST['email']; 
 		$senha = $_POST['password'];
 		$senha = md5($senha);
 
+		$classe ="LoginController";
+		$metodo ="validar";
+
+		echo $login;
+
 		$controller = new $classe();
 
 		$controller->$metodo($login,$senha);
-	}
-	else{
-		$classeEndereco ="LoginController";
-		$metodoInserir ="validar";
-		
 	}
 }
 elseif(isset($_GET['logout'])){

@@ -157,7 +157,6 @@ class financasDAO{
     }
 
     function totalFinancas(){
-
         //obtendo os valores
         $financaEntrada = $this->somarEntradasFinancas();
         $financaPendente = $this->somarPendenciasFinancas();
@@ -207,6 +206,43 @@ class financasDAO{
         $alter = DBUpdate('financeiro',$alterarTipo,'id_financeiro='.$id);
 
         return $alter;
+    }
+
+    function deletarFinanca($id, $data, $categoria, $descricao, $valor, $armazenamento, $motivoExclusao, $dataExclusao){
+        //inserindo log
+        $financa_arr = array (
+            'motivo_fin_del' => $motivoExclusao,
+            'data_exclusao_fin_del' => $dataExclusao,
+            'data_fin_del' => $data,
+            'valor_fin_del' => $valor,            
+            'descricao_fin_del' => $descricao,
+            'categoria_fin_del' => $categoria,
+            'armazenamento_fin_del' => $armazenamento,
+            'id_financeiro' => $id            
+        );
+        $salvar = DBCreate('financeiro_delete',$financa_arr);
+
+        $delete = DBDelete('financeiro', "id_financeiro = {$id}");
+
+        return $delete;
+    }
+
+    function listarFinancasExclusoes(){
+        $financaExclusao = DBRead('financeiro_delete',null);//retorna um vetor com as linhas do BD
+        $fin = [];
+        for($i=0; $i < count($financaExclusao); $i++){
+            $fin[$i] = new FinancasModel();
+
+            $fin[$i]->setIdFinancas($financaExclusao[$i]['id_fin_del']);  
+            $fin[$i]->setDataFinancas($financaExclusao[$i]['data_fin_del']);
+            $fin[$i]->setCategoriaFinancas($financaExclusao[$i]['categoria_fin_del']);  
+            $fin[$i]->setDescricaoFinancas($financaExclusao[$i]['descricao_fin_del']);  
+            $fin[$i]->setValorFinancas($financaExclusao[$i]['valor_fin_del']); 
+            $fin[$i]->setArmazenamentoFinancas($financaExclusao[$i]['armazenamento_fin_del']);
+            $fin[$i]->setDataExclusaoFinancas($financaExclusao[$i]['data_exclusao_fin_del']);
+            $fin[$i]->setMotivoExclusaoFinancas($financaExclusao[$i]['motivo_fin_del']);
+        }
+        return $fin;
     }
 
 }

@@ -92,14 +92,15 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="../../Style/css/style-crud.css">
 	<!--===============================================================================================-->
+	<!-- modal -->
 	<link rel="stylesheet" href="../../Style/css/modal.css">
 	<link rel="stylesheet" href="../../Style/css/style-modal.css">
 
 	</head>
 	<body>
-		<!-- <div class="preloader">
+		<div class="preloader">
 			<img src="../../Style/img/loader.gif" alt="Preloader image">
-		</div> -->
+		</div>
 
 		<!-- Menu horizontal -->
 		<div class="collapse navbar-collapse white-bg" id="bs-example-navbar-collapse-1">
@@ -110,12 +111,12 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-left main-nav">
 				<li class="green">
-					<a class="active" href="../financas/financas.php"><i class="fas fa-money-check-alt fa-2x" title="Finanças"></a></i>
+					<a class="active"><i class="fas fa-money-check-alt fa-2x white" title="Finanças"></a></i>
 				</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-left main-nav">
 				<li class="green">
-					<a href="../../index.php"><i class="icon-hover grey fas fa-trash-alt fa-2x" title="Lixeira"></a></i>
+					<a href="../lixeira/lixeira.php"><i class="icon-hover grey fas fa-trash-alt fa-2x" title="Lixeira"></a></i>
 				</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right main-nav">
@@ -159,12 +160,6 @@
 											echo "<th>R$ $entradaFinancas</th>";
 										?>
 										<th><a href="?tipo=entrada" class="btn btn-success" title='Visualizar tabela de Entrada'><i class="fas fa-search"></i></a></th>
-										<?php
-											// if($_GET['tipo']=='entrada'){
-											// 	$entradaAtiva = '<h5>Mostrar Tabela</h5>';
-											// 	echo '<th>'.$entradaAtiva.'</th>';
-											// }
-										?>
 										<th></th>
 									</tr>
 								
@@ -292,7 +287,6 @@
 			<div class="container id='entrada'">		
 
 					<?php 
-					
 					if(isset($_GET['tipo']) && $_GET['tipo'] == "entrada"){
 			echo'		<div class="table-wrapper">';
 			echo'			<div class="table-title">';
@@ -313,7 +307,9 @@
 			echo'					<th>Descrição</th>';
 			echo'					<th>Categoria</th>';
 			echo'					<th>Armazenamento</th>';
-			echo'					<th>Ações</th>';
+			echo'					<th>Editar</th>';
+			echo'					<th>Mover</th>';
+			echo'					<th>Excluir</th>';
 			echo'				</tr>';
 			echo'			</thead>';
 			echo'			<tbody>';
@@ -325,8 +321,20 @@
 									$valorFinancas = $fin->getValorFinancas();
 									$tipoFinancaFinancas = $fin->getTipoFinancaFinancas();
 									$armazenamentoFinancas = $fin->getArmazenamentoFinancas();
+									$dataExclusao = date('d/m/y', time());
 
-			echo				 "<tr>";
+									echo "<tr>";
+									if(empty($idFinancas)){					
+										echo "<td>-</td>";
+										echo "<td>-</td>";	
+										echo "<td>-</td>";	
+										echo "<td>-</td>";	
+										echo "<td>-</td>";									
+										echo "<td>-</td>";									
+										echo "<td>-</td>";									
+										echo "<td>-</td>";							
+										echo "<td>-</td>";							
+									}else{
 			echo				 "<td>$idFinancas</td>";
 			echo				 "<td>$dataFinancas</td>";
 			echo				 "<td>R$ $valorFinancas</td>";
@@ -383,7 +391,8 @@
 											</div>
 										</div>
 									</div>
-
+								</td>
+								<td>
 									<label for='modal-trigger-center-mover$idFinancas' class='open-modal'><i class='fas fa-money red'title='Mover para Pendência'></i></label>
 									<div class='pure-modal'>
 										<input id='modal-trigger-center-mover$idFinancas' class='checkbox' type='checkbox'>
@@ -414,7 +423,56 @@
 											</div>
 										</div>
 									</div>
-									</td>";
+								</td>
+								<td>
+									<label for='modal-trigger-center-deletar$idFinancas' class='open-modal'><i class='fas fa-trash grey'title='Excluir Entrada'></i></label>
+									<div class='pure-modal'>
+										<input id='modal-trigger-center-deletar$idFinancas' class='checkbox' type='checkbox'>
+										<div class='pure-modal-overlay'>
+											<label for='modal-trigger-center-deletar$idFinancas' class='o-close'></label>
+											<div class='pure-modal-wrap a-center'>
+												<label for='modal-trigger-center-deletar$idFinancas' class='close'>&#10006;</label>
+												</br>
+												</br>
+												<h3>DESEJA DELETAR A FINANÇA DE <span class='bold'>CÓDIGO $idFinancas</span>?</h3>
+												<p>
+													<form action='../../../Controller/financasController.php' method='POST'>
+														<div class='modal-header'>
+															<input type='hidden' name='id' value='$idFinancas'>
+															<input type='hidden' name='data' value='$dataFinancas'>
+															<input type='hidden' name='categoria' value='$categoriaFinancas'>
+															<input type='hidden' name='descricao' value='$descricaoFinancas'>
+															<input type='hidden' name='valor' value='$valorFinancas'>
+															<input type='hidden' name='armazenamento' value='$armazenamentoFinancas'>
+															<input type='hidden' name='dataExclusao' value='$dataExclusao'>
+
+															
+															<input type='hidden' name='classe' value='Financas'>
+															<input type='hidden' name='metodo' value='deletarFinanca'>
+														</div>
+														<div class='form-group text-left'>
+															<h5 class='bold'>Informe o motivo da exclusão</h5>
+															<textarea name='motivoExclusao' class='form-control' required></textarea>
+														</div>
+														<div class='form-group text-left'>
+															<h5 class='bold'>Data da Exclusão</h5>
+															<input type='text' class='form-control' value='$dataExclusao' disabled>
+															
+														</div>
+														<div class='modal-header'>
+														<input type='submit' name='submitConfirmExclusao' class='btn btn-danger' value='Confirmar'>
+														</div>
+														<div class='modal-footer center'>
+														<h5 class='bold red'>* ESTA AÇÃO NÃO PODE SER DESFEITA</h5>
+														</div>
+													</form>
+													
+												</p>
+											</div>
+										</div>
+									</div>
+								</td>";
+									}	
 							endforeach;
 			echo'				</tbody>';
 			echo'				</table>';
@@ -467,6 +525,17 @@
 									$armazenamentoFinancas = $fin->getArmazenamentoFinancas();
 
 			echo				 "<tr>";
+								if(empty($idFinancas)){					
+									echo "<td>-</td>";
+									echo "<td>-</td>";	
+									echo "<td>-</td>";	
+									echo "<td>-</td>";	
+									echo "<td>-</td>";									
+									echo "<td>-</td>";									
+									echo "<td>-</td>";									
+									echo "<td>-</td>";							
+									echo "<td>-</td>";							
+								}else{
 			echo				 "<td>$idFinancas</td>";
 			echo				 "<td>$dataFinancas</td>";
 			echo				 "<td>R$ $valorFinancas</td>";
@@ -524,6 +593,7 @@
 										</div>
 									</div>
 									</td>";
+								}
 							endforeach;
 			echo'				</tbody>';
 			echo'				</table>';
@@ -561,7 +631,8 @@
 							echo'					<th>Descrição</th>';
 							echo'					<th>Categoria</th>';
 							echo'					<th>Armazenamento</th>';
-							echo'					<th>Ações</th>';
+							echo'					<th>Editar</th>';
+							echo'					<th>Mover</th>';
 							echo'				</tr>';
 							echo'			</thead>';
 							echo'			<tbody>';
@@ -575,6 +646,17 @@
 													$armazenamentoFinancas = $fin->getArmazenamentoFinancas();
 				
 							echo				 "<tr>";
+												if(empty($idFinancas)){					
+													echo "<td>-</td>";
+													echo "<td>-</td>";	
+													echo "<td>-</td>";	
+													echo "<td>-</td>";	
+													echo "<td>-</td>";									
+													echo "<td>-</td>";									
+													echo "<td>-</td>";									
+													echo "<td>-</td>";							
+													echo "<td>-</td>";							
+												}else{
 							echo				 "<td>$idFinancas</td>";
 							echo				 "<td>$dataFinancas</td>";
 							echo				 "<td>R$ $valorFinancas</td>";
@@ -631,8 +713,9 @@
 															</div>
 														</div>
 													</div>
-				
-													<label for='modal-trigger-center-mover$idFinancas' class='open-modal'><i class='fas fa-money green-dark'title='Editar Finança'></i></label>
+													</td>
+													<td>
+													<label for='modal-trigger-center-mover$idFinancas' class='open-modal'><i class='fas fa-money green-dark'title='Mover Finança para Entrada'></i></label>
 													<div class='pure-modal'>
 														<input id='modal-trigger-center-mover$idFinancas' class='checkbox' type='checkbox'>
 														<div class='pure-modal-overlay'>
@@ -663,6 +746,7 @@
 														</div>
 													</div>
 													</td>";
+												}
 											endforeach;
 							echo'				</tbody>';
 							echo'				</table>';

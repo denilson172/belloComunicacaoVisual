@@ -6,6 +6,8 @@
         private $nome_projeto;
         private $id_logo; //fk
         private $id_cliente; //fk
+        private $dataExclusao; //fk
+        private $motivoExclusao; //fk
 
 
         public function getIdProjeto() {
@@ -54,6 +56,22 @@
 
         public function setIdCliente($id_cliente) {
             $this->id_cliente = $id_cliente;
+        }
+        //DATA EXCLUSÃO
+        public function getDataExclusao() {
+            return $this -> dataExclusao;
+        }
+
+        public function setDataExclusao($dataExclusao) {
+            $this->dataExclusao = $dataExclusao;
+        }
+        //MOTIVO EXCLUSÃO
+        public function getMotivoExclusao() {
+            return $this -> motivoExclusao;
+        }
+
+        public function setMotivoExclusao($motivoExclusao) {
+            $this->motivoExclusao = $motivoExclusao;
         }
     }
 ?>

@@ -77,6 +77,9 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="../../Style/css/style-crud.css">
 	<!--===============================================================================================-->
+	<!-- modal -->
+	<link rel="stylesheet" href="../../Style/css/modal.css">
+	<link rel="stylesheet" href="../../Style/css/style-modal.css">
 
 	</head>
 	<body>
@@ -99,7 +102,7 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-left main-nav">
 				<li class="green">
-					<a href="../../index.php"><i class="icon-hover grey fas fa-trash-alt fa-2x" title="Lixeira"></a></i>
+					<a href="../lixeira/lixeira.php"><i class="icon-hover grey fas fa-trash-alt fa-2x" title="Lixeira"></a></i>
 				</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right main-nav">
@@ -112,282 +115,242 @@
 		
 		<div class="container-contact100">
 			<div class="container">
+				<a href="?tipo=pendente" class="btn btn-danger" title='Visualizar projetos pendentes'><i class="fas fa-exclamation-triangle"></i> Projetos Pendentes</a>
+				<a href="?tipo=producao" class="btn btn-info" title='Visualizar projetos em produção'><i class="fas fa-cogs"></i> Projetos em Produção</a>
+				<a href="?tipo=finalizado" class="btn btn-success" title='Visualizar projetos finalizados'><i class="fas fa-check-square"></i> Projetos Finalizados</a>
 				<!--========inicio projetos pendentes=====================================================-->
-				<div class="table-wrapper">
-					<div class="table-title">
-						<div class="row">
-							<div class="col-sm-6">
-								<h2><b class="red">Projetos Pendentes</b></h2>
-							</div>
-						</div>
-					</div>
-					<table class="table table-striped table-hover">
-						<thead>
-							<tr>
-								<th>Código</th>
-								<th>Marca</th>
-								<th>Plano</th>
-								<th>Detalhes</th>
-								<th>Ações</th>
-							</tr>
-						</thead>
-						<tbody>
-							<!-- inserir campos dinâmicamente -->
-							<?php
-							foreach($projetoPendente as $cli):
-								$idProjeto = $cli->getIdProjeto();
-								$nomeProjeto = $cli->getNomeProjeto();
-								$planoProjeto = $cli->getPlanoProjeto();
-								$fkLogo = $cli->getIdLogo();
-								$fkCliente = $cli->getIdCliente();
+				<?php
+					if(isset($_GET['tipo']) && $_GET['tipo'] == "pendente" OR !isset($_GET['tipo']) ){
+			echo'		<div class="table-wrapper">';
+			echo'			<div class="table-title">';
+			echo'				<div class="row">';
+			echo'					<div class="col-sm-6">';
+			echo'						<h2><b class="btn-outline-danger">Projetos Pendentes</b></h2>';
+			echo'					</div>';
+			echo'				</div>';
+			echo'			</div>';
+			echo'			<table class="table table-striped table-hover">';
+			echo'				<thead>';
+			echo'					<tr>';
+			echo'						<th>Código</th>';
+			echo'						<th>Marca</th>';
+			echo'						<th>Plano</th>';
+			echo'						<th>Detalhes</th>';
+			echo'						<th>Ações</th>';
+			echo'					</tr>';
+			echo'				</thead>';
+			echo'				<tbody>';
+									foreach($projetoPendente as $cli):
+										$idProjeto = $cli->getIdProjeto();
+										$nomeProjeto = $cli->getNomeProjeto();
+										$planoProjeto = $cli->getPlanoProjeto();
+										$fkLogo = $cli->getIdLogo();
+										$fkCliente = $cli->getIdCliente();
 
-								foreach($cliente as $cli){
-									$idCliente = $cli->getIdCliente();
-									$nomeCliente = $cli->getNomeCliente();
-									$emailCliente = $cli->getEmailCliente();
-									$celularCliente = $cli->getCelularCliente();
-									// $fkEndereco = $cli->getIdEndereco();
-								}
+										foreach($cliente as $cli){
+											$idCliente = $cli->getIdCliente();
+											$nomeCliente = $cli->getNomeCliente();
+											$emailCliente = $cli->getEmailCliente();
+											$celularCliente = $cli->getCelularCliente();
+											// $fkEndereco = $cli->getIdEndereco();
+										}
 								
-								echo "<tr>";
-								if(empty($idProjeto)){
-									
-									echo "<td>-</td>";
-									echo "<td>-</td>";	
-									echo "<td>-</td>";	
-									echo "<td>-</td>";	
-									echo "<td>-</td>";									
-								}else{
-									echo "<td> $idProjeto</td> ";
-									echo "<td> $nomeProjeto </td> ";
-									echo "<td> $planoProjeto </td> ";
-									echo "<td><a href='detalhesProjetos.php?projeto=$idProjeto&cliente=$fkCliente&logo=$fkLogo' id='#detalhes$idProjeto' target='_blank'>Visualizar Detalhes</a></td>";
-									echo "<td><a href='../../../Controller/projetoController.php?projeto=$idProjeto&status=2' class='edit'><i class= 'fas fa-arrow-alt-circle-down blue' title='Executar Projeto'></i></a></td>";
-								echo "</tr>";
-								} 
-							?>
-							<?php	
-							endforeach;
-							?>	
-						</tbody>
-					</table>
-					<div class="clearfix">
-						<div class="hint-text">Exibindo <b>5</b> de <b>25</b> registros</div>
-						<ul class="pagination">
-							<li class="page-item disabled"><a href="#">Anterior</a></li>
-							<li class="page-item active"><a href="#" class="page-link">1</a></li>
-							<li class="page-item"><a href="#" class="page-link">2</a></li>
-							<li class="page-item"><a href="#" class="page-link">3</a></li>
-							<li class="page-item"><a href="#" class="page-link">4</a></li>
-							<li class="page-item"><a href="#" class="page-link">5</a></li>
-							<li class="page-item"><a href="#" class="page-link">Próximo</a></li>
-						</ul>
-					</div>
-				</div>
+										echo "<tr>";
+										if(empty($idProjeto)){
+											
+											echo "<td>-</td>";
+											echo "<td>-</td>";	
+											echo "<td>-</td>";	
+											echo "<td>-</td>";	
+											echo "<td>-</td>";									
+										}else{
+											echo "<td> $idProjeto</td> ";
+											echo "<td> $nomeProjeto </td> ";
+											echo "<td> $planoProjeto </td> ";
+											echo "<td><a href='detalhesProjetos.php?projeto=$idProjeto&cliente=$fkCliente&logo=$fkLogo' id='#detalhes$idProjeto' target='_blank'>Visualizar Detalhes</a></td>";
+											echo "<td><a href='../../../Controller/projetoController.php?projeto=$idProjeto&status=2'><i class= 'fas fa-cogs btn-outline-info' title='Executar Projeto'></i></a></td>";
+										echo "</tr>";
+										} 
+							
+									endforeach;
+								
+			echo'					</tbody>';
+			echo'				</table>';
+			echo'			</div>';
+					}
 		
-				<!--========inicio projetos em produção=====================================================-->							
-				<div class="table-wrapper">
-					<div class="table-title">
-						<div class="row">
-							<div class="col-sm-6">
-								<h2><b class="blue">Projetos Em Produção</b></h2>
-							</div>
-						</div>
-					</div>
-					<table class="table table-striped table-hover">
-						<thead>
-							<tr>
-								<th>Código</th>
-								<th>Marca</th>
-								<th>Plano</th>
-								<th>Detalhes</th>
-								<th>Ações</th>
-							</tr>
-						</thead>
-						<tbody>
-							<!-- inserir campos dinâmicamente -->
-							<?php
-							foreach($projetoEmProducao as $cli):
-								$idProjeto = $cli->getIdProjeto();
-								$nomeProjeto = $cli->getNomeProjeto();
-								$planoProjeto = $cli->getPlanoProjeto();
-								$fkLogo = $cli->getIdLogo();
-								$fkCliente = $cli->getIdCliente();
+					//========inicio projetos em produção=====================================================-->		
+					elseif(isset($_GET['tipo']) && $_GET['tipo'] == "producao"){					
+			echo'		<div class="table-wrapper">';
+			echo'			<div class="table-title">';
+			echo'				<div class="row">';
+			echo'					<div class="col-sm-6">';
+			echo'						<h2><b class="btn-outline-info">Projetos Em Produção</b></h2>';
+			echo'					</div>';
+			echo'				</div>';
+			echo'			</div>';
+			echo'			<table class="table table-striped table-hover">';
+			echo'				<thead>';
+			echo'					<tr>';
+			echo'						<th>Código</th>';
+			echo'						<th>Marca</th>';
+			echo'						<th>Plano</th>';
+			echo'						<th>Detalhes</th>';
+			echo'						<th>Finalizar</th>';
+			echo'						<th>Retornar</th>';
+			echo'					</tr>';
+			echo'				</thead>';
+			echo'				<tbody>';
 
-								foreach($cliente as $cli){
-									$idCliente = $cli->getIdCliente();
-									$nomeCliente = $cli->getNomeCliente();
-									$emailCliente = $cli->getEmailCliente();
-									$celularCliente = $cli->getCelularCliente();
-									$fkEndereco = $cli->getIdEndereco();
-								}
-								
-								echo "<tr>";
-								if(empty($idProjeto)){
+									foreach($projetoEmProducao as $cli):
+										$idProjeto = $cli->getIdProjeto();
+										$nomeProjeto = $cli->getNomeProjeto();
+										$planoProjeto = $cli->getPlanoProjeto();
+										$fkLogo = $cli->getIdLogo();
+										$fkCliente = $cli->getIdCliente();
+
+										foreach($cliente as $cli){
+											$idCliente = $cli->getIdCliente();
+											$nomeCliente = $cli->getNomeCliente();
+											$emailCliente = $cli->getEmailCliente();
+											$celularCliente = $cli->getCelularCliente();
+											$fkEndereco = $cli->getIdEndereco();
+										}
+										
+										echo "<tr>";
+										if(empty($idProjeto)){
+											
+											echo "<td>-</td>";
+											echo "<td>-</td>";	
+											echo "<td>-</td>";	
+											echo "<td>-</td>";	
+											echo "<td>-</td>";									
+										}else{
+											echo "<td> $idProjeto</td> ";
+											echo "<td> $nomeProjeto </td> ";
+											echo "<td> $planoProjeto </td> ";
+											echo "<td><a href='detalhesProjetos.php?projeto=$idProjeto&cliente=$fkCliente&logo=$fkLogo' id='#detalhes$idProjeto' target='_blank'>Visualizar Detalhes</a></td>";
+											echo "<td><a href='../../../Controller/projetoController.php?projeto=$idProjeto&status=3' class='edit'><i class='fas fa-check-square green-dark'title='Finalizar Projeto'></i></a></td>";
+											echo "<td><a href='../../../Controller/projetoController.php?projeto=$idProjeto&status=1' class='edit'><i class='fas fa-exclamation-triangle red'title='Voltar para Pendência'></i></a></td>";
+										echo "</tr>";
+										} 
 									
-									echo "<td>-</td>";
-									echo "<td>-</td>";	
-									echo "<td>-</td>";	
-									echo "<td>-</td>";	
-									echo "<td>-</td>";									
-								}else{
-									echo "<td> $idProjeto</td> ";
-									echo "<td> $nomeProjeto </td> ";
-									echo "<td> $planoProjeto </td> ";
-									echo "<td><a href='detalhesProjetos.php?projeto=$idProjeto&cliente=$fkCliente&logo=$fkLogo' id='#detalhes$idProjeto' target='_blank'>Visualizar Detalhes</a></td>";
-									echo "<td>
-											<a href='../../../Controller/projetoController.php?projeto=$idProjeto&status=3' class='edit'><i class='fas fa-arrow-alt-circle-down green-dark'title='Finalizar Projeto'></i></a>
-											<a href='../../../Controller/projetoController.php?projeto=$idProjeto&status=1' class='edit'><i class='fas fa-arrow-alt-circle-up red'title='Voltar par Pendência'></i></a>
-									</td>";
-								echo "</tr>";
-								} 
-							?>
-							<?php	
-							endforeach;
-							?>	
-						</tbody>
-					</table>
-					<div class="clearfix">
-						<div class="hint-text">Exibindo <b>5</b> de <b>25</b> registros</div>
-						<ul class="pagination">
-							<li class="page-item disabled"><a href="#">Anterior</a></li>
-							<li class="page-item active"><a href="#" class="page-link">1</a></li>
-							<li class="page-item"><a href="#" class="page-link">2</a></li>
-							<li class="page-item"><a href="#" class="page-link">3</a></li>
-							<li class="page-item"><a href="#" class="page-link">4</a></li>
-							<li class="page-item"><a href="#" class="page-link">5</a></li>
-							<li class="page-item"><a href="#" class="page-link">Próximo</a></li>
-						</ul>
-					</div>
-				</div>
+									endforeach;
 
-				<!--========inicio projetos finalizado=====================================================-->							
-				<div class="table-wrapper">
-					<div class="table-title">
-						<div class="row">
-							<div class="col-sm-6">
-								<h2><b class="green-dark">Projetos Finalizados</b></h2>
-							</div>
-						</div>
-					</div>
-					<table class="table table-striped table-hover">
-						<thead>
-							<tr>
-								<th>Código</th>
-								<th>Marca</th>
-								<th>Plano</th>
-								<th>Detalhes</th>
-								<th>Ações</th>
-							</tr>
-						</thead>
-						<tbody>
-							<!-- inserir campos dinâmicamente -->
-							<?php
-							foreach($projetoFinalizados as $cli):
-								$idProjeto = $cli->getIdProjeto();
-								$nomeProjeto = $cli->getNomeProjeto();
-								$planoProjeto = $cli->getPlanoProjeto();
-								$fkLogo = $cli->getIdLogo();
-								$fkCliente = $cli->getIdCliente();
+			echo'				</tbody>';
+			echo'			</table>';
+			echo'		</div>';
+					}
+					
+					//========inicio projetos finalizado=====================================================-->
+					elseif(isset($_GET['tipo']) && $_GET['tipo'] == "finalizado"){							
+			echo'		<div class="table-wrapper">';
+			echo'			<div class="table-title">';
+			echo'				<div class="row">';
+			echo'					<div class="col-sm-6">';
+			echo'						<h2><b class="btn-outline-success">Projetos Finalizados</b></h2>';
+			echo'					</div>';
+			echo'				</div>';
+			echo'			</div>';
+			echo'			<table class="table table-striped table-hover">';
+			echo'				<thead>';
+			echo'					<tr>';
+			echo'						<th>Código</th>';
+			echo'						<th>Marca</th>';
+			echo'						<th>Plano</th>';
+			echo'						<th>Detalhes</th>';
+			echo'						<th>Mover</th>';
+			echo'						<th>Excluir</th>';
+			echo'					</tr>';
+			echo'				</thead>';
+			echo'				<tbody>';
+									
+									foreach($projetoFinalizados as $cli):
+										$idProjeto = $cli->getIdProjeto();
+										$nomeProjeto = $cli->getNomeProjeto();
+										$planoProjeto = $cli->getPlanoProjeto();
+										$fkLogo = $cli->getIdLogo();
+										$fkCliente = $cli->getIdCliente();
+										$dataExclusao = date('d/m/y', time());
 
-								foreach($cliente as $cli){
-									$idCliente = $cli->getIdCliente();
-									$nomeCliente = $cli->getNomeCliente();
-									$emailCliente = $cli->getEmailCliente();
-									$celularCliente = $cli->getCelularCliente();
-									$fkEndereco = $cli->getIdEndereco();
-								}
-								
-								echo "<tr>";
-									if(empty($idProjeto)){
-										echo "<td>-</td>";
-										echo "<td>-</td>";	
-										echo "<td>-</td>";	
-										echo "<td>-</td>";	
-										echo "<td>-</td>";									
-									}else{
-										echo "<td> $idProjeto</td> ";
-										echo "<td> $nomeProjeto </td> ";
-										echo "<td> $planoProjeto </td> ";
-										echo "<td><a href='detalhesProjetos.php?projeto=$idProjeto&cliente=$fkCliente&logo=$fkLogo' id='#detalhes$idProjeto' target='_blank'>Visualizar Detalhes</a></td>";
-										echo "<td>
-											<a href='../../../Controller/projetoController.php?projeto=$idProjeto&status=2' class='edit'><i class='fas fa-arrow-alt-circle-up blue'title='Voltar para Projeto em Produção'></i></a>
-											<a href='#funcaoConfirmacao' id='btn' onclick='confirmar($idProjeto)'><i class='fas fa-trash-alt red'  title='Excluir Projeto'></i></a>
-												<div id='dialog-confirm' title='Deseja apagar esse registro?'></div>
-
-												<script id='funcaoConfirmacao'>
-													function funcao_deletar() {
-														location.href='../../../Controller/projetoController.php?projeto=$idProjeto&cliente=$fkCliente&logo=$fkLogo&delete=delete';
-														alert('Projeto de Código $idProjeto excluído com sucesso!');
-													}
-													function confirmar() {
-														$( '#dialog-confirm' ).dialog({
-															resizable: false,
-															height: 'auto',
-															width: 400,
-															modal: true,
-															buttons: {
-															'Confirmar': function() {
-																$( this ).dialog( 'close');
-																funcao_deletar();
-															},
-															'Cancelar': function() {
-																$( this ).dialog( 'close');
-																console.log('cancelado');
-															}
-															}
-														});
-													}
-												</script>
-
-										</td>";
-								echo "</tr>";
-								}
-
-								// echo '<script id="funcaoConfirmacao">';
-								// 	echo 'function funcao_deletar() {';
-								// 		echo "alert('$idProjeto, $fkCliente');";
-								// 	echo '}';
-								// 	echo 'function confirmar() {';
-								// 		echo '$( "#dialog-confirm" ).dialog({';
-								// 			echo 'resizable: false,';
-								// 			echo 'height: "auto",';
-								// 			echo 'width: 400,';
-								// 			echo 'modal: true,';
-								// 			echo 'buttons: {';
-								// 			echo '"Confirmar": function() {';
-								// 				echo  '$( this ).dialog( "close" );';
-								// 				echo 'funcao_deletar();';
-								// 			echo '},';
-								// 			echo "'Cancelar': function() {";
-								// 				echo '$( this ).dialog( "close" );';
-								// 				echo "console.log('cancelado');";
-								// 			echo '}';
-								// 			echo '}';
-								// 		echo '});';
-								// 	echo '}';
-								// echo '</script>';
-								
-							?>
-							<?php	
-							endforeach;
-							?>	
-						</tbody>
-					</table>
-					<div class="clearfix">
-						<div class="hint-text">Exibindo <b>5</b> de <b>25</b> registros</div>
-						<ul class="pagination">
-							<li class="page-item disabled"><a href="#">Anterior</a></li>
-							<li class="page-item active"><a href="#" class="page-link">1</a></li>
-							<li class="page-item"><a href="#" class="page-link">2</a></li>
-							<li class="page-item"><a href="#" class="page-link">3</a></li>
-							<li class="page-item"><a href="#" class="page-link">4</a></li>
-							<li class="page-item"><a href="#" class="page-link">5</a></li>
-							<li class="page-item"><a href="#" class="page-link">Próximo</a></li>
-						</ul>
-					</div>
-				</div>
-				<!-- fim tabela projeto finalizado -->
+										foreach($cliente as $cli){
+											$idCliente = $cli->getIdCliente();
+											$nomeCliente = $cli->getNomeCliente();
+											$emailCliente = $cli->getEmailCliente();
+											$celularCliente = $cli->getCelularCliente();
+											$fkEndereco = $cli->getIdEndereco();
+										}
+										
+										echo "<tr>";
+											if(empty($idProjeto)){
+												echo "<td>-</td>";
+												echo "<td>-</td>";	
+												echo "<td>-</td>";	
+												echo "<td>-</td>";	
+												echo "<td>-</td>";									
+											}else{
+												echo "<td> $idProjeto</td> ";
+												echo "<td> $nomeProjeto </td> ";
+												echo "<td> $planoProjeto </td> ";
+												echo "<td><a href='detalhesProjetos.php?projeto=$idProjeto&cliente=$fkCliente&logo=$fkLogo' id='#detalhes$idProjeto' target='_blank'>Visualizar Detalhes</a></td>";
+												echo "<td><a href='../../../Controller/projetoController.php?projeto=$idProjeto&status=2'><i class='fas fa-cogs bnt-outline-info'title='Voltar para Projeto em Produção'></i></a></td>";
+												echo "<td>
+													<label for='modal-trigger-center-deletar$idProjeto' class='open-modal'><i class='fas fa-trash grey'title='Excluir Entrada'></i></label>
+													<div class='pure-modal'>
+														<input id='modal-trigger-center-deletar$idProjeto' class='checkbox' type='checkbox'>
+														<div class='pure-modal-overlay'>
+															<label for='modal-trigger-center-deletar$idProjeto' class='o-close'></label>
+															<div class='pure-modal-wrap a-center'>
+																<label for='modal-trigger-center-deletar$idProjeto' class='close'>&#10006;</label>
+																</br>
+																</br>
+																<h3>DESEJA DELETAR A FINANÇA DE <span class='bold'>CÓDIGO $idProjeto</span>?</h3>
+																<p>
+																	<form action='../../../Controller/projetoController.php' method='POST'>
+																		<div class='modal-header'>
+																			<input type='hidden' name='id' value='$idProjeto'>
+																			<input type='hidden' name='nome' value='$nomeProjeto'>
+																			<input type='hidden' name='plano' value='$planoProjeto'>
+																			<input type='hidden' name='fkLogo' value='$idProjeto'>
+																			<input type='hidden' name='fkCliente' value='$idProjeto'>
+																			<input type='hidden' name='dataExclusao' value='$dataExclusao'>
+																			
+																			<input type='hidden' name='classe' value='Projeto'>
+																			<input type='hidden' name='metodo' value='deletarProjeto'>
+																		</div>
+																		<div class='form-group text-left'>
+																			<h5 class='bold'>Informe o motivo da exclusão</h5>
+																			<textarea name='motivoExclusao' class='form-control' required></textarea>
+																		</div>
+																		<div class='form-group text-left'>
+																			<h5 class='bold'>Data da Exclusão</h5>
+																			<input type='text' class='form-control' value='$dataExclusao' disabled>
+																			
+																		</div>
+																		<div class='modal-header'>
+																		<input type='submit' name='submitConfirmExclusao' class='btn btn-danger' value='Confirmar'>
+																		</div>
+																		<div class='modal-footer center'>
+																		<h5 class='bold red'>* ESTA AÇÃO NÃO PODE SER DESFEITA</h5>
+																		</div>
+																	</form>
+																	
+																</p>
+															</div>
+														</div>
+													</div>
+												</td>";
+										echo "</tr>";
+										}
+	
+									endforeach;
+										
+			echo'					</tbody>';
+			echo'				</table>';
+			echo'			</div>';
+					}
+				?>
+						<!-- fim tabela projeto finalizado -->
 			</div>			
 			
 		</div>
@@ -430,31 +393,7 @@
 
 		gtag('config', 'UA-23581568-13');
 		</script>
-
-	<!-- script das caixas de confirmação -->
-	<!-- <script id="funcaoConfirmacao">
-		function funcao_deletar($idProjeto,$fkCliente,$fkLogo,$fkEndereco) {
-			alert('<?php //echo $idProjeto, $fkCliente ?>');
-		}
-		function confirmar() {
-			$( "#dialog-confirm" ).dialog({
-				resizable: false,
-				height: "auto",
-				width: 400,
-				modal: true,
-				buttons: {
-				"Confirmar": function() {
-					$( this ).dialog( "close" );
-					funcao_deletar();
-				},
-				'Cancelar': function() {
-					$( this ).dialog( "close" );
-					console.log('cancelado');
-				}
-				}
-			});
-		}
-	</script> -->
+	
 
 	</body>
 </html>
