@@ -1,2 +1,0 @@
-# bellocv
-Projeto Integrador II
